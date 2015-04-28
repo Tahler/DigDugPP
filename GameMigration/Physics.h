@@ -36,9 +36,9 @@ namespace Physics
 		Point a, b;
 		Rectangle(Point pa, Point pb);
 
-		bool contains(Point p);
-		bool intersects(Rectangle r);
-		bool touchesTop(Rectangle r);
+		bool contains(Point& p);
+		bool intersects(Rectangle& r);
+		bool touchesTop(Rectangle& r);
 		void draw(Core::Graphics& g);
 	};
 

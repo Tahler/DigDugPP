@@ -39,17 +39,17 @@ Rectangle::Rectangle(Point pa, Point pb)
 {
 	a = pa, b = pb;
 }
-bool Rectangle::contains(Point p)
+bool Rectangle::contains(Point& p)
 {
 	return (p.x >= a.x && p.x <= b.x)  // within x-axis boundaries
 		&& (p.y >= a.y && p.y <= b.y); // within y-axis boundaries
 }
-bool Rectangle::intersects(Rectangle r)
+bool Rectangle::intersects(Rectangle& r)
 {
 	// if any of its points are inside then true
 	return (contains(r.a) || contains(r.b) || contains(Point(r.a.x, r.b.y)) || contains(Point(r.b.x, r.a.y)));
 }
-bool Rectangle::touchesTop(Rectangle r)
+bool Rectangle::touchesTop(Rectangle& r)
 {
 	return ((r.a.x >= a.x && r.a.x <= b.x || r.b.x >= a.x && r.b.x <= b.x) && // within x-axis boundaries
 		a.y == r.b.y); // touches bottom of other rectangle
