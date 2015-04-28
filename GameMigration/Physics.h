@@ -20,33 +20,38 @@ namespace Physics
 		Vector(float nx, float ny);
 	};
 
+	// They hold the same data, but have different meaning:
+	// Point = location
+	// Vector = displacement
+	typedef Vector Point; 
+	
 	/*
 		A - upper left
 		B - lower right
 	*/
 	struct Rectangle
 	{
-		Vector a, b;
-		Rectangle(Vector pa, Vector pb);
+		Point a, b;
+		Rectangle(Point pa, Point pb);
 
-		bool contains(Vector &p);
-		bool intersects(Rectangle &r);
-		bool touchesTop(Rectangle &r);
-		void draw(Core::Graphics &g);
+		bool contains(Point& p);
+		bool intersects(Rectangle& r);
+		bool touchesTop(Rectangle& r);
+		void draw(Core::Graphics& g);
 	};
 
 	struct Triangle
 	{
-		Vector lowerLeft;
-		Vector top;
-		Vector lowerRight;
+		Point lowerLeft;
+		Point top;
+		Point lowerRight;
 
 		Vector velocity;
 
-		Triangle(Vector pLowerLeft, Vector pTop, Vector pLowerRight);
+		Triangle(Point pLowerLeft, Point pTop, Point pLowerRight);
 
 		Rectangle getBoundingBox();
-		void draw(Core::Graphics &g);
+		void draw(Core::Graphics& g);
 		void move();
 	};
 }
