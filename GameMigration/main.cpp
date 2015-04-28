@@ -3,12 +3,12 @@
 #include "Physics.h"
 using namespace Physics;
 
-Physics::Rectangle rect(Point(350, 500), Point(450, 600));
-Triangle tri(Point(350, 400), Point(400, 350), Point(450, 400));
+Physics::Rectangle rect(Vector(350, 500), Vector(450, 600));
+Triangle tri(Vector(350, 400), Vector(400, 350), Vector(450, 400));
 
 void checkKeyInput()
 {
-	float pushAcceleration = 0.2;
+	float pushAcceleration = 0.2f;
 	
 	if (Core::Input::IsPressed(Core::Input::KEY_UP)) tri.velocity.y -= pushAcceleration;
 	if (Core::Input::IsPressed(Core::Input::KEY_DOWN)) tri.velocity.y += pushAcceleration;
@@ -19,7 +19,7 @@ void checkKeyInput()
 bool update(float dt)
 {
 	checkKeyInput();
-	tri.move();
+	if (!tri.getBoundingBox().intersects(rect)) tri.move();
 	return false;
 }
 

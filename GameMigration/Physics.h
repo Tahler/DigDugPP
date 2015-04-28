@@ -11,20 +11,13 @@ namespace Physics
 		static float acceleration;
 	};
 
-	struct Point
+	// In a typical convention, this would be called Vector2f (vector - 2d - float)
+	struct Vector
 	{
 		float x;
 		float y;
-		Point();
-		Point(float x, float y);
-	};
-
-	struct Vector
-	{
-		Point p;
-		float magnitude;
 		Vector();
-		Vector(float x, float y, float m);
+		Vector(float nx, float ny);
 	};
 
 	/*
@@ -33,27 +26,27 @@ namespace Physics
 	*/
 	struct Rectangle
 	{
-		Point a, b;
-		Rectangle(Point pa, Point pb);
+		Vector a, b;
+		Rectangle(Vector pa, Vector pb);
 
-		bool contains(Point& p);
-		bool intersects(Rectangle& r);
-		bool touchesTop(Rectangle& r);
-		void draw(Core::Graphics& g);
+		bool contains(Vector &p);
+		bool intersects(Rectangle &r);
+		bool touchesTop(Rectangle &r);
+		void draw(Core::Graphics &g);
 	};
 
 	struct Triangle
 	{
-		Point lowerLeft;
-		Point top;
-		Point lowerRight;
+		Vector lowerLeft;
+		Vector top;
+		Vector lowerRight;
 
-		Point velocity;
+		Vector velocity;
 
-		Triangle(Point pLowerLeft, Point pTop, Point pLowerRight);
+		Triangle(Vector pLowerLeft, Vector pTop, Vector pLowerRight);
 
-		Rectangle hitbox();
-		void draw(Core::Graphics& g);
+		Rectangle getBoundingBox();
+		void draw(Core::Graphics &g);
 		void move();
 	};
 }

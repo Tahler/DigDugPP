@@ -4,58 +4,51 @@ using namespace Physics;
 
 float Gravity::acceleration = 0.1f;
 
-Point::Point()
+Vector::Vector()
 {
 	x = 0;
 	y = 0;
 }
-Point::Point(float nx, float ny)
+Vector::Vector(float nx, float ny)
 {
 	x = nx;
 	y = ny;
 }
 
-Vector::Vector()
+Vector operator+(const Vector &left, const Vector &right)
 {
-	p = Point();
-	magnitude = 0;
+	return Vector(left.x + right.x, left.y + right.y);
 }
-Vector::Vector(float x, float y, float m)
-{
-	p = Point(x, y);
-	magnitude = m;
-}
-
-Point operator+(const Point& left, const Point& right)
-{
-	return Point(left.x + right.x, left.y + right.y);
-}
-void drawLine(Core::Graphics& g, const Point& left, const Point& right)
+void drawLine(Core::Graphics &g, const Vector &left, const Vector &right)
 {
 	g.DrawLine(left.x, left.y, right.x, right.y);
 }
 
-Rectangle::Rectangle(Point pa, Point pb)
+Rectangle::Rectangle(Vector pa, Vector pb)
 {
 	a = pa, b = pb;
 }
-bool Rectangle::contains(Point& p)
+bool Rectangle::contains(Vector &p)
 {
 	return (p.x >= a.x && p.x <= b.x)  // within x-axis boundaries
 		&& (p.y >= a.y && p.y <= b.y); // within y-axis boundaries
 }
-bool Rectangle::intersects(Rectangle& r)
+bool Rectangle::intersects(Rectangle &r)
 {
-	// if any of its points are inside then true
-	return (contains(r.a) || contains(r.b) || contains(Point(r.a.x, r.b.y)) || contains(Point(r.b.x, r.a.y)));
+	if(b.x < r.a.x || a.x > r.b.x) return false;
+	if(b.y < r.a.y || a.y > r.b.y) return false;
+
+	// if any of its Vectors are inside then true
+	//return (contains(r.a) || contains(r.b) || contains(Vector(r.a.x, r.b.y)) || contains(Vector(r.b.x, r.a.y)));
+	return true;
 }
-bool Rectangle::touchesTop(Rectangle& r)
+bool Rectangle::touchesTop(Rectangle &r)
 {
 	return ((r.a.x >= a.x && r.a.x <= b.x || r.b.x >= a.x && r.b.x <= b.x) && // within x-axis boundaries
 		a.y == r.b.y); // touches bottom of other rectangle
 }
 
-void Rectangle::draw(Core::Graphics& g)
+void Rectangle::draw(Core::Graphics &g)
 {
 	g.DrawLine(a.x, a.y, b.x, a.y);
 	g.DrawLine(b.x, a.y, b.x, b.y);
@@ -63,18 +56,18 @@ void Rectangle::draw(Core::Graphics& g)
 	g.DrawLine(a.x, b.y, a.x, a.y);
 }
 
-Triangle::Triangle(Point pLowerLeft, Point pTop, Point pLowerRight)
+Triangle::Triangle(Vector pLowerLeft, Vector pTop, Vector pLowerRight)
 {
 	lowerLeft = pLowerLeft;
 	top = pTop;
 	lowerRight = pLowerRight;
 }
 
-Physics::Rectangle Triangle::hitbox()
+Physics::Rectangle Triangle::getBoundingBox()
 {
-	return Rectangle(Point(lowerLeft.x, top.y), lowerRight);
+	return Rectangle(Vector(lowerLeft.x, top.y), lowerRight);
 }
-void Triangle::draw(Core::Graphics& g)
+void Triangle::draw(Core::Graphics &g)
 {
 	drawLine(g, lowerLeft, top);
 	drawLine(g, top, lowerRight);
@@ -83,7 +76,7 @@ void Triangle::draw(Core::Graphics& g)
 void Triangle::move()
 {
 	velocity.y += Gravity::acceleration;
-			
+
 	lowerLeft = lowerLeft + velocity;
 	top = top + velocity;
 	lowerRight = lowerRight + velocity;
