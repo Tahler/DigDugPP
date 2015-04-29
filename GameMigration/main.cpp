@@ -24,7 +24,7 @@ bool update(float dt)
 
 void draw(Core::Graphics& graphics)
 {
-	graphics.SetBackgroundColor(RGB(127, 127, 127));
+	//graphics.SetBackgroundColor(RGB(127, 127, 127));
 	b1.draw(graphics);
 	b2.draw(graphics);
 	b3.draw(graphics);
