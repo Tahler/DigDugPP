@@ -6,21 +6,26 @@
 using Physics::Rectangle;
 using Physics::Point;
 
+extern const int BLOCK_WIDTH; 
+
 namespace Blocks
 {
+
+	
+
 	struct Block:Rectangle
 	{
 		//Base block
-		Block(Point a, Point b) :
-			Rectangle(a, b)
+		Block(Point a) :
+			Rectangle(a, Point(a.x + BLOCK_WIDTH, a.y + BLOCK_WIDTH))
 		{}
 	};
 
 	struct Stone:Block
 	{
 		//Has gravity
-		Stone(Point a, Point b) :
-			Block(a,b)
+		Stone(Point a) :
+			Block(a)
 		{}
 	};
 
@@ -28,8 +33,8 @@ namespace Blocks
 	{
 		//Can break
 		int durability;
-		BreakableBlock(Point a, Point b) :
-			Block(a,b)
+		BreakableBlock(Point a) :
+			Block(a)
 		{
 			durability = 100;
 		}
@@ -38,16 +43,16 @@ namespace Blocks
 	struct Earth:BreakableBlock
 	{
 		//No value, disappears
-		Earth(Point a, Point b) :
-			BreakableBlock(a, b)
+		Earth(Point a) :
+			BreakableBlock(a)
 		{}
 	};
 
 	struct OreBlock:BreakableBlock
 	{
 		//Has value, goes to inv
-		OreBlock(Point a, Point b) :
-			BreakableBlock(a, b)
+		OreBlock(Point a) :
+			BreakableBlock(a)
 		{}
 	};
 
