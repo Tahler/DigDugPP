@@ -25,6 +25,10 @@ void World::init()
 		}
 	}
 }
+void World::update()
+{
+	
+}
 void World::draw(Core::Graphics& g)
 {
 	for (unsigned int i = 0; i < blocks.size(); i++)
@@ -34,7 +38,6 @@ void World::draw(Core::Graphics& g)
 			blocks[i][j].draw(g);
 		}
 	}
-	// draw character
 }
 Block& World::getBlockAt(Point& a) // consider returning Block&
 {

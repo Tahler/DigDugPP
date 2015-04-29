@@ -1,7 +1,9 @@
 
-#include "Core.h"
 #include "Character.h"
+
+#include "Core.h"
 #include "Physics.h"
+#include "World.h"
 
 using Physics::Gravity;
 using Physics::Point;
@@ -17,8 +19,9 @@ Character::Character()
 	isColliding = false;
 	isJumping = false;
 }
-Character::Character(float x, float y)
+Character::Character(World* w, float x, float y)
 {
+	world = w;
 	location = Point(x, y);
 	velocity = Vector(0, 0);
 	acceleration = Vector(0, 0);
@@ -27,8 +30,7 @@ Character::Character(float x, float y)
 }
 Physics::Rectangle Character::getBoundingBox()
 {
-	// HARDCODED...
-	return Physics::Rectangle(location, Point(location.x + 50, location.y + 50));
+	return Physics::Rectangle(location, Point(location.x + BLOCK_SIZE, location.y + BLOCK_SIZE));
 }
 void Character::checkKeyInput()
 {
@@ -46,7 +48,8 @@ void Character::move()
 {
 	checkKeyInput();
 
-	// Adjust for gravity
+	// Adjust for gravity and friction
+	acceleration.x += -0.02 * velocity.x;
 	velocity.y += Gravity::acceleration;
 
 	// Adjust for own fluid motion
@@ -56,6 +59,11 @@ void Character::move()
 	// Move
 	location += velocity;
 
+}
+void Character::update()
+{
+	// check for collision
+	move();
 }
 void Character::draw(Core::Graphics g)
 {
