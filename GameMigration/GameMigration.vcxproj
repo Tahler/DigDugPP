@@ -90,6 +90,7 @@
     <ClCompile Include="Physics.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Blocks.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
