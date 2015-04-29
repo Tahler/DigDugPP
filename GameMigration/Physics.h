@@ -49,7 +49,7 @@ namespace Physics
 		bool contains(Point& p);
 		bool intersects(Rectangle& r);
 
-		void draw(Core::Graphics& g);
+		virtual void draw(Core::Graphics& g);
 	};
 }
 
