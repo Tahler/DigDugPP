@@ -1,0 +1,13 @@
+*.exe
+*.tlog
+*.idb
+*.obj
+*.ilk
+*.vcxproj
+*.log
+*.pdb
+*.opensdf
+*.suo
+*.filters
+*.lastbuildstate
+*.sdf
