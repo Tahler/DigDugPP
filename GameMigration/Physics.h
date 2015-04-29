@@ -44,12 +44,16 @@ namespace Physics
 	struct Rectangle
 	{
 		Point a, b;
-		Rectangle(Point pa, Point pb);
 
-		bool contains(Point& p);
-		bool intersects(Rectangle& r);
+		Rectangle();
+		Rectangle(Point, Point);
+		
+		void setPoints(Point, Point);
 
-		void draw(Core::Graphics& g);
+		bool contains(Point&);
+		bool intersects(Rectangle&);
+
+		void draw(Core::Graphics&);
 	};
 }
 

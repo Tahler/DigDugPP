@@ -27,7 +27,7 @@ void Vector::operator=(const Vector& v)
 void Vector::operator+=(const Vector& right)
 {
 	x += right.x;
-	y += right.y;
+	y += right.y;	
 }
 void drawLine(Core::Graphics& g, const Vector& left, const Vector& right)
 {
@@ -47,7 +47,15 @@ Line::Line(Point pa, Point pb)
 }
 
 // Rectangle //
+Rectangle::Rectangle()
+{
+
+}
 Rectangle::Rectangle(Point pa, Point pb)
+{
+	a = pa, b = pb;
+}
+void Rectangle::setPoints(Point pa, Point pb)
 {
 	a = pa, b = pb;
 }

@@ -10,15 +10,14 @@ extern const int BLOCK_WIDTH;
 
 namespace Blocks
 {
-
-	
-
 	struct Block:Rectangle
 	{
 		//Base block
+		Block();
 		Block(Point a) :
 			Rectangle(a, Point(a.x + BLOCK_WIDTH, a.y + BLOCK_WIDTH))
 		{}
+		void setLocation(Point);
 	};
 
 	struct Stone:Block
