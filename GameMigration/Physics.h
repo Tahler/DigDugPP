@@ -70,6 +70,23 @@ namespace Physics
 		void move();
 		//void resolveCollision(Line& edge);
 	};
+
+	class Character
+	{
+	public:
+		Point location;
+		Vector velocity;
+		Vector acceleration;
+		bool isColliding;
+		bool isJumping;
+
+		Character();
+		Character(Point&);
+
+		Rectangle getBoundingBox();
+		void move();
+		void draw(Core::Graphics);
+	};
 }
 
 #endif

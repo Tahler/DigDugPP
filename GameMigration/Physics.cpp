@@ -129,3 +129,42 @@ void Triangle::move()
 	//	}
 	//}
 }
+
+// Character //
+Character::Character()
+{
+	location = Point(0, 0);
+	velocity = Vector(0, 0);
+	acceleration = Vector(0, 0);
+	isColliding = false;
+	isJumping = false;
+}
+Character::Character(Point& p)
+{
+	velocity = Vector(0, 0);
+	acceleration = Vector(0, 0);
+	isColliding = false;
+	isJumping = false;
+	location = p;
+}
+Physics::Rectangle Character::getBoundingBox()
+{
+	// do work based on image
+}
+void Character::move()
+{
+	// Adjust for gravity
+	velocity.y += Gravity::acceleration;
+
+	// Adjust for own fluid motion
+	velocity.x += acceleration.x;
+	velocity.y += acceleration.y;
+
+	// Move
+	location += velocity;
+
+}
+void Character::draw(Core::Graphics g)
+{
+	// draw image
+}
