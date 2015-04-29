@@ -15,6 +15,7 @@ namespace Blocks
 	struct Block:Rectangle
 	{
 		//Base block
+		Block();
 		Block(Point a) :
 			Rectangle(a, Point(a.x + BLOCK_WIDTH, a.y + BLOCK_WIDTH))
 		{}
@@ -22,6 +23,7 @@ namespace Blocks
 		{
 			fillSquare(g, a, BLOCK_WIDTH);
 		}
+		void setLocation(Point);
 	};
 
 	struct Stone:Block
@@ -120,7 +122,7 @@ namespace Blocks
 		Silver(Point a) :
 			OreBlock(a)
 		{
-			value = 2;
+			value = 3;
 		};
 		
 		virtual void draw(Core::Graphics& g)
