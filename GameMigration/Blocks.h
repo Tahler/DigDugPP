@@ -8,7 +8,6 @@ using Physics::Vector;
 
 namespace Blocks
 {
-
 	struct Block:Rectangle
 	{
 		//Base block

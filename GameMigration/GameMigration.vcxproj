@@ -86,11 +86,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Character.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Physics.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Blocks.h" />
+    <ClInclude Include="Character.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>

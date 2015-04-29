@@ -51,42 +51,6 @@ namespace Physics
 
 		void draw(Core::Graphics& g);
 	};
-
-	struct Triangle
-	{
-		Point lowerLeft;
-		Point top;
-		Point lowerRight;
-
-		Vector velocity;
-		Vector acceleration;
-
-		bool isColliding;
-
-		Triangle(Point pLowerLeft, Point pTop, Point pLowerRight);
-
-		Rectangle getBoundingBox();
-		void draw(Core::Graphics& g);
-		void move();
-		//void resolveCollision(Line& edge);
-	};
-
-	class Character
-	{
-	public:
-		Point location;
-		Vector velocity;
-		Vector acceleration;
-		bool isColliding;
-		bool isJumping;
-
-		Character();
-		Character(Point&);
-
-		Rectangle getBoundingBox();
-		void move();
-		void draw(Core::Graphics);
-	};
 }
 
 #endif
