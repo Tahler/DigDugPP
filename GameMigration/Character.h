@@ -3,6 +3,7 @@
 #define CHARACTER_H
 
 #include "Physics.h"
+#include "World.h"
 
 using Physics::Point;
 using Physics::Vector;
@@ -10,6 +11,9 @@ using Physics::Rectangle;
 
 class Character
 {
+private:
+	World* world; // WORLD-STAR
+
 public:
 	Point location; // The upper left corner of the bounding box
 	Vector velocity;
@@ -18,11 +22,13 @@ public:
 	bool isJumping;
 
 	Character();
-	Character(float, float);
+	Character(World*, float, float);
 
 	Physics::Rectangle getBoundingBox();
 	void checkKeyInput();
 	void move();
+
+	void update();
 	void draw(Core::Graphics);
 };
 

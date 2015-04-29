@@ -7,21 +7,21 @@
 using Physics::Rectangle;
 using Physics::Point;
 
-extern const int BLOCK_WIDTH;
-const int BLOCK_FIFTH = BLOCK_WIDTH/5;
+extern const int BLOCK_SIZE;
+const int BLOCK_FIFTH = BLOCK_SIZE/5;
 
 namespace Blocks
 {
 	struct Block:Rectangle
 	{
 		//Base block
-		Block();
+		Block() {}
 		Block(Point a) :
-			Rectangle(a, Point(a.x + BLOCK_WIDTH, a.y + BLOCK_WIDTH))
+			Rectangle(a, Point(a.x + BLOCK_SIZE, a.y + BLOCK_SIZE))
 		{}
 		virtual void draw(Core::Graphics& g) 
 		{
-			fillSquare(g, a, BLOCK_WIDTH);
+			fillSquare(g, a, BLOCK_SIZE);
 		}
 		void setLocation(Point);
 	};
@@ -35,7 +35,7 @@ namespace Blocks
 		virtual void draw(Core::Graphics& g) 
 		{
 			g.SetColor(RGB(121,122,122));
-			fillSquare(g, a, BLOCK_WIDTH);
+			fillSquare(g, a, BLOCK_SIZE);
 			g.SetColor(RGB(102,102,102));
 			fillSquare(g, Point(a.x + BLOCK_FIFTH, a.y + 2 * BLOCK_FIFTH), BLOCK_FIFTH * 2);
 			g.SetColor(RGB(110, 110, 100));
@@ -63,7 +63,7 @@ namespace Blocks
 		virtual void draw(Core::Graphics& g) 
 		{
 			g.SetColor(RGB(110,83,9));
-			fillSquare(g, a, BLOCK_WIDTH);
+			fillSquare(g, a, BLOCK_SIZE);
 		}
 	};
 
@@ -88,7 +88,7 @@ namespace Blocks
 		virtual void draw(Core::Graphics& g)
 		{
 			g.SetColor(RGB(121,122,122));
-			fillSquare(g, a, BLOCK_WIDTH);
+			fillSquare(g, a, BLOCK_SIZE);
 			g.SetColor(RGB(245, 151, 29));
 			fillSquare(g, Point(a.x + BLOCK_FIFTH, a.y + BLOCK_FIFTH), BLOCK_FIFTH);
 			fillSquare(g, Point(a.x + 3 * BLOCK_FIFTH, a.y + 2 * BLOCK_FIFTH), BLOCK_FIFTH);
@@ -108,7 +108,7 @@ namespace Blocks
 		virtual void draw(Core::Graphics& g)
 		{
 			g.SetColor(RGB(121,122,122));
-			fillSquare(g, a, BLOCK_WIDTH);
+			fillSquare(g, a, BLOCK_SIZE);
 			g.SetColor(RGB(199, 174, 141));
 			fillRectangle(g, Point(a.x + BLOCK_FIFTH, a.y + BLOCK_FIFTH), 2*BLOCK_FIFTH, BLOCK_FIFTH);
 			fillSquare(g, Point(a.x + 3* BLOCK_FIFTH, a.y + 2 * BLOCK_FIFTH), BLOCK_FIFTH);
@@ -128,7 +128,7 @@ namespace Blocks
 		virtual void draw(Core::Graphics& g)
 		{
 			g.SetColor(RGB(121,122,122));
-			fillSquare(g, a, BLOCK_WIDTH);
+			fillSquare(g, a, BLOCK_SIZE);
 			g.SetColor(RGB(207, 207, 207));
 			fillRectangle(g, Point(a.x + BLOCK_FIFTH, a.y + BLOCK_FIFTH), 2*BLOCK_FIFTH, BLOCK_FIFTH);
 			fillSquare(g, Point(a.x + 2* BLOCK_FIFTH, a.y + 2 * BLOCK_FIFTH), BLOCK_FIFTH);
