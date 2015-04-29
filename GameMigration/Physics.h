@@ -18,6 +18,9 @@ namespace Physics
 		float y;
 		Vector();
 		Vector(float nx, float ny);
+		
+		void operator=(const Vector& v);
+		void operator+=(const Vector& right);
 	};
 
 	// They hold the same data, but have different meaning:
@@ -25,6 +28,15 @@ namespace Physics
 	// Vector = displacement
 	typedef Vector Point; 
 	
+	struct Line
+	{
+		Point a;
+		Point b;
+
+		Line();
+		Line(Point pa, Point pb);
+	};
+
 	/*
 		A - upper left
 		B - lower right
@@ -36,7 +48,7 @@ namespace Physics
 
 		bool contains(Point& p);
 		bool intersects(Rectangle& r);
-		bool touchesTop(Rectangle& r);
+
 		void draw(Core::Graphics& g);
 	};
 
@@ -47,12 +59,16 @@ namespace Physics
 		Point lowerRight;
 
 		Vector velocity;
+		Vector acceleration;
+
+		bool isColliding;
 
 		Triangle(Point pLowerLeft, Point pTop, Point pLowerRight);
 
 		Rectangle getBoundingBox();
 		void draw(Core::Graphics& g);
 		void move();
+		void resolveCollision(Line& edge);
 	};
 }
 

@@ -10,16 +10,20 @@ void checkKeyInput()
 {
 	float pushAcceleration = 0.2f;
 	
-	if (Core::Input::IsPressed(Core::Input::KEY_UP)) tri.velocity.y -= pushAcceleration;
-	if (Core::Input::IsPressed(Core::Input::KEY_DOWN)) tri.velocity.y += pushAcceleration;
-	if (Core::Input::IsPressed(Core::Input::KEY_LEFT)) tri.velocity.x -= pushAcceleration;
-	if (Core::Input::IsPressed(Core::Input::KEY_RIGHT)) tri.velocity.x += pushAcceleration;
+	if (Core::Input::IsPressed(Core::Input::KEY_LEFT)) tri.acceleration.x = -pushAcceleration;
+	else if (Core::Input::IsPressed(Core::Input::KEY_RIGHT)) tri.acceleration.x = pushAcceleration;
+	else tri.acceleration.x = 0;
+
+	if (Core::Input::IsPressed(Core::Input::KEY_UP)) tri.acceleration.y = -pushAcceleration;
+	else if (Core::Input::IsPressed(Core::Input::KEY_DOWN)) tri.acceleration.y = pushAcceleration;
+	else tri.acceleration.y = 0;
 }
 ////////////////////////////////////////////////////////////
 bool update(float dt)
 {
 	checkKeyInput();
-	if (!tri.getBoundingBox().intersects(rect)) tri.move();
+	tri.isColliding = (!tri.getBoundingBox().intersects(rect));
+	tri.move();
 	return false;
 }
 
