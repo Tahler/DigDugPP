@@ -21,6 +21,7 @@ public:
 	Character(Point&);
 
 	Physics::Rectangle getBoundingBox();
+	void checkKeyInput();
 	void move();
 	void draw(Core::Graphics);
 };
