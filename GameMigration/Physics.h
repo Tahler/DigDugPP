@@ -19,8 +19,8 @@ namespace Physics
 		Vector();
 		Vector(float nx, float ny);
 		
-		void operator=(const Vector& v);
-		void operator+=(const Vector& right);
+		void operator=(const Vector&);
+		void operator+=(const Vector&);
 	};
 
 	// They hold the same data, but have different meaning:

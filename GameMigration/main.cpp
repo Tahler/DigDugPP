@@ -6,8 +6,13 @@
 
 //Physics::Rectangle rect(Point(350, 500), Point(450, 600));
 //Triangle tri(Point(350, 400), Point(400, 350), Point(450, 400));
-Character c(500, 500);
-Blocks::Block b1(Point(500, 600), Point(550, 650));
+Character c(0, 0);
+Blocks::Block b1(Point(0, 100), Point(50, 150));
+Blocks::Block b2(Point(50, 100), Point(100, 150));
+Blocks::Block b3(Point(100, 100), Point(150, 150));
+Blocks::Block b4(Point(100, 150), Point(150, 200));
+Blocks::Block b5(Point(150, 150), Point(200, 200));
+Blocks::Block b6(Point(200, 150), Point(250, 200));
 
 ////////////////////////////////////////////////////////////
 bool update(float dt)
@@ -21,6 +26,11 @@ void draw(Core::Graphics& graphics)
 {
 	graphics.SetBackgroundColor(RGB(127, 127, 127));
 	b1.draw(graphics);
+	b2.draw(graphics);
+	b3.draw(graphics);
+	b4.draw(graphics);
+	b5.draw(graphics);
+	b6.draw(graphics);
 	c.draw(graphics);
 }
 

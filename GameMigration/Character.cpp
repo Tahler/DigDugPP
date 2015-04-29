@@ -11,7 +11,7 @@ using Physics::Rectangle;
 // Character //
 Character::Character()
 {
-	location = Point(0, 0); 
+	location = Point(0, 0);
 	velocity = Vector(0, 0);
 	acceleration = Vector(0, 0);
 	isColliding = false;
