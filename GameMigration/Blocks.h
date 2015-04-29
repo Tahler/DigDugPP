@@ -4,14 +4,14 @@
 #include "Physics.h"
 
 using Physics::Rectangle;
-using Physics::Vector;
+using Physics::Point;
 
 namespace Blocks
 {
 	struct Block:Rectangle
 	{
 		//Base block
-		Block(Vector a, Vector b) :
+		Block(Point a, Point b) :
 			Rectangle(a, b)
 		{}
 	};
@@ -19,7 +19,7 @@ namespace Blocks
 	struct Stone:Block
 	{
 		//Has gravity
-		Stone(Vector a, Vector b) :
+		Stone(Point a, Point b) :
 			Block(a,b)
 		{}
 	};
@@ -28,7 +28,7 @@ namespace Blocks
 	{
 		//Can break
 		int durability;
-		BreakableBlock(Vector a, Vector b) :
+		BreakableBlock(Point a, Point b) :
 			Block(a,b)
 		{
 			durability = 100;
@@ -38,7 +38,7 @@ namespace Blocks
 	struct Earth:BreakableBlock
 	{
 		//No value, disappears
-		Earth(Vector a, Vector b) :
+		Earth(Point a, Point b) :
 			BreakableBlock(a, b)
 		{}
 	};
@@ -46,7 +46,7 @@ namespace Blocks
 	struct OreBlock:BreakableBlock
 	{
 		//Has value, goes to inv
-		OreBlock(Vector a, Vector b) :
+		OreBlock(Point a, Point b) :
 			BreakableBlock(a, b)
 		{}
 	};

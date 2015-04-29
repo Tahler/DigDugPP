@@ -6,7 +6,7 @@
 
 //Physics::Rectangle rect(Point(350, 500), Point(450, 600));
 //Triangle tri(Point(350, 400), Point(400, 350), Point(450, 400));
-Character c(Point(500, 500));
+Character c(500, 500);
 Blocks::Block b1(Point(500, 600), Point(550, 650));
 
 ////////////////////////////////////////////////////////////

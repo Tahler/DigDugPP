@@ -11,14 +11,14 @@ using Physics::Rectangle;
 class Character
 {
 public:
-	Point location;
+	Point location; // The upper left corner of the bounding box
 	Vector velocity;
 	Vector acceleration;
 	bool isColliding;
 	bool isJumping;
 
 	Character();
-	Character(Point&);
+	Character(float, float);
 
 	Physics::Rectangle getBoundingBox();
 	void checkKeyInput();
