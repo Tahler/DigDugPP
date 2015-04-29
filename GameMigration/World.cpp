@@ -1,12 +1,13 @@
 
 #include "World.h"
 
+// Measured in pixels
 const int WINDOW_WIDTH = 1200;
 const int WINDOW_HEIGHT = 800;
+const int BLOCK_SIZE = 50;
 
-const int BLOCK_WIDTH = 50;
-
-const int BLOCKS_PER_WINDOW = (WINDOW_WIDTH / BLOCK_WIDTH) * (WINDOW_HEIGHT / BLOCK_WIDTH);
+// Measured in blocks
+const int BLOCKS_PER_WINDOW = (WINDOW_WIDTH / BLOCK_SIZE) * (WINDOW_HEIGHT / BLOCK_SIZE);
 const int WORLD_SIZE_IN_WINDOWS = 20;
 
 World::World()
@@ -16,22 +17,26 @@ World::World()
 }
 void World::init()
 {
-	for (int i = 0; i < blocks.size(); i++)
+	for (unsigned int i = 0; i < blocks.size(); i++)
 	{
-		for (int j = 0; j < blocks[0].size(); j++)
+		for (unsigned int j = 4; j < blocks[i].size(); j++) // Leave the first four rows blank.
 		{
-			blocks[i][j] = Block(Point(i * BLOCK_WIDTH, j * BLOCK_WIDTH));
+			blocks[i][j] = Block(Point(i * BLOCK_SIZE, j * BLOCK_SIZE + BLOCK_SIZE));
 		}
 	}
 }
-void World::draw(Core::Graphics g)
+void World::draw(Core::Graphics& g)
 {
-	for (int i = 0; i < blocks.size(); i++)
+	for (unsigned int i = 0; i < blocks.size(); i++)
 	{
-		for (int j = 0; j < blocks[0].size(); j++)
+		for (unsigned int j = 0; j < blocks[0].size(); j++)
 		{
 			blocks[i][j].draw(g);
 		}
 	}
 	// draw character
+}
+Block& World::getBlockAt(Point& a) // consider returning Block&
+{
+	return blocks[a.x / BLOCK_SIZE][a.y / BLOCK_SIZE];
 }

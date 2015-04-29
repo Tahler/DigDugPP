@@ -5,16 +5,10 @@
 #include "Blocks.h"
 
 World world;
-
 Character c(0, 0);
-//Blocks::Block b1(Point(0, 100));
-//Blocks::Block b2(Point(50, 100));
-//Blocks::Block b3(Point(100, 100));
-//Blocks::Block b4(Point(100, 150));
-//Blocks::Block b5(Point(150, 150));
-//Blocks::Block b6(Point(200, 150));
 
 ////////////////////////////////////////////////////////////
+
 bool update(float dt)
 {
 	//tri.isColliding = (!tri.getBoundingBox().intersects(rect));
@@ -25,12 +19,6 @@ bool update(float dt)
 void draw(Core::Graphics& graphics)
 {
 	//graphics.SetBackgroundColor(RGB(127, 127, 127));
-	/*b1.draw(graphics);
-	b2.draw(graphics);
-	b3.draw(graphics);
-	b4.draw(graphics);
-	b5.draw(graphics);
-	b6.draw(graphics);*/
 	world.draw(graphics);
 	c.draw(graphics);
 }

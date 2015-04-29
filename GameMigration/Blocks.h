@@ -6,16 +6,16 @@
 using Physics::Rectangle;
 using Physics::Point;
 
-extern const int BLOCK_WIDTH; 
+extern const int BLOCK_SIZE; 
 
 namespace Blocks
 {
 	struct Block:Rectangle
 	{
 		//Base block
-		Block();
+		Block() {}
 		Block(Point a) :
-			Rectangle(a, Point(a.x + BLOCK_WIDTH, a.y + BLOCK_WIDTH))
+			Rectangle(a, Point(a.x + BLOCK_SIZE, a.y + BLOCK_SIZE))
 		{}
 		void setLocation(Point);
 	};

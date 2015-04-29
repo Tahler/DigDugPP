@@ -45,7 +45,7 @@ namespace Physics
 	{
 		Point a, b;
 
-		Rectangle();
+		Rectangle() {}
 		Rectangle(Point, Point);
 		
 		void setPoints(Point, Point);

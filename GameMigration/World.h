@@ -10,7 +10,7 @@
 using std::vector;
 using namespace Blocks;
 
-extern const int WINDOW_WIDTH, WINDOW_HEIGHT, BLOCK_WIDTH;
+extern const int WINDOW_WIDTH, WINDOW_HEIGHT, BLOCK_SIZE;
 
 class World
 {
@@ -20,7 +20,9 @@ public:
 	World();
 
 	void init();
-	void draw(Core::Graphics);
+	void draw(Core::Graphics&);
+
+	Block& getBlockAt(Point&);
 };
 
 #endif

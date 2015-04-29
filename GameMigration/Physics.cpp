@@ -47,10 +47,6 @@ Line::Line(Point pa, Point pb)
 }
 
 // Rectangle //
-Rectangle::Rectangle()
-{
-
-}
 Rectangle::Rectangle(Point pa, Point pb)
 {
 	a = pa, b = pb;
