@@ -68,7 +68,7 @@ namespace Physics
 		Rectangle getBoundingBox();
 		void draw(Core::Graphics& g);
 		void move();
-		void resolveCollision(Line& edge);
+		//void resolveCollision(Line& edge);
 	};
 }
 

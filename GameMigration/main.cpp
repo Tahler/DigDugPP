@@ -1,6 +1,7 @@
 
 #include "Core.h"
 #include "Physics.h"
+#include "World.h"
 using namespace Physics;
 
 Physics::Rectangle rect(Point(350, 500), Point(450, 600));
@@ -33,9 +34,11 @@ void draw(Core::Graphics& graphics)
 	tri.draw(graphics);
 }
 
+extern const int WINDOW_WIDTH, WINDOW_HEIGHT;
+
 void main()
 {
-	Core::Init("DigDug++", 800, 800);
+	Core::Init("DigDug++", WINDOW_WIDTH, WINDOW_HEIGHT);
 	Core::RegisterUpdateFn(update);
 	Core::RegisterDrawFn(draw);
 	Core::GameLoop();

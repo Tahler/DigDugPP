@@ -108,24 +108,24 @@ void Triangle::move()
 	lowerRight += velocity;
 
 	// Resolve collision
-	if (isColliding)
-	{
-		if (acceleration.x < 0) // Moving left
-		{
-			resolveCollision(Line(Point(lowerLeft.x, top.y), Point(lowerLeft.x, lowerLeft.y)));
-		}
-		else if (acceleration.x > 0) // Moving right
-		{
+	//if (isColliding)
+	//{
+	//	if (acceleration.x < 0) // Moving left
+	//	{
+	//		resolveCollision(Line(Point(lowerLeft.x, top.y), Point(lowerLeft.x, lowerLeft.y)));
+	//	}
+	//	else if (acceleration.x > 0) // Moving right
+	//	{
 
-		}
+	//	}
 
-		if (acceleration.y < 0) // Moving up
-		{
+	//	if (acceleration.y < 0) // Moving up
+	//	{
 
-		}
-		else if (acceleration.y > 0) // Moving down
-		{
+	//	}
+	//	else if (acceleration.y > 0) // Moving down
+	//	{
 
-		}
-	}
+	//	}
+	//}
 }
