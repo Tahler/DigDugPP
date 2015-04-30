@@ -12,7 +12,7 @@ using Physics::Rectangle;
 using Physics::operator+;
 
 // Character //
-const float MAX_SPEED = 5.0;
+const float MAX_SPEED = BLOCK_SIZE / 10;
 const float DRAG = 0.1;
 
 Physics::Rectangle Character::getBoundingBox()
@@ -47,26 +47,20 @@ void Character::checkCollisions()
 	{
 		neighbor = &(world->getBlockAt(Point(box->a.x - MAX_SPEED + 1, box->a.y)));
 		neighbor2 = &(world->getBlockAt(Point(box->a.x - MAX_SPEED + 1, box->b.y)));
-		if (!neighbor->isTraversable || !neighbor2->isTraversable)
+		if (!neighbor->isTraversable || !neighbor2->isTraversable) // collision incoming
 		{
 			velocity.x = 0;
-			if (neighbor->intersects(*box) && neighbor2->intersects(*box)) 
-			{
-				location.x = neighbor->a.x + BLOCK_SIZE;
-			}
+			location.x = neighbor->b.x; // it does not matter which neighbor we set the location to
 		}
 	}
 	else if (velocity.x > 0) // moving right
 	{
-		neighbor = &(world->getBlockAt(Point(box->b.x + MAX_SPEED - 1, box->a.y)));
-		neighbor2 = &(world->getBlockAt(Point(box->b.x + MAX_SPEED - 1, box->b.y)));
-		if (!neighbor->isTraversable || !neighbor2->isTraversable)
+		neighbor = &(world->getBlockAt(Point(box->b.x + MAX_SPEED, box->a.y)));
+		neighbor2 = &(world->getBlockAt(Point(box->b.x + MAX_SPEED, box->b.y)));
+		if (!neighbor->isTraversable || !neighbor2->isTraversable) 
 		{
 			velocity.x = 0;
-			if (neighbor->intersects(*box) || neighbor2->intersects(*box)) 
-			{
-				location.x = neighbor->a.x - BLOCK_SIZE;
-			}
+			location.x = neighbor->a.x - BLOCK_SIZE - 1;
 		}
 	}
 
@@ -80,10 +74,7 @@ void Character::checkCollisions()
 		{
 			isJumping = false;
 			velocity.y = 0;
-			if (neighbor->intersects(*box) || neighbor2->intersects(*box)) 
-			{
-				location.y = neighbor->a.y - BLOCK_SIZE;
-			}
+			location.y = neighbor->a.y - BLOCK_SIZE - 1;
 		}
 	}
 	else if (velocity.y < 0) // moving up
@@ -93,10 +84,7 @@ void Character::checkCollisions()
 		if (!neighbor->isTraversable || !neighbor2->isTraversable)
 		{
 			velocity.y = 0;
-			if (neighbor->intersects(*box) || neighbor2->intersects(*box)) 
-			{
-				location.y = neighbor->a.y + BLOCK_SIZE;
-			}
+			location.y = neighbor->b.y + 1;
 		}
 	}
 }
