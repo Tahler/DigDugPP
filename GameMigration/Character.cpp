@@ -73,6 +73,7 @@ void Character::checkCollisions()
 
 	if (velocity.y > 0) // moving down
 	{
+		isJumping = true; // If the character is falling he should not be able to jump
 		check = &(world->getBlockAt(Point(location.x, location.y + BLOCK_SIZE + 1)));
 		if (!check->isTraversable)
 		{
