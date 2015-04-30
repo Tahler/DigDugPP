@@ -21,8 +21,22 @@ public:
 	bool isColliding;
 	bool isJumping;
 
-	Character();
-	Character(World*, float, float);
+	Character() :
+		world(NULL),
+		location(0, 0),
+		velocity(0, 0),
+		acceleration(0, 0),
+		isColliding(false),
+		isJumping(false)
+	{}
+	Character(World* w, float x, float y) : 
+		world(w),
+		location(x, y),
+		velocity(0, 0),
+		acceleration(0, 0),
+		isColliding(false),
+		isJumping(false)
+	{}
 
 	Physics::Rectangle getBoundingBox();
 	void checkKeyInput();

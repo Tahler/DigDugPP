@@ -18,16 +18,16 @@ namespace Blocks
 		bool isTraversable;
 
 		Block() {}
-		Block(Point a, bool isTraversable) :
+		Block(Point& a, bool isTraversable) :
 			Rectangle(a, Point(a.x + BLOCK_SIZE, a.y + BLOCK_SIZE)),
 			isTraversable(isTraversable)
 		{}
-		void setLocation(Point);
+		void setLocation(Point&);
 	};
 
 	struct Air:Block
 	{
-		Air(Point a) : 
+		Air(Point& a) : 
 			Block(a, true)
 		{}
 		void draw(Core::Graphics& g);
@@ -36,7 +36,7 @@ namespace Blocks
 	struct Stone:Block
 	{
 		//Has gravity
-		Stone(Point a) :
+		Stone(Point& a) :
 			Block(a, false)
 		{}
 		void draw(Core::Graphics& g);
@@ -46,7 +46,7 @@ namespace Blocks
 	{
 		//Can break
 		int durability;
-		BreakableBlock(Point a) :
+		BreakableBlock(Point& a) :
 			Block(a, false)
 		{
 			durability = 100;
@@ -56,7 +56,7 @@ namespace Blocks
 	struct Earth:BreakableBlock
 	{
 		//No value, disappears
-		Earth(Point a) :
+		Earth(Point& a) :
 			BreakableBlock(a)
 		{}
 		void draw(Core::Graphics& g);
@@ -66,7 +66,7 @@ namespace Blocks
 	{
 		//Has value, goes to inv
 		int value;
-		OreBlock(Point a) :
+		OreBlock(Point& a) :
 			BreakableBlock(a)
 		{}
 	};
@@ -74,7 +74,7 @@ namespace Blocks
 	struct Copper:OreBlock
 	{
 		
-		Copper(Point a) :
+		Copper(Point& a) :
 			OreBlock(a)
 		{
 			value = 1;
@@ -86,7 +86,7 @@ namespace Blocks
 	struct Iron:OreBlock
 	{
 	
-		Iron(Point a) :
+		Iron(Point& a) :
 			OreBlock(a)
 		{
 			value = 2;
@@ -98,7 +98,7 @@ namespace Blocks
 	struct Silver:OreBlock
 	{
 		
-		Silver(Point a) :
+		Silver(Point& a) :
 			OreBlock(a)
 		{
 			value = 3;

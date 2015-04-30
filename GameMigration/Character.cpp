@@ -12,23 +12,6 @@ using Physics::Rectangle;
 using Physics::operator+;
 
 // Character //
-Character::Character()
-{
-	location = Point(0, 0);
-	velocity = Vector(0, 0);
-	acceleration = Vector(0, 0);
-	isColliding = false;
-	isJumping = false;
-}
-Character::Character(World* w, float x, float y)
-{
-	world = w;
-	location = Point(x, y);
-	velocity = Vector(0, 0);
-	acceleration = Vector(0, 0);
-	isColliding = false;
-	isJumping = false;
-}
 Physics::Rectangle Character::getBoundingBox()
 {
 	return Physics::Rectangle(location, Point(location.x + BLOCK_SIZE, location.y + BLOCK_SIZE));

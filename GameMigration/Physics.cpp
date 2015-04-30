@@ -5,16 +5,6 @@ using namespace Physics;
 float Gravity::acceleration = 0.1f;
 
 // Vector //
-Vector::Vector()
-{
-	x = 0;
-	y = 0;
-}
-Vector::Vector(float nx, float ny)
-{
-	x = nx;
-	y = ny;
-}
 Vector operator+(const Vector& left, const Vector& right)
 {
 	return Vector(left.x + right.x, left.y + right.y);
@@ -38,24 +28,8 @@ void drawLine(Core::Graphics& g, const Vector& left, const Vector& right)
 	g.DrawLine(left.x, left.y, right.x, right.y);
 }
 
-// Line //
-Line::Line()
-{
-	a = Point(0, 0);
-	b = Point(0, 0);
-}
-Line::Line(Point pa, Point pb)
-{
-	a = pa;
-	b = pb;
-}
-
 // Rectangle //
-Rectangle::Rectangle(Point pa, Point pb)
-{
-	a = pa, b = pb;
-}
-void Rectangle::setPoints(Point pa, Point pb)
+void Rectangle::setPoints(Point& pa, Point& pb)
 {
 	a = pa, b = pb;
 }

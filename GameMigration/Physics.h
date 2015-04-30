@@ -16,8 +16,12 @@ namespace Physics
 	{
 		float x;
 		float y;
-		Vector();
-		Vector(float nx, float ny);
+		Vector() :
+			x(0), y(0)
+		{}
+		Vector(float x, float y) :
+			x(x), y(y)
+		{}
 		
 		void operator=(const Vector&);
 		void operator+=(const Vector&);
@@ -35,8 +39,12 @@ namespace Physics
 		Point a;
 		Point b;
 
-		Line();
-		Line(Point pa, Point pb);
+		Line() : 
+			a(0, 0), b(0, 0)
+		{}
+		Line(Point& a, Point& b) : 
+			a(a), b(b)
+		{}
 	};
 
 	//	a - upper left point, b - lower right point	
@@ -44,10 +52,14 @@ namespace Physics
 	{
 		Point a, b;
 
-		Rectangle() {}
-		Rectangle(Point, Point);
+		Rectangle() :
+			a(0, 0), b(0, 0)
+		{}
+		Rectangle(Point& a, Point& b) : 
+			a(a), b(b) 
+		{}
 		
-		void setPoints(Point, Point);
+		void setPoints(Point&, Point&);
 
 		bool contains(Point&);
 		bool intersects(Rectangle&);
