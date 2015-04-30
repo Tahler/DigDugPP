@@ -5,7 +5,7 @@
 #include "Blocks.h"
 
 World world;
-Character player(&world, 100, 0);
+//Character player(&world, 100, 0);
 
 ////////////////////////////////////////////////////////////
 
@@ -13,7 +13,7 @@ bool update(float dt)
 {
 	//tri.isColliding = (!tri.getBoundingBox().intersects(rect));
 	world.update();
-	player.update();
+	//player.update();
 	return false;
 }
 
@@ -21,7 +21,7 @@ void draw(Core::Graphics& graphics)
 {
 	//graphics.SetBackgroundColor(RGB(127, 127, 127));
 	world.draw(graphics);
-	player.draw(graphics);
+	//player.draw(graphics);
 }
 
 //extern const int WINDOW_WIDTH, WINDOW_HEIGHT;

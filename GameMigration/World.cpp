@@ -17,12 +17,23 @@ World::World()
 }
 World::~World()
 {
-	
+	for (unsigned int i = 0; i < blocks.size(); i++)
+	{
+		for (unsigned int j = 0; j < blocks[i].size(); j++) // Leave the first four rows blank.
+		{
+			delete blocks[i][j];
+		}
+	}
 }
 void World::init()
 {
 	for (unsigned int i = 0; i < blocks.size(); i++)
 	{
+		for (unsigned int j = 0; j < 4; j++) // Leave the first four rows blank.
+		{
+			// will need to be an air block or something
+			blocks[i][j] = new Earth(Point(i * BLOCK_SIZE, j * BLOCK_SIZE));
+		}
 		for (unsigned int j = 4; j < blocks[i].size(); j++) // Leave the first four rows blank.
 		{
 			blocks[i][j] = new Earth(Point(i * BLOCK_SIZE, j * BLOCK_SIZE));

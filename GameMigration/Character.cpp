@@ -58,7 +58,7 @@ void Character::move()
 	velocity.x += acceleration.x;
 	velocity.y += acceleration.y;
 
-	// Move
+	// Check for collisions then move
 	Block* check;
 	if (velocity.x < 0) // moving left
 	{
