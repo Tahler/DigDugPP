@@ -123,7 +123,6 @@ void Character::update()
 	velocity.y += Gravity::acceleration;
 	// and friction
 	acceleration.x += -DRAG * velocity.x;
-
 	// Adjust for own fluid motion
 	// Don't let the guy run too fast
 	if (std::abs(velocity.x) > MAX_SPEED) 
@@ -132,6 +131,7 @@ void Character::update()
 		velocity.x *= MAX_SPEED / std::abs(velocity.x);
 	}
 	velocity.x += acceleration.x;
+	if (std::abs(velocity.x) < .2) velocity.x = 0;
 	velocity.y += acceleration.y;
 }
 void Character::draw(Core::Graphics g)
@@ -162,6 +162,7 @@ void Character::draw(Core::Graphics g)
 	}
 	g.SetColor(RGB(38, 88, 158));
 	fillRectangle(g, Point(location.x + BLOCK_FIFTH * 2, location.y + BLOCK_FIFTH * 3), BLOCK_FIFTH, BLOCK_FIFTH * 2);
-	//g.SetColor(RGB(10, 10, 255));
-	//getBoundingBox().draw(g);
+	g.SetColor(RGB(10, 10, 255));
+	getBoundingBox().draw(g);
+	
 }
