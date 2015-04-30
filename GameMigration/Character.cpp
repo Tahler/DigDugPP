@@ -45,8 +45,8 @@ void Character::checkCollisions()
 
 	if (velocity.x < 0) // moving left
 	{
-		neighbor = &(world->getBlockAt(Point(box->a.x - 1, box->a.y)));
-		neighbor2 = &(world->getBlockAt(Point(box->a.x - 1, box->b.y)));
+		neighbor = &(world->getBlockAt(Point(box->a.x - MAX_SPEED, box->a.y)));
+		neighbor2 = &(world->getBlockAt(Point(box->a.x - MAX_SPEED, box->b.y)));
 		if (!neighbor->isTraversable || !neighbor2->isTraversable)
 		{
 			velocity.x = 0;
@@ -58,8 +58,8 @@ void Character::checkCollisions()
 	}
 	else if (velocity.x > 0) // moving right
 	{
-		neighbor = &(world->getBlockAt(Point(box->b.x + 1, box->a.y)));
-		neighbor2 = &(world->getBlockAt(Point(box->b.x + 1, box->b.y)));
+		neighbor = &(world->getBlockAt(Point(box->b.x + MAX_SPEED, box->a.y)));
+		neighbor2 = &(world->getBlockAt(Point(box->b.x + MAX_SPEED, box->b.y)));
 		if (!neighbor->isTraversable || !neighbor2->isTraversable)
 		{
 			velocity.x = 0;
@@ -74,8 +74,8 @@ void Character::checkCollisions()
 	{
 		isJumping = true; // If the character is falling he should not be able to jump
 		
-		neighbor = &(world->getBlockAt(Point(box->a.x, box->b.y + 1)));
-		neighbor2 = &(world->getBlockAt(Point(box->b.x, box->b.y + 1)));
+		neighbor = &(world->getBlockAt(Point(box->a.x, box->b.y + MAX_SPEED)));
+		neighbor2 = &(world->getBlockAt(Point(box->b.x, box->b.y + MAX_SPEED)));
 		if (!neighbor->isTraversable || !neighbor2->isTraversable)
 		{
 			isJumping = false;
@@ -88,8 +88,8 @@ void Character::checkCollisions()
 	}
 	else if (velocity.y < 0) // moving up
 	{
-		neighbor = &(world->getBlockAt(Point(box->a.x, box->b.y - 1)));
-		neighbor2 = &(world->getBlockAt(Point(box->b.x, box->b.y - 1)));
+		neighbor = &(world->getBlockAt(Point(box->a.x, box->b.y - MAX_SPEED)));
+		neighbor2 = &(world->getBlockAt(Point(box->b.x, box->b.y - MAX_SPEED)));
 		if (!neighbor->isTraversable || !neighbor2->isTraversable)
 		{
 			velocity.y = 0;
