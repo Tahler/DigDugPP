@@ -31,14 +31,18 @@ void World::init()
 	{
 		for (unsigned int j = 0; j < 4; j++) // Leave the first four rows blank.
 		{
-			blocks[i][j] = new Air(Point(i * BLOCK_SIZE, j * BLOCK_SIZE));
+			blocks[i][j] = new Sky(Point(i * BLOCK_SIZE, j * BLOCK_SIZE));
 		}
 		for (unsigned int j = 4; j < blocks[i].size(); j++) // Rest of the world is ground
 		{
-			if (j == 4 && i >= 6 && i <= 18) blocks[i][j] = new Air(Point(i * BLOCK_SIZE, j * BLOCK_SIZE));
+			if (j == 4 && i >= 6 && i <= 18) blocks[i][j] = new Cave(Point(i * BLOCK_SIZE, j * BLOCK_SIZE));
 			else blocks[i][j] = new Earth(Point(i * BLOCK_SIZE, j * BLOCK_SIZE));
 		}
 	}
+	blocks[3][4] = new Stone(Point(150, 200));
+	blocks[3][5] = new Copper(Point(150, 250));
+	blocks[3][6] = new Iron(Point(150, 300));
+	blocks[3][7] = new Silver(Point(150, 350));
 }
 void World::update()
 {

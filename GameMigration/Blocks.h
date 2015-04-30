@@ -25,9 +25,17 @@ namespace Blocks
 		void setLocation(Point&);
 	};
 
-	struct Air:Block
+	struct Sky:Block
 	{
-		Air(Point& a) : 
+		Sky(Point& a) : 
+			Block(a, true)
+		{}
+		void draw(Core::Graphics& g);
+	};
+
+	struct Cave:Block
+	{
+		Cave(Point& a) :
 			Block(a, true)
 		{}
 		void draw(Core::Graphics& g);
