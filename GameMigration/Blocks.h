@@ -9,6 +9,7 @@ using Physics::Point;
 
 extern const int BLOCK_SIZE;
 const int BLOCK_FIFTH = BLOCK_SIZE/5;
+const int BLOCK_SIXTH = (BLOCK_SIZE/6);
 
 namespace Blocks
 {
@@ -36,6 +37,14 @@ namespace Blocks
 	struct Cave:Block
 	{
 		Cave(Point& a) :
+			Block(a, true)
+		{}
+		void draw(Core::Graphics& g);
+	};
+	
+	struct Ladder:Block
+	{
+		Ladder(Point& a) : 
 			Block(a, true)
 		{}
 		void draw(Core::Graphics& g);

@@ -19,6 +19,19 @@ void Cave::draw(Core::Graphics& g)
 	g.SetColor(RGB(41, 24, 2));
 	fillSquare(g, a, BLOCK_SIZE);
 }
+void Ladder::draw(Core::Graphics& g)
+{
+	g.SetColor(RGB(41, 24, 2));
+	fillSquare(g, a, BLOCK_SIZE);
+	g.SetColor(RGB(204, 151, 6));
+	//Rails
+	fillRectangle(g, Point(a.x + BLOCK_FIFTH, a.y), BLOCK_FIFTH, BLOCK_SIZE);
+	fillRectangle(g, Point(a.x + 3*BLOCK_FIFTH, a.y), BLOCK_FIFTH, BLOCK_SIZE);
+	//Wrungs
+	fillRectangle(g, Point(a.x + 2*BLOCK_FIFTH, a.y + BLOCK_SIXTH), BLOCK_FIFTH, BLOCK_SIXTH);
+	fillRectangle(g, Point(a.x + 2*BLOCK_FIFTH, a.y + 3*BLOCK_SIXTH), BLOCK_FIFTH, BLOCK_SIXTH);
+	fillRectangle(g, Point(a.x + 2*BLOCK_FIFTH, a.y + 5*BLOCK_SIXTH), BLOCK_FIFTH, BLOCK_SIXTH);
+}
 void Stone::draw(Core::Graphics &g)
 {
 	g.SetColor(RGB(121,122,122));

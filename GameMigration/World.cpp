@@ -51,6 +51,10 @@ void World::init()
 	blocks[3][6] = new Iron(Point(150, 300));
 	delete blocks[3][7];
 	blocks[3][7] = new Silver(Point(150, 350));
+	delete blocks[2][5];
+	blocks[2][5] = new Ladder(Point(100, 250));
+	delete blocks[2][6];
+	blocks[2][6] = new Ladder(Point(100, 300));
 }
 void World::update()
 {
