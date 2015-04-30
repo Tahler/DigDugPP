@@ -12,8 +12,12 @@ const int WORLD_SIZE_IN_WINDOWS = 20;
 
 World::World()
 {
-	blocks = vector<vector<Block>>(24, vector<Block>(16));
+	blocks = vector<vector<Block*>>(24, vector<Block*>(16));
 	init();
+}
+World::~World()
+{
+	
 }
 void World::init()
 {
@@ -21,7 +25,7 @@ void World::init()
 	{
 		for (unsigned int j = 0; j < blocks[i].size(); j++) // Leave the first four rows blank.
 		{
-			blocks[i][j] = Block(Point(i * BLOCK_SIZE, j * BLOCK_SIZE));
+			blocks[i][j] = new Earth(Point(i * BLOCK_SIZE, j * BLOCK_SIZE));
 		}
 	}
 }
@@ -35,11 +39,11 @@ void World::draw(Core::Graphics& g)
 	{
 		for (unsigned int j = 0; j < blocks[0].size(); j++)
 		{
-			blocks[i][j].draw(g);
+			blocks[i][j]->draw(g);
 		}
 	}
 }
 Block& World::getBlockAt(Point& a) // consider returning Block&
 {
-	return blocks[a.x / BLOCK_SIZE][a.y / BLOCK_SIZE];
+	return *blocks[a.x / BLOCK_SIZE][a.y / BLOCK_SIZE];
 }
