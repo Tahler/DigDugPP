@@ -15,10 +15,10 @@ extern const int WINDOW_WIDTH, WINDOW_HEIGHT, BLOCK_SIZE;
 class World
 {
 public:
-	vector<vector<Block>> blocks;
+	vector<vector<Block*>> blocks;
 	
 	World();
-
+	~World();
 	void init();
 
 	void update();
