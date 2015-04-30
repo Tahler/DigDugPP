@@ -2,9 +2,9 @@
 #include "World.h"
 
 // Measured in pixels
-const int WINDOW_WIDTH = 1200;
-const int WINDOW_HEIGHT = 800;
 const int BLOCK_SIZE = 50;
+const int WINDOW_WIDTH = 24 * BLOCK_SIZE;
+const int WINDOW_HEIGHT = 16 * BLOCK_SIZE;
 
 // Measured in blocks
 const int BLOCKS_PER_WINDOW = (WINDOW_WIDTH / BLOCK_SIZE) * (WINDOW_HEIGHT / BLOCK_SIZE);

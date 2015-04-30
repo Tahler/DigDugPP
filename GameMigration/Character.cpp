@@ -32,8 +32,8 @@ void Character::jump()
 	if (!isJumping)
 	{
 		isJumping = true;
-		// This is hard coded right now... perhaps there is some calculation to jump exactly one block
-		velocity.y = -4.0;
+		// Perhaps there is some calculation to jump exactly one block
+		velocity.y = -MAX_SPEED;
 	}
 }
 void Character::checkCollisions()
@@ -118,7 +118,6 @@ void Character::update()
 }
 void Character::draw(Core::Graphics g)
 {
-	// draw image eventually
 	g.SetColor(RGB(28, 212, 52));
 	//fillSquare(g, location, BLOCK_SIZE);
 	fillRectangle(g, Point(location.x + BLOCK_FIFTH, location.y + BLOCK_FIFTH), BLOCK_FIFTH * 3, BLOCK_FIFTH * 1);
