@@ -13,6 +13,8 @@ using Physics::operator+;
 
 // Character //
 const float MAX_SPEED = 5.0;
+const float DRAG = 0.02;
+
 Physics::Rectangle Character::getBoundingBox()
 {
 	return Physics::Rectangle(location, Point(location.x + BLOCK_SIZE, location.y + BLOCK_SIZE));
@@ -40,10 +42,10 @@ void Character::jump()
 		velocity.y = -4.0;
 	}
 }
-void Character::move()
+void Character::checkCollisions()
 {
-	// Check for collisions then move
 	Block* check;
+
 	if (velocity.x < 0) // moving left
 	{
 		check = &(world->getBlockAt(Point(location.x - 1, location.y)));
@@ -54,9 +56,7 @@ void Character::move()
 				velocity.x = 0;
 				location.x = (*check).a.x + BLOCK_SIZE;
 			}
-			else location.x += velocity.x;
 		}
-		else location.x += velocity.x;
 	}
 	else if (velocity.x > 0) // moving right
 	{
@@ -68,12 +68,23 @@ void Character::move()
 				velocity.x = 0;
 				location.x = (*check).a.x - BLOCK_SIZE;
 			}
-			else location.x += velocity.x;
 		}
-		else location.x += velocity.x;
 	}
 
-	if (velocity.y < 0) // moving up
+	if (velocity.y > 0) // moving down
+	{
+		check = &(world->getBlockAt(Point(location.x, location.y + BLOCK_SIZE + 1)));
+		if (!check->isTraversable)
+		{
+			if (check->intersects(getBoundingBox())) 
+			{
+				isJumping = false;
+				velocity.y = 0;
+				location.y = (*check).a.y - BLOCK_SIZE;
+			}
+		}
+	}
+	else if (velocity.y < 0) // moving up
 	{
 		check = &(world->getBlockAt(Point(location.x, location.y - 1)));
 		if (!check->isTraversable)
@@ -83,32 +94,27 @@ void Character::move()
 				velocity.y = 0;
 				location.y = (*check).a.y + BLOCK_SIZE;
 			}
-			else location.y += velocity.y;
 		}
-		else location.y += velocity.y;
 	}
-	else if (velocity.y > 0) // moving down
-	{
-		check = &(world->getBlockAt(Point(location.x, location.y + BLOCK_SIZE + 1)));
-		if (!check->isTraversable)
-		{
-			if (check->intersects(getBoundingBox())) 
-			{
-				velocity.y = 0;
-				location.y = (*check).a.y - BLOCK_SIZE;
-			}
-			else location.y += velocity.y;
-		}
-		else location.y += velocity.y;
-	}
-
+}
+void Character::move()
+{
+	// Don't go outside the window, otherwise allow movement
+	if (location.x >= 0 && location.x + BLOCK_SIZE <= WINDOW_WIDTH) location.x += velocity.x;
+	if (location.y >= 0 && location.y + BLOCK_SIZE <= WINDOW_HEIGHT) location.y += velocity.y;
+}
+void Character::update()
+{
 	checkKeyInput();
 
+	checkCollisions();
+	move();
+	
 	// Adjust for gravity
 	velocity.y += Gravity::acceleration;
 	// and friction
-	acceleration.x += -0.02 * velocity.x;
-	
+	acceleration.x += -DRAG * velocity.x;
+
 	// Adjust for own fluid motion
 	// Don't let the guy run too fast
 	if (std::abs(velocity.x) > MAX_SPEED) 
@@ -118,10 +124,6 @@ void Character::move()
 	}
 	velocity.x += acceleration.x;
 	velocity.y += acceleration.y;
-}
-void Character::update()
-{
-	move();
 }
 void Character::draw(Core::Graphics g)
 {

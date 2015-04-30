@@ -41,6 +41,7 @@ public:
 	Physics::Rectangle getBoundingBox();
 	void checkKeyInput();
 	void jump();
+	void checkCollisions();
 	void move();
 
 	void update();
