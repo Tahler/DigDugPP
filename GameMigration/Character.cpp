@@ -49,36 +49,6 @@ void Character::checkCollisions()
 	Block* neighbor2;
 	Physics::Rectangle* box = &getBoundingBox();
 
-	if (velocity.y > 0) // moving down
-	{
-		isJumping = true; // If the character is falling he should not be able to jump
-		
-		neighbor = &(world->getBlockAt(Point(box->a.x, box->b.y + 1)));
-		neighbor2 = &(world->getBlockAt(Point(box->b.x, box->b.y + 1)));
-		if (!neighbor->isTraversable || !neighbor2->isTraversable)
-		{
-			isJumping = false;
-			velocity.y = 0;
-			if (neighbor->intersects(*box) || neighbor2->intersects(*box)) 
-			{
-				//location.y = neighbor->a.y - BLOCK_SIZE;
-			}
-		}
-	}
-	else if (velocity.y < 0) // moving up
-	{
-		neighbor = &(world->getBlockAt(Point(box->a.x, box->b.y - 1)));
-		neighbor2 = &(world->getBlockAt(Point(box->b.x, box->b.y - 1)));
-		if (!neighbor->isTraversable || !neighbor2->isTraversable)
-		{
-			velocity.y = 0;
-			if (neighbor->intersects(*box) || neighbor2->intersects(*box)) 
-			{
-				//location.y = neighbor->a.y + BLOCK_SIZE;
-			}
-		}
-	}
-
 	if (velocity.x < 0) // moving left
 	{
 		neighbor = &(world->getBlockAt(Point(box->a.x - 1, box->a.y)));
@@ -102,6 +72,36 @@ void Character::checkCollisions()
 			if (neighbor->intersects(*box) || neighbor2->intersects(*box)) 
 			{
 				//location.x = neighbor->a.x - BLOCK_SIZE;
+			}
+		}
+	}
+
+	if (velocity.y > 0) // moving down
+	{
+		isJumping = true; // If the character is falling he should not be able to jump
+		
+		neighbor = &(world->getBlockAt(Point(box->a.x, box->b.y + 1)));
+		neighbor2 = &(world->getBlockAt(Point(box->b.x, box->b.y + 1)));
+		if (!neighbor->isTraversable || !neighbor2->isTraversable)
+		{
+			isJumping = false;
+			velocity.y = 0;
+			if (neighbor->intersects(*box) || neighbor2->intersects(*box)) 
+			{
+				location.y = neighbor->a.y - BLOCK_SIZE;
+			}
+		}
+	}
+	else if (velocity.y < 0) // moving up
+	{
+		neighbor = &(world->getBlockAt(Point(box->a.x, box->b.y - 1)));
+		neighbor2 = &(world->getBlockAt(Point(box->b.x, box->b.y - 1)));
+		if (!neighbor->isTraversable || !neighbor2->isTraversable)
+		{
+			velocity.y = 0;
+			if (neighbor->intersects(*box) || neighbor2->intersects(*box)) 
+			{
+				//location.y = neighbor->a.y + BLOCK_SIZE;
 			}
 		}
 	}
