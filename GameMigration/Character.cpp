@@ -12,7 +12,7 @@ using Physics::Rectangle;
 using Physics::operator+;
 
 // Character //
-const float MAX_VELOCITY = 5.0;
+const float MAX_SPEED = 5.0;
 Physics::Rectangle Character::getBoundingBox()
 {
 	return Physics::Rectangle(location, Point(location.x + BLOCK_SIZE, location.y + BLOCK_SIZE));
@@ -42,18 +42,6 @@ void Character::jump()
 }
 void Character::move()
 {
-	checkKeyInput();
-
-	// Adjust for gravity
-	velocity.y += Gravity::acceleration;
-	// and friction
-	acceleration.x += -0.02 * velocity.x;
-	
-	// Adjust for own fluid motion
-	if (velocity.x < MAX_VELOCITY) velocity.x += acceleration.x;
-	else velocity.x = MAX_VELOCITY;
-	velocity.y += acceleration.y;
-
 	// Check for collisions then move
 	Block* check;
 	if (velocity.x < 0) // moving left
@@ -114,6 +102,23 @@ void Character::move()
 		}
 		else location.y += velocity.y;
 	}
+
+	checkKeyInput();
+
+	// Adjust for gravity
+	velocity.y += Gravity::acceleration;
+	// and friction
+	acceleration.x += -0.02 * velocity.x;
+	
+	// Adjust for own fluid motion
+	// Don't let the guy run too fast
+	if (std::abs(velocity.x) > MAX_SPEED) 
+	{
+		// Normalize the vector (make it equal to 1 or -1) and multiply by the MAX_SPEED
+		velocity.x *= MAX_SPEED / std::abs(velocity.x);
+	}
+	velocity.x += acceleration.x;
+	velocity.y += acceleration.y;
 }
 void Character::update()
 {
