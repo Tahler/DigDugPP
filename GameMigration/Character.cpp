@@ -44,29 +44,34 @@ void Character::jump()
 }
 void Character::checkCollisions()
 {
-	Block* check;
+	// No matter what direction, there are two corners that have to be checked.
+	Block* neighbor;
+	Block* neighbor2;
+	Physics::Rectangle* box = &getBoundingBox();
 
 	if (velocity.x < 0) // moving left
 	{
-		check = &(world->getBlockAt(Point(location.x - 1, location.y)));
-		if (!check->isTraversable)
+		neighbor = &(world->getBlockAt(Point(box->a.x - 1, box->a.y)));
+		neighbor2 = &(world->getBlockAt(Point(box->a.x - 1, box->b.y)));
+		if (!neighbor->isTraversable || !neighbor2->isTraversable)
 		{
-			if (check->intersects(getBoundingBox())) 
+			velocity.x = 0;
+			if (neighbor->intersects(*box) && neighbor2->intersects(*box)) 
 			{
-				velocity.x = 0;
-				location.x = (*check).a.x + BLOCK_SIZE;
+				//location.x = neighbor->a.x + BLOCK_SIZE;
 			}
 		}
 	}
 	else if (velocity.x > 0) // moving right
 	{
-		check = &(world->getBlockAt(Point(location.x + BLOCK_SIZE, location.y)));
-		if (!check->isTraversable)
+		neighbor = &(world->getBlockAt(Point(box->b.x + 1, box->a.y)));
+		neighbor2 = &(world->getBlockAt(Point(box->b.x + 1, box->b.y)));
+		if (!neighbor->isTraversable || !neighbor2->isTraversable)
 		{
-			if (check->intersects(getBoundingBox())) 
+			velocity.x = 0;
+			if (neighbor->intersects(*box) || neighbor2->intersects(*box)) 
 			{
-				velocity.x = 0;
-				location.x = (*check).a.x - BLOCK_SIZE;
+				//location.x = neighbor->a.x - BLOCK_SIZE;
 			}
 		}
 	}
@@ -74,26 +79,29 @@ void Character::checkCollisions()
 	if (velocity.y > 0) // moving down
 	{
 		isJumping = true; // If the character is falling he should not be able to jump
-		check = &(world->getBlockAt(Point(location.x, location.y + BLOCK_SIZE + 1)));
-		if (!check->isTraversable)
+		
+		neighbor = &(world->getBlockAt(Point(box->a.x, box->b.y + 1)));
+		neighbor2 = &(world->getBlockAt(Point(box->b.x, box->b.y + 1)));
+		if (!neighbor->isTraversable || !neighbor2->isTraversable)
 		{
-			if (check->intersects(getBoundingBox())) 
+			isJumping = false;
+			velocity.y = 0;
+			if (neighbor->intersects(*box) || neighbor2->intersects(*box)) 
 			{
-				isJumping = false;
-				velocity.y = 0;
-				location.y = (*check).a.y - BLOCK_SIZE;
+				location.y = neighbor->a.y - BLOCK_SIZE;
 			}
 		}
 	}
 	else if (velocity.y < 0) // moving up
 	{
-		check = &(world->getBlockAt(Point(location.x, location.y - 1)));
-		if (!check->isTraversable)
+		neighbor = &(world->getBlockAt(Point(box->a.x, box->b.y - 1)));
+		neighbor2 = &(world->getBlockAt(Point(box->b.x, box->b.y - 1)));
+		if (!neighbor->isTraversable || !neighbor2->isTraversable)
 		{
-			if (check->intersects(getBoundingBox())) 
+			velocity.y = 0;
+			if (neighbor->intersects(*box) || neighbor2->intersects(*box)) 
 			{
-				velocity.y = 0;
-				location.y = (*check).a.y + BLOCK_SIZE;
+				//location.y = neighbor->a.y + BLOCK_SIZE;
 			}
 		}
 	}
@@ -130,6 +138,7 @@ void Character::draw(Core::Graphics g)
 {
 	// draw image eventually
 	g.SetColor(RGB(28, 212, 52));
+	fillSquare(g, location, BLOCK_SIZE);
 	fillRectangle(g, Point(location.x + BLOCK_FIFTH, location.y + BLOCK_FIFTH), BLOCK_FIFTH * 3, BLOCK_FIFTH * 2);
 	g.SetColor(RGB(247, 214, 143));
 	fillSquare(g, Point(location.x + 2 * BLOCK_FIFTH, location.y), BLOCK_FIFTH);

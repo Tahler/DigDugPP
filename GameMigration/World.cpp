@@ -31,7 +31,8 @@ void World::init()
 	{
 		for (unsigned int j = 0; j < 4; j++) // Leave the first four rows blank.
 		{
-			blocks[i][j] = new Air(Point(i * BLOCK_SIZE, j * BLOCK_SIZE));
+			if (j == 3 && i < 6) blocks[i][j] = new Earth(Point(i * BLOCK_SIZE, j * BLOCK_SIZE));
+			else blocks[i][j] = new Air(Point(i * BLOCK_SIZE, j * BLOCK_SIZE));
 		}
 		for (unsigned int j = 4; j < blocks[i].size(); j++) // Rest of the world is ground
 		{
@@ -39,6 +40,8 @@ void World::init()
 			else blocks[i][j] = new Earth(Point(i * BLOCK_SIZE, j * BLOCK_SIZE));
 		}
 	}
+	delete blocks[10][4];
+	blocks[10][4] = new Earth(Point(10 * BLOCK_SIZE, 4 * BLOCK_SIZE));
 }
 void World::update()
 {
