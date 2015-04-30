@@ -15,10 +15,14 @@ Vector::Vector(float nx, float ny)
 	x = nx;
 	y = ny;
 }
-Point operator+(const Point& left, const Vector& right)
+Vector operator+(const Vector& left, const Vector& right)
 {
-	return Point(left.x + right.x, left.y + right.y);
+	return Vector(left.x + right.x, left.y + right.y);
 }
+//Point operator+(Point& left, Vector& right)
+//{
+//	return Point(left.x + right.x, left.y + right.y);
+//}
 void Vector::operator=(const Vector& v)
 {
 	x = v.x;

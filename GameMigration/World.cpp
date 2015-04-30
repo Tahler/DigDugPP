@@ -19,9 +19,9 @@ void World::init()
 {
 	for (unsigned int i = 0; i < blocks.size(); i++)
 	{
-		for (unsigned int j = 4; j < blocks[i].size(); j++) // Leave the first four rows blank.
+		for (unsigned int j = 0; j < blocks[i].size(); j++) // Leave the first four rows blank.
 		{
-			blocks[i][j] = Block(Point(i * BLOCK_SIZE, j * BLOCK_SIZE + BLOCK_SIZE));
+			blocks[i][j] = Block(Point(i * BLOCK_SIZE, j * BLOCK_SIZE));
 		}
 	}
 }

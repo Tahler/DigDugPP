@@ -5,7 +5,7 @@
 #include "Blocks.h"
 
 World world;
-Character player(&world, 0, 0);
+Character player(&world, 100, 0);
 
 ////////////////////////////////////////////////////////////
 

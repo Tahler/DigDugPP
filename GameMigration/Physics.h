@@ -11,7 +11,7 @@ namespace Physics
 		static float acceleration;
 	};
 
-	// In a typical convention, this would be called Vector2f (vector - 2d - float)
+	// In a typical convention, this would be called Vector2f (vector - 2 dimensional - float)
 	struct Vector
 	{
 		float x;
@@ -22,12 +22,14 @@ namespace Physics
 		void operator=(const Vector&);
 		void operator+=(const Vector&);
 	};
-
+	
 	// They hold the same data, but have different meaning:
 	// Point = location
 	// Vector = displacement
 	typedef Vector Point; 
 	
+	Vector operator+(const Vector&, const Vector&);
+
 	struct Line
 	{
 		Point a;
@@ -37,10 +39,7 @@ namespace Physics
 		Line(Point pa, Point pb);
 	};
 
-	/*
-		A - upper left
-		B - lower right
-	*/
+	//	a - upper left point, b - lower right point	
 	struct Rectangle
 	{
 		Point a, b;
