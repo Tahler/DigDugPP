@@ -7,12 +7,12 @@ const int WINDOW_WIDTH = 24 * BLOCK_SIZE;
 const int WINDOW_HEIGHT = 16 * BLOCK_SIZE;
 
 // Measured in blocks
-const int BLOCKS_PER_WINDOW = (WINDOW_WIDTH / BLOCK_SIZE) * (WINDOW_HEIGHT / BLOCK_SIZE);
-const int WORLD_SIZE_IN_WINDOWS = 20;
+const int WORLD_WIDTH = 24;
+const int WORLD_HEIGHT = 80;
 
 World::World()
 {
-	blocks = vector<vector<Block*>>(24, vector<Block*>(16));
+	blocks = vector<vector<Block*>>(WORLD_WIDTH, vector<Block*>(16));
 	init();
 }
 World::~World()
