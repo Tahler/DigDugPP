@@ -12,7 +12,7 @@ using Physics::Rectangle;
 using Physics::operator+;
 
 // Character //
-const float MAX_SPEED = 4.0;
+const float MAX_SPEED = 5.0;
 const float DRAG = 0.1;
 
 Physics::Rectangle Character::getBoundingBox()
@@ -52,7 +52,7 @@ void Character::checkCollisions()
 			velocity.x = 0;
 			if (neighbor->intersects(*box) && neighbor2->intersects(*box)) 
 			{
-				//location.x = neighbor->a.x + BLOCK_SIZE;
+				location.x = neighbor->a.x + BLOCK_SIZE;
 			}
 		}
 	}
@@ -65,7 +65,7 @@ void Character::checkCollisions()
 			velocity.x = 0;
 			if (neighbor->intersects(*box) || neighbor2->intersects(*box)) 
 			{
-				//location.x = neighbor->a.x - BLOCK_SIZE;
+				location.x = neighbor->a.x - BLOCK_SIZE;
 			}
 		}
 	}
@@ -95,7 +95,7 @@ void Character::checkCollisions()
 			velocity.y = 0;
 			if (neighbor->intersects(*box) || neighbor2->intersects(*box)) 
 			{
-				//location.y = neighbor->a.y + BLOCK_SIZE;
+				location.y = neighbor->a.y + BLOCK_SIZE;
 			}
 		}
 	}
@@ -115,14 +115,6 @@ void Character::update()
 	
 	// Adjust for gravity
 	velocity.y += Gravity::acceleration;
-
-	// Adjust for own fluid motion
-	// Don't let the guy run too fast
-	if (std::abs(velocity.x) > MAX_SPEED) 
-	{
-		// Normalize the vector (make it equal to 1 or -1) and multiply by the MAX_SPEED
-		velocity.x *= MAX_SPEED / std::abs(velocity.x);
-	}
 }
 void Character::draw(Core::Graphics g)
 {
