@@ -59,33 +59,44 @@ void Character::move()
 	velocity.y += acceleration.y;
 
 	// Move
+	// not efficienct, gets block twice in the case of collision
 	if (velocity.x < 0) // moving left
 	{
-		if (!world->getBlockAt(Point(location.x - BLOCK_SIZE / 2, location.y)).intersects(getBoundingBox())) location.x += velocity.x;
-
-		//if (!world->getBlockAt(location + Point(-BLOCK_SIZE/2, 0)).intersects(getBoundingBox())) location.x += velocity.x;
+		if (!world->getBlockAt(Point(location.x - 1, location.y)).intersects(getBoundingBox())) location.x += velocity.x;
+		else 
+		{
+			velocity.x = 0;
+			location.x = world->getBlockAt(Point(location.x - 1, location.y)).a.x + BLOCK_SIZE;
+		}
 	}
 	else if (velocity.x > 0) // moving right
 	{
-		if (!world->getBlockAt(Point(location.x + BLOCK_SIZE / 2, location.y)).intersects(getBoundingBox())) location.x += velocity.x;
-		
-		//if (!world->getBlockAt(location + Point(BLOCK_SIZE/2, 0)).intersects(getBoundingBox())) location.x += velocity.x;
+		if (!world->getBlockAt(Point(location.x + BLOCK_SIZE, location.y)).intersects(getBoundingBox())) location.x += velocity.x;
+		else 
+		{
+			velocity.x = 0;
+			location.x = world->getBlockAt(Point(location.x + BLOCK_SIZE, location.y)).a.x - BLOCK_SIZE;
+		}
 	}
 
 	if (velocity.y < 0) // moving up
 	{
-		if (!world->getBlockAt(Point(location.x, location.y - BLOCK_SIZE / 2)).intersects(getBoundingBox())) location.y += velocity.y;
-
-		//if (!world->getBlockAt(location + Point(0, -BLOCK_SIZE/2)).intersects(getBoundingBox())) location.y += velocity.y;
+		if (!world->getBlockAt(Point(location.x, location.y - 1)).intersects(getBoundingBox())) location.y += velocity.y;
+		else 
+		{
+			velocity.y = 0;
+			location.y = world->getBlockAt(Point(location.x, location.y - 1)).a.y + BLOCK_SIZE;
+		}
 	}
 	else if (velocity.y > 0) // moving down
 	{
-		if (!world->getBlockAt(Point(location.x, location.y + BLOCK_SIZE / 2)).intersects(getBoundingBox())) location.y += velocity.y;
-
-		//if (!world->getBlockAt(location + Point(0, BLOCK_SIZE/2)).intersects(getBoundingBox())) location.y += velocity.y;
+		if (!world->getBlockAt(Point(location.x, location.y + BLOCK_SIZE + 1)).intersects(getBoundingBox())) location.y += velocity.y;
+		else 
+		{
+			velocity.y = 0;
+			location.y = world->getBlockAt(Point(location.x, location.y + BLOCK_SIZE + 1)).a.y - BLOCK_SIZE;
+		}
 	}
-	/*location.x += velocity.x;
-	location.y += velocity.y;*/
 }
 void Character::update()
 {
