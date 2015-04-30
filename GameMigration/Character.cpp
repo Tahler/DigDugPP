@@ -12,8 +12,8 @@ using Physics::Rectangle;
 using Physics::operator+;
 
 // Character //
-const float MAX_SPEED = 5.0;
-const float DRAG = 0.02;
+const float MAX_SPEED = 4.0;
+const float DRAG = 0.1;
 
 Physics::Rectangle Character::getBoundingBox()
 {
@@ -21,17 +21,11 @@ Physics::Rectangle Character::getBoundingBox()
 }
 void Character::checkKeyInput()
 {
-	float pushAcceleration = 0.2f;
-
-	if (Core::Input::IsPressed(Core::Input::KEY_LEFT)) acceleration.x = -pushAcceleration;
-	else if (Core::Input::IsPressed(Core::Input::KEY_RIGHT)) acceleration.x = pushAcceleration;
-	else acceleration.x = 0;
+	if (Core::Input::IsPressed(Core::Input::KEY_LEFT)) velocity.x = -MAX_SPEED;
+	else if (Core::Input::IsPressed(Core::Input::KEY_RIGHT)) velocity.x = MAX_SPEED;
+	else velocity.x = 0;
 
 	if (Core::Input::IsPressed(Core::Input::KEY_UP)) jump();
-
-	//if (Core::Input::IsPressed(Core::Input::KEY_UP)) acceleration.y = -pushAcceleration;
-	//else if (Core::Input::IsPressed(Core::Input::KEY_DOWN)) acceleration.y = pushAcceleration;
-	//else acceleration.y = 0;
 }
 void Character::jump()
 {
@@ -121,8 +115,7 @@ void Character::update()
 	
 	// Adjust for gravity
 	velocity.y += Gravity::acceleration;
-	// and friction
-	acceleration.x += -DRAG * velocity.x;
+
 	// Adjust for own fluid motion
 	// Don't let the guy run too fast
 	if (std::abs(velocity.x) > MAX_SPEED) 
@@ -130,9 +123,6 @@ void Character::update()
 		// Normalize the vector (make it equal to 1 or -1) and multiply by the MAX_SPEED
 		velocity.x *= MAX_SPEED / std::abs(velocity.x);
 	}
-	velocity.x += acceleration.x;
-	if (std::abs(velocity.x) < .2) velocity.x = 0;
-	velocity.y += acceleration.y;
 }
 void Character::draw(Core::Graphics g)
 {

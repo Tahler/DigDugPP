@@ -17,7 +17,6 @@ private:
 public:
 	Point location; // The upper left corner of the bounding box
 	Vector velocity;
-	Vector acceleration;
 	bool isColliding;
 	bool isJumping;
 
@@ -25,7 +24,6 @@ public:
 		world(NULL),
 		location(0, 0),
 		velocity(0, 0),
-		acceleration(0, 0),
 		isColliding(false),
 		isJumping(false)
 	{}
@@ -33,7 +31,6 @@ public:
 		world(w),
 		location(x, y),
 		velocity(0, 0),
-		acceleration(0, 0),
 		isColliding(false),
 		isJumping(false)
 	{}
