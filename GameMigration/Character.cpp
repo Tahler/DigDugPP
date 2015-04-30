@@ -57,12 +57,12 @@ void Character::checkCollisions()
 		neighbor2 = &(world->getBlockAt(Point(box->b.x, box->b.y + 1)));
 		if (!neighbor->isTraversable || !neighbor2->isTraversable)
 		{
-			//if (neighbor->intersects(*box) || neighbor2->intersects(*box)) 
-			//{
-				isJumping = false;
-				velocity.y = 0;
-				location.y = neighbor->a.y - BLOCK_SIZE;
-			//}
+			isJumping = false;
+			velocity.y = 0;
+			if (neighbor->intersects(*box) || neighbor2->intersects(*box)) 
+			{
+				//location.y = neighbor->a.y - BLOCK_SIZE;
+			}
 		}
 	}
 	else if (velocity.y < 0) // moving up
@@ -71,11 +71,11 @@ void Character::checkCollisions()
 		neighbor2 = &(world->getBlockAt(Point(box->b.x, box->b.y - 1)));
 		if (!neighbor->isTraversable || !neighbor2->isTraversable)
 		{
-			//if (neighbor->intersects(*box) || neighbor2->intersects(*box)) 
-			//{
-				velocity.y = 0;
-				location.y = neighbor->a.y + BLOCK_SIZE;
-			//}
+			velocity.y = 0;
+			if (neighbor->intersects(*box) || neighbor2->intersects(*box)) 
+			{
+				//location.y = neighbor->a.y + BLOCK_SIZE;
+			}
 		}
 	}
 
@@ -85,14 +85,12 @@ void Character::checkCollisions()
 		neighbor2 = &(world->getBlockAt(Point(box->a.x - 1, box->b.y)));
 		if (!neighbor->isTraversable || !neighbor2->isTraversable)
 		{
-			//if (neighbor->intersects(*box) && neighbor2->intersects(*box)) 
-			//{
-				velocity.x = 0;
-				location.x = neighbor->a.x + BLOCK_SIZE;
-			//}
-			//else location.x += velocity.x;
+			velocity.x = 0;
+			if (neighbor->intersects(*box) && neighbor2->intersects(*box)) 
+			{
+				//location.x = neighbor->a.x + BLOCK_SIZE;
+			}
 		}
-		//else location.x += velocity.x;
 	}
 	else if (velocity.x > 0) // moving right
 	{
@@ -100,11 +98,11 @@ void Character::checkCollisions()
 		neighbor2 = &(world->getBlockAt(Point(box->b.x + 1, box->b.y)));
 		if (!neighbor->isTraversable || !neighbor2->isTraversable)
 		{
-			//if (neighbor->intersects(*box) || neighbor2->intersects(*box)) 
-			//{
-				velocity.x = 0;
-				location.x = neighbor->a.x - BLOCK_SIZE;
-			//}
+			velocity.x = 0;
+			if (neighbor->intersects(*box) || neighbor2->intersects(*box)) 
+			{
+				//location.x = neighbor->a.x - BLOCK_SIZE;
+			}
 		}
 	}
 }
