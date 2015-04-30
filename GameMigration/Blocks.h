@@ -15,18 +15,29 @@ namespace Blocks
 	struct Block:Rectangle
 	{
 		//Base block
+		bool isTraversable;
+
 		Block() {}
-		Block(Point a) :
-			Rectangle(a, Point(a.x + BLOCK_SIZE, a.y + BLOCK_SIZE))
+		Block(Point a, bool isTraversable) :
+			Rectangle(a, Point(a.x + BLOCK_SIZE, a.y + BLOCK_SIZE)),
+			isTraversable(isTraversable)
 		{}
 		void setLocation(Point);
+	};
+
+	struct Air:Block
+	{
+		Air(Point a) : 
+			Block(a, true)
+		{}
+		void draw(Core::Graphics& g);
 	};
 
 	struct Stone:Block
 	{
 		//Has gravity
 		Stone(Point a) :
-			Block(a)
+			Block(a, false)
 		{}
 		void draw(Core::Graphics& g);
 	};
@@ -36,7 +47,7 @@ namespace Blocks
 		//Can break
 		int durability;
 		BreakableBlock(Point a) :
-			Block(a)
+			Block(a, false)
 		{
 			durability = 100;
 		}

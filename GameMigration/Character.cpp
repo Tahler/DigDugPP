@@ -63,43 +63,59 @@ void Character::move()
 	if (velocity.x < 0) // moving left
 	{
 		check = &(world->getBlockAt(Point(location.x - 1, location.y)));
-		if (!(*check).intersects(getBoundingBox())) location.x += velocity.x;
-		else 
+		if (!check->isTraversable)
 		{
-			velocity.x = 0;
-			location.x = (*check).a.x + BLOCK_SIZE;
+			if (!(*check).intersects(getBoundingBox())) location.x += velocity.x;
+			else 
+			{
+				velocity.x = 0;
+				location.x = (*check).a.x + BLOCK_SIZE;
+			}
 		}
+		else location.x += velocity.x;
 	}
 	else if (velocity.x > 0) // moving right
 	{
 		check = &(world->getBlockAt(Point(location.x + BLOCK_SIZE, location.y)));
-		if (!(*check).intersects(getBoundingBox())) location.x += velocity.x;
-		else 
+		if (!check->isTraversable)
 		{
-			velocity.x = 0;
-			location.x = (*check).a.x - BLOCK_SIZE;
+			if (!(*check).intersects(getBoundingBox())) location.x += velocity.x;
+			else 
+			{
+				velocity.x = 0;
+				location.x = (*check).a.x - BLOCK_SIZE;
+			}
 		}
+		else location.x += velocity.x;
 	}
 
 	if (velocity.y < 0) // moving up
 	{
 		check = &(world->getBlockAt(Point(location.x, location.y - 1)));
-		if (!(*check).intersects(getBoundingBox())) location.y += velocity.y;
-		else 
+		if (!check->isTraversable)
 		{
-			velocity.y = 0;
-			location.y = (*check).a.y + BLOCK_SIZE;
+			if (!(*check).intersects(getBoundingBox())) location.y += velocity.y;
+			else 
+			{
+				velocity.y = 0;
+				location.y = (*check).a.y + BLOCK_SIZE;
+			}
 		}
+		else location.y += velocity.y;
 	}
 	else if (velocity.y > 0) // moving down
 	{
 		check = &(world->getBlockAt(Point(location.x, location.y + BLOCK_SIZE + 1)));
-		if (!(*check).intersects(getBoundingBox())) location.y += velocity.y;
-		else 
+		if (!check->isTraversable)
 		{
-			velocity.y = 0;
-			location.y = (*check).a.y - BLOCK_SIZE;
+			if (!(*check).intersects(getBoundingBox())) location.y += velocity.y;
+			else 
+			{
+				velocity.y = 0;
+				location.y = (*check).a.y - BLOCK_SIZE;
+			}
 		}
+		else location.y += velocity.y;
 	}
 }
 void Character::update()

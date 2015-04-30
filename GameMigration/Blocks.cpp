@@ -9,6 +9,12 @@ void Block::setLocation(Point pa)
 }
 
 //Draw functions for each block
+void Air::draw(Core::Graphics& g)
+{
+	// This draws black...
+	// maybe we need a sky block for blue above ground
+	// and a cave block for dark brown under ground
+}
 void Stone::draw(Core::Graphics &g)
 {
 	g.SetColor(RGB(121,122,122));
