@@ -14,6 +14,7 @@ using Physics::operator+;
 // Character //
 const float MAX_SPEED = 5.0;
 const float DRAG = 0.02;
+bool movingRight = true;
 
 Physics::Rectangle Character::getBoundingBox()
 {
@@ -23,8 +24,8 @@ void Character::checkKeyInput()
 {
 	float pushAcceleration = 0.2f;
 
-	if (Core::Input::IsPressed(Core::Input::KEY_LEFT)) acceleration.x = -pushAcceleration;
-	else if (Core::Input::IsPressed(Core::Input::KEY_RIGHT)) acceleration.x = pushAcceleration;
+	if (Core::Input::IsPressed(Core::Input::KEY_LEFT)) acceleration.x = -pushAcceleration, movingRight = false;
+	else if (Core::Input::IsPressed(Core::Input::KEY_RIGHT)) acceleration.x = pushAcceleration, movingRight = true;
 	else acceleration.x = 0;
 
 	if (Core::Input::IsPressed(Core::Input::KEY_UP)) jump();
@@ -139,11 +140,22 @@ void Character::draw(Core::Graphics g)
 	// draw image eventually
 	g.SetColor(RGB(28, 212, 52));
 	fillSquare(g, location, BLOCK_SIZE);
-	fillRectangle(g, Point(location.x + BLOCK_FIFTH, location.y + BLOCK_FIFTH), BLOCK_FIFTH * 3, BLOCK_FIFTH * 2);
+	fillRectangle(g, Point(location.x + BLOCK_FIFTH, location.y + BLOCK_FIFTH), BLOCK_FIFTH * 3, BLOCK_FIFTH * 1);
+	fillSquare(g, Point(location.x + BLOCK_FIFTH * 2, location.y + BLOCK_FIFTH*2), BLOCK_FIFTH);
 	g.SetColor(RGB(247, 214, 143));
 	fillSquare(g, Point(location.x + 2 * BLOCK_FIFTH, location.y), BLOCK_FIFTH);
-	fillSquare(g, Point(location.x + BLOCK_FIFTH, location.y + BLOCK_FIFTH * 2), BLOCK_FIFTH);
-	fillSquare(g, Point(location.x + 3 * BLOCK_FIFTH, location.y + BLOCK_FIFTH * 2), BLOCK_FIFTH);
+	
+	//Hands
+	if(movingRight)
+	{
+		fillSquare(g, Point(location.x + BLOCK_FIFTH, location.y + BLOCK_FIFTH * 2), BLOCK_FIFTH);
+		fillSquare(g, Point(location.x + 4 * BLOCK_FIFTH, location.y + BLOCK_FIFTH), BLOCK_FIFTH);
+	} 
+	else 
+	{
+		fillSquare(g, Point(location.x, location.y + BLOCK_FIFTH), BLOCK_FIFTH);
+		fillSquare(g, Point(location.x + 3 * BLOCK_FIFTH, location.y + BLOCK_FIFTH * 2), BLOCK_FIFTH);
+	}
 	g.SetColor(RGB(38, 88, 158));
 	fillRectangle(g, Point(location.x + BLOCK_FIFTH * 2, location.y + BLOCK_FIFTH * 3), BLOCK_FIFTH, BLOCK_FIFTH * 2);
 	//g.SetColor(RGB(10, 10, 255));
