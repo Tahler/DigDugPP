@@ -22,25 +22,48 @@ void Cave::draw(Core::Graphics& g)
 void Stone::draw(Core::Graphics &g)
 {
 	g.SetColor(RGB(121,122,122));
-	fillSquare(g, a, BLOCK_SIZE);
+			fillSquare(g, a, BLOCK_SIZE);
+			g.SetColor(RGB(102,102,102));
+			fillSquare(g, Point(a.x + BLOCK_FIFTH, a.y + 2 * BLOCK_FIFTH), BLOCK_FIFTH * 2);
+			g.SetColor(RGB(110, 110, 100));
+			fillSquare(g, Point(a.x + 2* BLOCK_FIFTH, a.y + BLOCK_FIFTH), BLOCK_FIFTH * 2);
 }
 void Earth::draw(Core::Graphics &g)
 {
 	g.SetColor(RGB(110,83,9));
 	fillSquare(g, a, BLOCK_SIZE);
 }
+void Grass::draw(Core::Graphics &g)
+{
+	g.SetColor(RGB(110,83,9));
+	fillSquare(g, a, BLOCK_SIZE);
+	g.SetColor(RGB(20, 219, 2));
+	fillRectangle(g, a, BLOCK_SIZE, BLOCK_FIFTH);
+}
 void Iron::draw(Core::Graphics &g)
 {
-	g.SetColor(RGB(199, 174, 141));
-	fillSquare(g, a, BLOCK_SIZE);			
+	g.SetColor(RGB(121,122,122));
+			fillSquare(g, a, BLOCK_SIZE);
+			g.SetColor(RGB(199, 174, 141));
+			fillRectangle(g, Point(a.x + BLOCK_FIFTH, a.y + BLOCK_FIFTH), 2*BLOCK_FIFTH, BLOCK_FIFTH);
+			fillSquare(g, Point(a.x + 3*BLOCK_FIFTH, a.y + 2*BLOCK_FIFTH), BLOCK_FIFTH);
+			fillSquare(g, Point(a.x + 2*BLOCK_FIFTH, a.y + 3 * BLOCK_FIFTH), BLOCK_FIFTH);			
 }
 void Silver::draw(Core::Graphics &g)
 {
-	g.SetColor(RGB(207, 207, 207));
-	fillSquare(g, a, BLOCK_SIZE);
+	g.SetColor(RGB(121,122,122));
+			fillSquare(g, a, BLOCK_SIZE);
+			g.SetColor(RGB(207, 207, 207));
+			fillRectangle(g, Point(a.x + BLOCK_FIFTH, a.y + BLOCK_FIFTH), 2*BLOCK_FIFTH, BLOCK_FIFTH);
+			fillSquare(g, Point(a.x + 2* BLOCK_FIFTH, a.y + 2 * BLOCK_FIFTH), BLOCK_FIFTH);
+			fillSquare(g, Point(a.x + 3* BLOCK_FIFTH, a.y + 3 * BLOCK_FIFTH), BLOCK_FIFTH);
 }
 void Copper::draw(Core::Graphics &g)
 {
-	g.SetColor(RGB(245, 151, 29));
-	fillSquare(g, a, BLOCK_SIZE);
+	g.SetColor(RGB(121,122,122));
+			fillSquare(g, a, BLOCK_SIZE);
+			g.SetColor(RGB(245, 151, 29));
+			fillSquare(g, Point(a.x + BLOCK_FIFTH, a.y + BLOCK_FIFTH), BLOCK_FIFTH);
+			fillSquare(g, Point(a.x + 3 * BLOCK_FIFTH, a.y + 2 * BLOCK_FIFTH), BLOCK_FIFTH);
+			fillSquare(g, Point(a.x + BLOCK_FIFTH, a.y +  3* BLOCK_FIFTH), BLOCK_FIFTH);
 }

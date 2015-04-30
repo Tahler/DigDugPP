@@ -1,4 +1,3 @@
-
 #ifndef BLOCKS_H
 #define BLOCKS_H
 	
@@ -66,6 +65,15 @@ namespace Blocks
 	{
 		//No value, disappears
 		Earth(Point& a) :
+			BreakableBlock(a)
+		{}
+		void draw(Core::Graphics& g);
+	};
+
+	struct Grass:BreakableBlock
+	{
+		//No value, disappears
+		Grass(Point& a) :
 			BreakableBlock(a)
 		{}
 		void draw(Core::Graphics& g);
