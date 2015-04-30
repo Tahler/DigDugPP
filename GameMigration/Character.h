@@ -15,7 +15,7 @@ private:
 	World* world; // WORLD-STAR
 
 public:
-	Point location; // The upper left corner of the bounding box
+	Point location; // The upper left corner of his block
 	Vector velocity;
 	bool isColliding;
 	bool isJumping;

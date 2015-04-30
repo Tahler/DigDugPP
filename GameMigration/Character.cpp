@@ -17,7 +17,7 @@ const float DRAG = 0.1;
 
 Physics::Rectangle Character::getBoundingBox()
 {
-	return Physics::Rectangle(location, Point(location.x + BLOCK_SIZE, location.y + BLOCK_SIZE));
+	return Physics::Rectangle(Point(location.x + 2, location.y), Point(location.x + BLOCK_SIZE - 2, location.y + BLOCK_SIZE));
 }
 void Character::checkKeyInput()
 {
@@ -33,7 +33,7 @@ void Character::jump()
 	{
 		isJumping = true;
 		// Perhaps there is some calculation to jump exactly one block
-		velocity.y = -MAX_SPEED;
+		velocity.y = -MAX_SPEED / 1.5;
 	}
 }
 void Character::checkCollisions()
@@ -84,7 +84,7 @@ void Character::checkCollisions()
 		if (!neighbor->isTraversable || !neighbor2->isTraversable)
 		{
 			velocity.y = 0;
-			location.y = neighbor->b.y + 1;
+			location.y = neighbor->b.y;
 		}
 	}
 }
@@ -97,7 +97,6 @@ void Character::move()
 void Character::update()
 {
 	checkKeyInput();
-
 	checkCollisions();
 	move();
 	
@@ -107,13 +106,12 @@ void Character::update()
 void Character::draw(Core::Graphics g)
 {
 	g.SetColor(RGB(28, 212, 52));
-	//fillSquare(g, location, BLOCK_SIZE);
 	fillRectangle(g, Point(location.x + BLOCK_FIFTH, location.y + BLOCK_FIFTH), BLOCK_FIFTH * 3, BLOCK_FIFTH * 1);
 	fillSquare(g, Point(location.x + BLOCK_FIFTH * 2, location.y + BLOCK_FIFTH*2), BLOCK_FIFTH);
 	g.SetColor(RGB(247, 214, 143));
 	fillSquare(g, Point(location.x + 2 * BLOCK_FIFTH, location.y), BLOCK_FIFTH);
 	
-	//Hands
+	// Hands
 	if(velocity.x > 0)
 	{
 		fillSquare(g, Point(location.x + BLOCK_FIFTH, location.y + BLOCK_FIFTH * 2), BLOCK_FIFTH);
@@ -132,6 +130,6 @@ void Character::draw(Core::Graphics g)
 	g.SetColor(RGB(38, 88, 158));
 	fillRectangle(g, Point(location.x + BLOCK_FIFTH * 2, location.y + BLOCK_FIFTH * 3), BLOCK_FIFTH, BLOCK_FIFTH * 2);
 	g.SetColor(RGB(10, 10, 255));
-	getBoundingBox().draw(g);
 	
+	//getBoundingBox().draw(g);
 }

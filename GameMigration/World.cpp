@@ -38,11 +38,13 @@ void World::init()
 		{
 			if (j == 4 && i >= 6 && i <= 18) blocks[i][j] = new Cave(Point(i, j));
 			else if (j==4 || j == 3) blocks[i][j] = new Grass(Point(i, j));
-				else blocks[i][j] = new Earth(Point(i, j));
+			else blocks[i][j] = new Earth(Point(i, j));
 		}
 	}
 	delete blocks[10][4];
 	blocks[10][4] = new Grass(Point(10, 4));
+	delete blocks[11][5];
+	blocks[11][5] = new Cave(Point(11, 5));
 	delete blocks[3][4];
 	blocks[3][4] = new Stone(Point(3, 4));
 	delete blocks[3][5];
