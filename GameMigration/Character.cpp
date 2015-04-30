@@ -106,26 +106,37 @@ void Character::update()
 void Character::draw(Core::Graphics g)
 {
 	g.SetColor(RGB(28, 212, 52));
-	fillRectangle(g, Point(location.x + BLOCK_FIFTH, location.y + BLOCK_FIFTH), BLOCK_FIFTH * 3, BLOCK_FIFTH * 1);
+	
+	fillSquare(g, Point(location.x + BLOCK_FIFTH * 2, location.y + BLOCK_FIFTH), BLOCK_FIFTH);
 	fillSquare(g, Point(location.x + BLOCK_FIFTH * 2, location.y + BLOCK_FIFTH*2), BLOCK_FIFTH);
+	
+	
 	g.SetColor(RGB(247, 214, 143));
 	fillSquare(g, Point(location.x + 2 * BLOCK_FIFTH, location.y), BLOCK_FIFTH);
 	
 	// Hands
 	if(velocity.x > 0)
 	{
-		fillSquare(g, Point(location.x + BLOCK_FIFTH, location.y + BLOCK_FIFTH * 2), BLOCK_FIFTH);
+		//fillSquare(g, Point(location.x + BLOCK_FIFTH, location.y + BLOCK_FIFTH * 2), BLOCK_FIFTH);
 		fillSquare(g, Point(location.x + 4 * BLOCK_FIFTH, location.y + BLOCK_FIFTH), BLOCK_FIFTH);
+		g.SetColor(RGB(28, 212, 52));
+		fillSquare(g, Point(location.x + BLOCK_FIFTH * 3, location.y + BLOCK_FIFTH), BLOCK_FIFTH);
 	} 
 	else if (velocity.x < 0)
 	{
 		fillSquare(g, Point(location.x, location.y + BLOCK_FIFTH), BLOCK_FIFTH);
-		fillSquare(g, Point(location.x + 3 * BLOCK_FIFTH, location.y + BLOCK_FIFTH * 2), BLOCK_FIFTH);
+		//fillSquare(g, Point(location.x + 3 * BLOCK_FIFTH, location.y + BLOCK_FIFTH * 2), BLOCK_FIFTH);
+		g.SetColor(RGB(28, 212, 52));
+		fillSquare(g, Point(location.x + BLOCK_FIFTH, location.y + BLOCK_FIFTH), BLOCK_FIFTH);
 	} 
 	else 
 	{
+
 		fillSquare(g, Point(location.x + BLOCK_FIFTH, location.y + BLOCK_FIFTH * 2), BLOCK_FIFTH);
 		fillSquare(g, Point(location.x + 3 * BLOCK_FIFTH, location.y + BLOCK_FIFTH * 2), BLOCK_FIFTH);
+		g.SetColor(RGB(28, 212, 52));
+		fillSquare(g, Point(location.x + BLOCK_FIFTH * 3, location.y + BLOCK_FIFTH), BLOCK_FIFTH);
+		fillSquare(g, Point(location.x + BLOCK_FIFTH, location.y + BLOCK_FIFTH), BLOCK_FIFTH);
 	}
 	g.SetColor(RGB(38, 88, 158));
 	fillRectangle(g, Point(location.x + BLOCK_FIFTH * 2, location.y + BLOCK_FIFTH * 3), BLOCK_FIFTH, BLOCK_FIFTH * 2);
