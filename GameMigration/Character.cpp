@@ -59,48 +59,51 @@ void Character::move()
 	velocity.y += acceleration.y;
 
 	// Move
-	// not efficienct, gets block twice in the case of collision
+	Block* check;
 	if (velocity.x < 0) // moving left
 	{
-		if (!world->getBlockAt(Point(location.x - 1, location.y)).intersects(getBoundingBox())) location.x += velocity.x;
+		check = &(world->getBlockAt(Point(location.x - 1, location.y)));
+		if (!(*check).intersects(getBoundingBox())) location.x += velocity.x;
 		else 
 		{
 			velocity.x = 0;
-			location.x = world->getBlockAt(Point(location.x - 1, location.y)).a.x + BLOCK_SIZE;
+			location.x = (*check).a.x + BLOCK_SIZE;
 		}
 	}
 	else if (velocity.x > 0) // moving right
 	{
-		if (!world->getBlockAt(Point(location.x + BLOCK_SIZE, location.y)).intersects(getBoundingBox())) location.x += velocity.x;
+		check = &(world->getBlockAt(Point(location.x + BLOCK_SIZE, location.y)));
+		if (!(*check).intersects(getBoundingBox())) location.x += velocity.x;
 		else 
 		{
 			velocity.x = 0;
-			location.x = world->getBlockAt(Point(location.x + BLOCK_SIZE, location.y)).a.x - BLOCK_SIZE;
+			location.x = (*check).a.x - BLOCK_SIZE;
 		}
 	}
 
 	if (velocity.y < 0) // moving up
 	{
-		if (!world->getBlockAt(Point(location.x, location.y - 1)).intersects(getBoundingBox())) location.y += velocity.y;
+		check = &(world->getBlockAt(Point(location.x, location.y - 1)));
+		if (!(*check).intersects(getBoundingBox())) location.y += velocity.y;
 		else 
 		{
 			velocity.y = 0;
-			location.y = world->getBlockAt(Point(location.x, location.y - 1)).a.y + BLOCK_SIZE;
+			location.y = (*check).a.y + BLOCK_SIZE;
 		}
 	}
 	else if (velocity.y > 0) // moving down
 	{
-		if (!world->getBlockAt(Point(location.x, location.y + BLOCK_SIZE + 1)).intersects(getBoundingBox())) location.y += velocity.y;
+		check = &(world->getBlockAt(Point(location.x, location.y + BLOCK_SIZE + 1)));
+		if (!(*check).intersects(getBoundingBox())) location.y += velocity.y;
 		else 
 		{
 			velocity.y = 0;
-			location.y = world->getBlockAt(Point(location.x, location.y + BLOCK_SIZE + 1)).a.y - BLOCK_SIZE;
+			location.y = (*check).a.y - BLOCK_SIZE;
 		}
 	}
 }
 void Character::update()
 {
-	// check for collision
 	move();
 }
 void Character::draw(Core::Graphics g)
