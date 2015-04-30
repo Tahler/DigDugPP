@@ -44,17 +44,17 @@ void World::init()
 	delete blocks[10][4];
 	blocks[10][4] = new Grass(Point(10 * BLOCK_SIZE, 4 * BLOCK_SIZE));
 	delete blocks[3][4];
-	blocks[3][4] = new Stone(Point(150, 200));
+	blocks[3][4] = new Stone(Point(3 * BLOCK_SIZE, 4 * BLOCK_SIZE));
 	delete blocks[3][5];
-	blocks[3][5] = new Copper(Point(150, 250));
+	blocks[3][5] = new Copper(Point(3 * BLOCK_SIZE, 5 * BLOCK_SIZE));
 	delete blocks[3][6];
-	blocks[3][6] = new Iron(Point(150, 300));
+	blocks[3][6] = new Iron(Point(3 * BLOCK_SIZE, 6 * BLOCK_SIZE));
 	delete blocks[3][7];
-	blocks[3][7] = new Silver(Point(150, 350));
+	blocks[3][7] = new Silver(Point(3 * BLOCK_SIZE, 7 * BLOCK_SIZE));
 	delete blocks[2][5];
-	blocks[2][5] = new Ladder(Point(100, 250));
+	blocks[2][5] = new Ladder(Point(2 * BLOCK_SIZE, 5 * BLOCK_SIZE));
 	delete blocks[2][6];
-	blocks[2][6] = new Ladder(Point(100, 300));
+	blocks[2][6] = new Ladder(Point(2 * BLOCK_SIZE, 6 * BLOCK_SIZE));
 }
 void World::update()
 {
