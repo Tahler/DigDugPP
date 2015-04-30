@@ -29,7 +29,7 @@ public:
 	{}
 	Character(World* w, float x, float y) : 
 		world(w),
-		location(x, y),
+		location(x * BLOCK_SIZE, y * BLOCK_SIZE),
 		velocity(0, 0),
 		isColliding(false),
 		isJumping(false)

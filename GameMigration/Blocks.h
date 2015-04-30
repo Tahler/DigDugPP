@@ -19,8 +19,8 @@ namespace Blocks
 		bool isTraversable;
 
 		Block() {}
-		Block(Point& a, bool isTraversable) :
-			Rectangle(a, Point(a.x + BLOCK_SIZE, a.y + BLOCK_SIZE)),
+		Block(Point& a, bool isTraversable) : // block is based on grid coordinates
+			Rectangle(Point(a.x * BLOCK_SIZE, a.y * BLOCK_SIZE), Point(a.x + BLOCK_SIZE, a.y + BLOCK_SIZE)), // point in rectangle is pixel coordinates
 			isTraversable(isTraversable)
 		{}
 		void setLocation(Point&);

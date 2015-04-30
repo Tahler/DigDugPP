@@ -31,30 +31,30 @@ void World::init()
 	{
 		for (unsigned int j = 0; j < 4; j++) // Leave the first four rows blank.
 		{
-			//if (j == 3 && i < 6) blocks[i][j] = new Earth(Point(i * BLOCK_SIZE, j * BLOCK_SIZE));
-			/*else*/ blocks[i][j] = new Sky(Point(i * BLOCK_SIZE, j * BLOCK_SIZE));
+			//if (j == 3 && i < 6) blocks[i][j] = new Earth(Point(i, j));
+			/*else*/ blocks[i][j] = new Sky(Point(i, j));
 		}
 		for (unsigned int j = 4; j < blocks[i].size(); j++) // Rest of the world is ground
 		{
-			if (j == 4 && i >= 6 && i <= 18) blocks[i][j] = new Cave(Point(i * BLOCK_SIZE, j * BLOCK_SIZE));
-			else if (j==4 || j == 3) blocks[i][j] = new Grass(Point(i * BLOCK_SIZE, j * BLOCK_SIZE));
-				else blocks[i][j] = new Earth(Point(i * BLOCK_SIZE, j * BLOCK_SIZE));
+			if (j == 4 && i >= 6 && i <= 18) blocks[i][j] = new Cave(Point(i, j));
+			else if (j==4 || j == 3) blocks[i][j] = new Grass(Point(i, j));
+				else blocks[i][j] = new Earth(Point(i, j));
 		}
 	}
 	delete blocks[10][4];
-	blocks[10][4] = new Grass(Point(10 * BLOCK_SIZE, 4 * BLOCK_SIZE));
+	blocks[10][4] = new Grass(Point(10, 4));
 	delete blocks[3][4];
-	blocks[3][4] = new Stone(Point(3 * BLOCK_SIZE, 4 * BLOCK_SIZE));
+	blocks[3][4] = new Stone(Point(3, 4));
 	delete blocks[3][5];
-	blocks[3][5] = new Copper(Point(3 * BLOCK_SIZE, 5 * BLOCK_SIZE));
+	blocks[3][5] = new Copper(Point(3, 5));
 	delete blocks[3][6];
-	blocks[3][6] = new Iron(Point(3 * BLOCK_SIZE, 6 * BLOCK_SIZE));
+	blocks[3][6] = new Iron(Point(3, 6));
 	delete blocks[3][7];
-	blocks[3][7] = new Silver(Point(3 * BLOCK_SIZE, 7 * BLOCK_SIZE));
+	blocks[3][7] = new Silver(Point(3, 7));
 	delete blocks[2][5];
-	blocks[2][5] = new Ladder(Point(2 * BLOCK_SIZE, 5 * BLOCK_SIZE));
+	blocks[2][5] = new Ladder(Point(2, 5));
 	delete blocks[2][6];
-	blocks[2][6] = new Ladder(Point(2 * BLOCK_SIZE, 6 * BLOCK_SIZE));
+	blocks[2][6] = new Ladder(Point(2, 6));
 }
 void World::update()
 {
