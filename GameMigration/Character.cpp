@@ -49,12 +49,12 @@ void Character::move()
 		check = &(world->getBlockAt(Point(location.x - 1, location.y)));
 		if (!check->isTraversable)
 		{
-			if (!(*check).intersects(getBoundingBox())) location.x += velocity.x;
-			else 
+			if (check->intersects(getBoundingBox())) 
 			{
 				velocity.x = 0;
 				location.x = (*check).a.x + BLOCK_SIZE;
 			}
+			else location.x += velocity.x;
 		}
 		else location.x += velocity.x;
 	}
@@ -63,12 +63,12 @@ void Character::move()
 		check = &(world->getBlockAt(Point(location.x + BLOCK_SIZE, location.y)));
 		if (!check->isTraversable)
 		{
-			if (!(*check).intersects(getBoundingBox())) location.x += velocity.x;
-			else 
+			if (check->intersects(getBoundingBox())) 
 			{
 				velocity.x = 0;
 				location.x = (*check).a.x - BLOCK_SIZE;
 			}
+			else location.x += velocity.x;
 		}
 		else location.x += velocity.x;
 	}
@@ -78,12 +78,12 @@ void Character::move()
 		check = &(world->getBlockAt(Point(location.x, location.y - 1)));
 		if (!check->isTraversable)
 		{
-			if (!(*check).intersects(getBoundingBox())) location.y += velocity.y;
-			else 
+			if (check->intersects(getBoundingBox())) 
 			{
 				velocity.y = 0;
 				location.y = (*check).a.y + BLOCK_SIZE;
 			}
+			else location.y += velocity.y;
 		}
 		else location.y += velocity.y;
 	}
@@ -92,13 +92,12 @@ void Character::move()
 		check = &(world->getBlockAt(Point(location.x, location.y + BLOCK_SIZE + 1)));
 		if (!check->isTraversable)
 		{
-			if (!(*check).intersects(getBoundingBox())) location.y += velocity.y;
-			else 
+			if (check->intersects(getBoundingBox())) 
 			{
-				isJumping = false;
 				velocity.y = 0;
 				location.y = (*check).a.y - BLOCK_SIZE;
 			}
+			else location.y += velocity.y;
 		}
 		else location.y += velocity.y;
 	}
