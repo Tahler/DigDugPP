@@ -40,6 +40,7 @@ public:
 
 	Physics::Rectangle getBoundingBox();
 	void checkKeyInput();
+	void jump();
 	void move();
 
 	void update();

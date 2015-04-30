@@ -12,6 +12,7 @@ using Physics::Rectangle;
 using Physics::operator+;
 
 // Character //
+const float MAX_VELOCITY = 5.0;
 Physics::Rectangle Character::getBoundingBox()
 {
 	return Physics::Rectangle(location, Point(location.x + BLOCK_SIZE, location.y + BLOCK_SIZE));
@@ -24,9 +25,20 @@ void Character::checkKeyInput()
 	else if (Core::Input::IsPressed(Core::Input::KEY_RIGHT)) acceleration.x = pushAcceleration;
 	else acceleration.x = 0;
 
-	if (Core::Input::IsPressed(Core::Input::KEY_UP)) acceleration.y = -pushAcceleration;
-	else if (Core::Input::IsPressed(Core::Input::KEY_DOWN)) acceleration.y = pushAcceleration;
-	else acceleration.y = 0;
+	if (Core::Input::IsPressed(Core::Input::KEY_UP)) jump();
+
+	//if (Core::Input::IsPressed(Core::Input::KEY_UP)) acceleration.y = -pushAcceleration;
+	//else if (Core::Input::IsPressed(Core::Input::KEY_DOWN)) acceleration.y = pushAcceleration;
+	//else acceleration.y = 0;
+}
+void Character::jump()
+{
+	if (!isJumping)
+	{
+		isJumping = true;
+		// This is hard coded right now... perhaps there is some calculation to jump exactly one block
+		velocity.y = -4.0;
+	}
 }
 void Character::move()
 {
@@ -38,7 +50,8 @@ void Character::move()
 	acceleration.x += -0.02 * velocity.x;
 	
 	// Adjust for own fluid motion
-	velocity.x += acceleration.x;
+	if (velocity.x < MAX_VELOCITY) velocity.x += acceleration.x;
+	else velocity.x = MAX_VELOCITY;
 	velocity.y += acceleration.y;
 
 	// Check for collisions then move
@@ -94,6 +107,7 @@ void Character::move()
 			if (!(*check).intersects(getBoundingBox())) location.y += velocity.y;
 			else 
 			{
+				isJumping = false;
 				velocity.y = 0;
 				location.y = (*check).a.y - BLOCK_SIZE;
 			}
