@@ -15,7 +15,7 @@ const int WINDOW_HEIGHT = 800;
 void Window::shift(Vector& shift)
 {
 	box += shift;
-	//deadzone += shift;
+	deadzone += shift;
 }
 void Window::moveUpperLeftTo(Point& newLocation)
 {
@@ -25,6 +25,7 @@ void Window::moveUpperLeftTo(Point& newLocation)
 
 void Window::draw(Core::Graphics& g)
 {
+	g.SetColor(RGB(0x63, 0x19, 0x9c));
 	box.draw(g);
-	//box
+	deadzone.draw(g);
 }

@@ -100,19 +100,11 @@ void Character::move()
 	// Move the window if needed
 	Window* window = &(world->window); // The larger, viewable screen
 	Physics::Rectangle* deadzone = &(world->window.deadzone); // The invisible small box that the character cannot move out of
+	Physics::Rectangle* character = &(getBoundingBox()); // The character's bouding box
 	
-	//if (location.x < deadzone->a.x)
-	//{
-	//	window->shift(Vector(location.x - deadzone->a.x, 0));
-	//	/*window->deadzone.setPoints(Point(deadzone->a.x + location.x, deadzone->a.y), Point(deadzone->b.x + location.x, deadzone->b.y));
-	//	window->box.setPoints()*/
-	//}
-	//if (location.x > deadzone->b.x) 
-	//{
-	//	window->box.setPoints(Point(deadzone->a.x - location.x, deadzone->a.y), Point(deadzone->b.x - location.x, deadzone->b.y));
-	//}
-	//if (location.x < deadzone->a.x) window->shift(Vector(deadzone->a.x - location.x, 0));
-	//if (location.x > deadzone->b.x) window->shift(Vector(location.x - deadzone->a.x, 0));
+	if (character->a.x < deadzone->a.x) window->shift(Vector(character->a.x - deadzone->a.x, 0));
+	if (character->b.x > deadzone->b.x) window->shift(Vector(character->b.x - deadzone->b.x, 0));
+	
 	location += velocity;
 }
 void Character::update()
