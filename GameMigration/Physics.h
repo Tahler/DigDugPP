@@ -65,6 +65,8 @@ namespace Physics
 		bool intersects(Rectangle&);
 
 		virtual void draw(Core::Graphics& g);
+
+		void operator+=(const Vector&);
 	};
 }
 

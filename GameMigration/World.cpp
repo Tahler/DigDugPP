@@ -1,11 +1,9 @@
 
 #include "World.h"
+#include "Physics.h"
 #include <stdlib.h>
 
-// Measured in pixels
-const int BLOCK_SIZE = 50;
-const int WINDOW_WIDTH = 24 * BLOCK_SIZE;
-const int WINDOW_HEIGHT = 16 * BLOCK_SIZE;
+using Physics::Vector;
 
 // Measured in blocks
 const int WORLD_WIDTH = 24;
@@ -20,7 +18,7 @@ World::~World()
 {
 	for (unsigned int i = 0; i < blocks.size(); i++)
 	{
-		for (unsigned int j = 0; j < blocks[i].size(); j++) // Leave the first four rows blank.
+		for (unsigned int j = 0; j < blocks[i].size(); j++)
 		{
 			delete blocks[i][j];
 		}
@@ -28,6 +26,8 @@ World::~World()
 }
 void World::init()
 {
+	windowPosition = Point(0, 0);
+
 	for (unsigned int i = 0; i < blocks.size(); i++)
 	{
 		for (unsigned int j = 0; j < 4; j++) // Leave the first four rows blank.

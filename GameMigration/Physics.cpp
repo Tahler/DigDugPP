@@ -54,3 +54,8 @@ void Rectangle::draw(Core::Graphics& g)
 	g.DrawLine(b.x, b.y, a.x, b.y);
 	g.DrawLine(a.x, b.y, a.x, a.y);
 }
+void Rectangle::operator+=(const Vector& shift)
+{
+	a += shift;
+	b += shift;
+}
