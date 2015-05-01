@@ -79,6 +79,15 @@ namespace Blocks
 		void draw(Core::Graphics& g);
 	};
 
+	struct Earth2:BreakableBlock
+	{
+		//No value, disappears
+		Earth2(Point& a) :
+			BreakableBlock(a)
+		{}
+		void draw(Core::Graphics& g);
+	};
+
 	struct Grass:BreakableBlock
 	{
 		//No value, disappears

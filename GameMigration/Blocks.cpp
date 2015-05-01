@@ -46,6 +46,11 @@ void Earth::draw(Core::Graphics &g)
 	g.SetColor(RGB(110,83,9));
 	fillSquare(g, a, BLOCK_SIZE);
 }
+void Earth2::draw(Core::Graphics &g)
+{
+	g.SetColor(RGB(121, 122, 122));
+	fillSquare(g, a, BLOCK_SIZE);
+}
 void Grass::draw(Core::Graphics &g)
 {
 	g.SetColor(RGB(110,83,9));

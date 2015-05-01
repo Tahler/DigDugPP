@@ -1,5 +1,6 @@
 
 #include "World.h"
+#include <stdlib.h>
 
 // Measured in pixels
 const int BLOCK_SIZE = 50;
@@ -31,14 +32,21 @@ void World::init()
 	{
 		for (unsigned int j = 0; j < 4; j++) // Leave the first four rows blank.
 		{
-			//if (j == 3 && i < 6) blocks[i][j] = new Earth(Point(i, j));
-			/*else*/ blocks[i][j] = new Sky(Point(i, j));
+			blocks[i][j] = new Sky(Point(i, j));
 		}
-		for (unsigned int j = 4; j < blocks[i].size(); j++) // Rest of the world is ground
+		for (unsigned int j = 4; j < 6; j++) 
 		{
 			if (j == 4 && i >= 6 && i <= 18) blocks[i][j] = new Cave(Point(i, j));
 			else if (j==4 || j == 3) blocks[i][j] = new Grass(Point(i, j));
 			else blocks[i][j] = new Earth(Point(i, j));
+		}
+		for (unsigned int j = 6; j < 9; j++)
+		{
+			(rand() % 2 == 0) ? blocks[i][j] = new Earth(Point(i, j)) : blocks[i][j] = new Earth2(Point(i, j));
+		}
+		for (unsigned int j = 9; j < blocks[i].size(); j++)
+		{
+			blocks[i][j] = new Earth2(Point(i, j));
 		}
 	}
 	delete blocks[10][4];
