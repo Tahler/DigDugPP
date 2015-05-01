@@ -17,7 +17,7 @@ const float DRAG = 0.1;
 
 Physics::Rectangle Character::getBoundingBox()
 {
-	return Physics::Rectangle(Point(location.x + 2, location.y), Point(location.x + BLOCK_SIZE - 2, location.y + BLOCK_SIZE));
+	return Physics::Rectangle(Point(location.x + 2, location.y + 2), Point(location.x + BLOCK_SIZE - 2, location.y + BLOCK_SIZE - 2));
 }
 void Character::checkKeyInput()
 {
