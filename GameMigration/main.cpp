@@ -3,6 +3,7 @@
 #include "Character.h"
 #include "World.h"
 #include "Blocks.h"
+#include "Window.h"
 
 using namespace std;
 
@@ -29,9 +30,6 @@ void draw(Core::Graphics& graphics)
 	world.draw(graphics);
 	player.draw(graphics);
 }
-
-
-//extern const int WINDOW_WIDTH, WINDOW_HEIGHT;
 
 void main()
 {
