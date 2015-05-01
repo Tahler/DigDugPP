@@ -90,8 +90,8 @@ void Character::checkCollisions()
 	}
 	else if (velocity.y < 0) // moving up
 	{
-		neighbor = &(world->getBlockAt(Point(box->a.x, box->b.y - MAX_SPEED + 1)));
-		neighbor2 = &(world->getBlockAt(Point(box->b.x, box->b.y - MAX_SPEED + 1)));
+		neighbor = &(world->getBlockAt(Point(box->a.x, box->a.y - MAX_SPEED + 1)));
+		neighbor2 = &(world->getBlockAt(Point(box->b.x, box->a.y - MAX_SPEED + 1)));
 		if (!neighbor->isTraversable || !neighbor2->isTraversable)
 		{
 			velocity.y = 0;
@@ -119,7 +119,7 @@ void Character::mine(int dir)
 			break;
 		case 2:
 			//up
-			b = &(world->getBlockAt(Point(box->a.x + BLOCK_HALF, box->b.y - MAX_SPEED + 1)));
+			b = &(world->getBlockAt(Point(box->a.x + BLOCK_HALF, box->a.y - MAX_SPEED + 1)));
 			break;
 		case 3:
 			//left
