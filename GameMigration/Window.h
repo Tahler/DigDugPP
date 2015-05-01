@@ -18,9 +18,7 @@ public:
 	Window() : 
 		box(Physics::Rectangle(Point(0, 0), Point(0, 0)))
 	{}
-	Window(Point& upperLeft) : 
-		box(Physics::Rectangle(upperLeft, Point(upperLeft.x + WINDOW_WIDTH, upperLeft.y + WINDOW_HEIGHT)))
-	{}
+	Window(Point& upperLeft);
 	void shift(Vector&);
 	void moveUpperLeftTo(Point&);
 };

@@ -6,13 +6,13 @@
 using Physics::Vector;
 
 // Measured in blocks
-const int WORLD_WIDTH = 24;
+const int WORLD_WIDTH = 30;
 const int WORLD_HEIGHT = 80;
 
 World::World()
 {
-	window = Window(Point(0, 0));
 	blocks = vector<vector<Block*>>(WORLD_WIDTH, vector<Block*>(16));
+	window = Window(Point(0, 0));
 	init();
 }
 World::~World()
@@ -75,11 +75,31 @@ void World::draw(Core::Graphics& g)
 	{
 		for (unsigned int j = 0; j < blocks[0].size(); j++)
 		{
-			blocks[i][j]->draw(g);
+			if (window.box.contains(blocks[i][j]->a)) blocks[i][j]->draw(g);
 		}
 	}
+	//Block* upperLeft = &getBlockAt(window.box.a);
+	//Block* lowerRight = &getBlockAt(window.box.b);
+
+	//Point begin = Point(upperLeft->a.x / BLOCK_SIZE, upperLeft->a.y / BLOCK_SIZE);
+	//Point end = Point(lowerRight->b.x / BLOCK_SIZE, lowerRight->b.y / BLOCK_SIZE);
+	//
+	//for (unsigned int i = begin.x; i < end.x; i++)
+	//{
+	//	for (unsigned int j = begin.y; j < end.y; j++)
+	//	{
+	//		blocks[i][j]->draw(g);
+	//	}
+	//}
 }
-Block& World::getBlockAt(Point& a) // consider returning Block&
+Block& World::getBlockAt(Point& p)
 {
-	return *blocks[a.x / BLOCK_SIZE][a.y / BLOCK_SIZE];
+	//int x = p.x / BLOCK_SIZE;
+	//int y = p.y / BLOCK_SIZE;
+	//
+	//// Prevent index out of bounds
+	//if (p.x >= blocks.size()) x = blocks.size() - 1;
+	//if (p.y >= blocks[0].size()) y = blocks[0].size() - 1;
+	
+	return *blocks[p.x / BLOCK_SIZE][p.y / BLOCK_SIZE];
 }
