@@ -11,6 +11,7 @@ const int WORLD_HEIGHT = 80;
 
 World::World()
 {
+	window = Window(Point(0, 0));
 	blocks = vector<vector<Block*>>(WORLD_WIDTH, vector<Block*>(16));
 	init();
 }
@@ -26,8 +27,6 @@ World::~World()
 }
 void World::init()
 {
-	windowPosition = Point(0, 0);
-
 	for (unsigned int i = 0; i < blocks.size(); i++)
 	{
 		for (unsigned int j = 0; j < 4; j++) // Leave the first four rows blank.

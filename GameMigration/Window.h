@@ -4,16 +4,25 @@
 
 #include "Physics.h"
 
+using Physics::Point;
+using Physics::Vector;
+using Physics::Rectangle;
+
 extern const int WINDOW_WIDTH, WINDOW_HEIGHT;
 
 class Window
 {
-	Physics::Rectangle box;
 public:
-	Window() {}
-	Window(Point& upperLeft);
-	void shift(Vector& shift);
-	void moveUpperLeftTo(Point& newLocation);
+	Physics::Rectangle box;
+
+	Window() : 
+		box(Physics::Rectangle(Point(0, 0), Point(0, 0)))
+	{}
+	Window(Point& upperLeft) : 
+		box(Physics::Rectangle(upperLeft, Point(upperLeft.x + WINDOW_WIDTH, upperLeft.y + WINDOW_HEIGHT)))
+	{}
+	void shift(Vector&);
+	void moveUpperLeftTo(Point&);
 };
 
 #endif

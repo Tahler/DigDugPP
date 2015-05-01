@@ -6,6 +6,7 @@
 #include "Core.h"
 #include "Physics.h"
 #include "Blocks.h"
+#include "Window.h"
 
 using std::vector;
 using namespace Blocks;
@@ -15,10 +16,9 @@ extern const int WORLD_WIDTH, WORLD_HEIGHT;
 class World
 {
 public:
+	Window window;
 	vector<vector<Block*>> blocks;
 	
-	Point windowPosition;
-
 	World();
 	~World();
 	void init();
