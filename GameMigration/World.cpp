@@ -118,5 +118,4 @@ Block& World::getBlockAt(Point& p)
 	if (y >= blocks[0].size()) y = blocks[0].size() - 1;
 	
 	return *blocks[x][y];
-	//return *blocks[p.x / BLOCK_SIZE][p.y / BLOCK_SIZE];
 }

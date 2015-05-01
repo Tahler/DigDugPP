@@ -16,7 +16,10 @@ void Window::shift(Vector& shift)
 {
 	//if (box.a.x + shift.x >= BLOCK_SIZE) box += shift;
 	//if (box.b.x + shift.x <= 0) box += shift; // hard coded
-	box += shift;
+
+	if (box.a.x > 0 && box.b.x < 2400) box += shift;
+
+	//box += shift;
 	deadzone += shift;
 }
 void Window::moveUpperLeftTo(Point& newLocation)

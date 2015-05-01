@@ -100,8 +100,9 @@ void Character::move()
 	// Move the window if needed
 	Window* window = &(world->window); // The larger, viewable screen
 	Physics::Rectangle* deadzone = &(world->window.deadzone); // The invisible small box that the character cannot move out of
-	Physics::Rectangle* character = &(getBoundingBox()); // The character's bouding box
+	Physics::Rectangle* character = &(getBoundingBox()); // The character's bounding box
 	
+	// if the character is outside the deadzone, shift the window (which also shifts the deadzone)
 	if (character->a.x < deadzone->a.x) window->shift(Vector(character->a.x - deadzone->a.x, 0));
 	if (character->b.x > deadzone->b.x) window->shift(Vector(character->b.x - deadzone->b.x, 0));
 	
