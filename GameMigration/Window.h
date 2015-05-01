@@ -26,6 +26,8 @@ public:
 	{}
 	void shift(Vector&);
 	void moveUpperLeftTo(Point&);
+
+	void draw(Core::Graphics&);
 };
 
 #endif

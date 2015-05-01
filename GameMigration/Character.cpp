@@ -10,6 +10,7 @@ using Physics::Point;
 using Physics::Vector;
 using Physics::Rectangle;
 using Physics::operator+;
+using Physics::operator-;
 
 // Character //
 const float MAX_SPEED = BLOCK_SIZE / 10;
@@ -17,7 +18,7 @@ const float DRAG = 0.1;
 
 Physics::Rectangle Character::getBoundingBox()
 {
-	return Physics::Rectangle(Point(location.x + 2, location.y), Point(location.x + BLOCK_SIZE - 2, location.y + BLOCK_SIZE));
+	return Physics::Rectangle(Point(location.x + 2, location.y + 2), Point(location.x + BLOCK_SIZE - 2, location.y + BLOCK_SIZE - 2));
 }
 void Character::checkKeyInput()
 {
@@ -91,10 +92,28 @@ void Character::checkCollisions()
 void Character::move()
 {
 	// Don't go outside the window, otherwise allow movement
-	if (location.x >= 0 && location.x + BLOCK_SIZE <= WINDOW_WIDTH - MAX_SPEED -4) location.x += velocity.x;
-	else if (location.x >= 0)location.x -= 1;
-	else location.x +=1;
-	if (location.y >= 0 && location.y + BLOCK_SIZE <= WINDOW_HEIGHT) location.y += velocity.y;
+	//if (location.x >= 0 && location.x + BLOCK_SIZE <= WINDOW_WIDTH - MAX_SPEED -4) location.x += velocity.x;
+	//else if (location.x >= 0)location.x -= 1;
+	//else location.x +=1;
+	//if (location.y >= 0 && location.y + BLOCK_SIZE <= WINDOW_HEIGHT) location.y += velocity.y;
+
+	// Move the window if needed
+	Window* window = &(world->window); // The larger, viewable screen
+	Physics::Rectangle* deadzone = &(world->window.deadzone); // The invisible small box that the character cannot move out of
+	
+	//if (location.x < deadzone->a.x)
+	//{
+	//	window->shift(Vector(location.x - deadzone->a.x, 0));
+	//	/*window->deadzone.setPoints(Point(deadzone->a.x + location.x, deadzone->a.y), Point(deadzone->b.x + location.x, deadzone->b.y));
+	//	window->box.setPoints()*/
+	//}
+	//if (location.x > deadzone->b.x) 
+	//{
+	//	window->box.setPoints(Point(deadzone->a.x - location.x, deadzone->a.y), Point(deadzone->b.x - location.x, deadzone->b.y));
+	//}
+	//if (location.x < deadzone->a.x) window->shift(Vector(deadzone->a.x - location.x, 0));
+	//if (location.x > deadzone->b.x) window->shift(Vector(location.x - deadzone->a.x, 0));
+	location += velocity;
 }
 void Character::update()
 {

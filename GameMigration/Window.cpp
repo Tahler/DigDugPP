@@ -15,8 +15,16 @@ const int WINDOW_HEIGHT = 800;
 void Window::shift(Vector& shift)
 {
 	box += shift;
+	//deadzone += shift;
 }
 void Window::moveUpperLeftTo(Point& newLocation)
 {
 	box = Physics::Rectangle(newLocation, Point(newLocation.x + WINDOW_WIDTH, newLocation.y + WINDOW_HEIGHT));
+	//deadzone = Physics::Rectangle(newLocation, Point(newLocation.x + WINDOW_WIDTH, newLocation.y + WINDOW_HEIGHT));
+}
+
+void Window::draw(Core::Graphics& g)
+{
+	box.draw(g);
+	//box
 }

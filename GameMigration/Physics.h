@@ -25,6 +25,7 @@ namespace Physics
 		
 		void operator=(const Vector&);
 		void operator+=(const Vector&);
+		void operator-=(const Vector&);
 	};
 	
 	// They hold the same data, but have different meaning:
@@ -33,6 +34,7 @@ namespace Physics
 	typedef Vector Point; 
 	
 	Vector operator+(const Vector&, const Vector&);
+	Vector operator-(const Vector&, const Vector&);
 
 	struct Line
 	{

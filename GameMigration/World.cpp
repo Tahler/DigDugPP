@@ -103,6 +103,8 @@ void World::draw(Core::Graphics& g)
 			blocks[i][j]->draw(g);
 		}
 	}
+
+	window.draw(g);
 }
 Block& World::getBlockAt(Point& p)
 {

@@ -9,10 +9,10 @@ Vector operator+(const Vector& left, const Vector& right)
 {
 	return Vector(left.x + right.x, left.y + right.y);
 }
-//Point operator+(Point& left, Vector& right)
-//{
-//	return Point(left.x + right.x, left.y + right.y);
-//}
+Vector operator-(const Vector& left, const Vector& right)
+{
+	return Vector(left.x - right.x, left.y - right.y);
+}
 void Vector::operator=(const Vector& v)
 {
 	x = v.x;
@@ -22,6 +22,11 @@ void Vector::operator+=(const Vector& right)
 {
 	x += right.x;
 	y += right.y;	
+}
+void Vector::operator-=(const Vector& right)
+{
+	x -= right.x;
+	y -= right.y;	
 }
 void drawLine(Core::Graphics& g, const Vector& left, const Vector& right)
 {
