@@ -4,9 +4,14 @@
 #include "World.h"
 #include "Blocks.h"
 
+using namespace std;
+
 World world;
 Character player(&world, 1, 1);
-
+int frameRate;
+std::string frames;
+float currentTime;
+float lastTime;
 ////////////////////////////////////////////////////////////
 
 bool update(float dt)
@@ -23,6 +28,7 @@ void draw(Core::Graphics& graphics)
 	world.draw(graphics);
 	player.draw(graphics);
 }
+
 
 //extern const int WINDOW_WIDTH, WINDOW_HEIGHT;
 
