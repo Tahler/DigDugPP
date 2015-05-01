@@ -12,6 +12,7 @@ int frameRate;
 std::string frames;
 float currentTime;
 float lastTime;
+
 ////////////////////////////////////////////////////////////
 
 bool update(float dt)

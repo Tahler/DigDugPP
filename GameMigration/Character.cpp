@@ -144,5 +144,5 @@ void Character::draw(Core::Graphics g)
 	fillRectangle(g, Point(location.x + BLOCK_FIFTH * 2, location.y + BLOCK_FIFTH * 3), BLOCK_FIFTH, BLOCK_FIFTH * 2);
 	g.SetColor(RGB(10, 10, 255));
 	
-	getBoundingBox().draw(g);
+	//getBoundingBox().draw(g);
 }
