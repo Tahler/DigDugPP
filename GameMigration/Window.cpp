@@ -12,10 +12,6 @@ using Physics::Vector;
 const int WINDOW_WIDTH = 1200;
 const int WINDOW_HEIGHT = 800;
 
-Window::Window(Point& upperLeft)
-{
-	box = Physics::Rectangle(upperLeft, Point(upperLeft.x + WINDOW_WIDTH, upperLeft.y + WINDOW_HEIGHT));
-}
 void Window::shift(Vector& shift)
 {
 	box += shift;

@@ -6,8 +6,8 @@
 using Physics::Vector;
 
 // Measured in blocks
-const int WORLD_WIDTH = 24;
-const int WORLD_HEIGHT = 16;
+const int WORLD_WIDTH = 48;
+const int WORLD_HEIGHT = 80;
 
 World::World()
 {
