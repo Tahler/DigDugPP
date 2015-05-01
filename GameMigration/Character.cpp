@@ -91,7 +91,9 @@ void Character::checkCollisions()
 void Character::move()
 {
 	// Don't go outside the window, otherwise allow movement
-	if (location.x >= 0 && location.x + BLOCK_SIZE <= WINDOW_WIDTH) location.x += velocity.x;
+	if (location.x >= 0 && location.x + BLOCK_SIZE <= WINDOW_WIDTH - MAX_SPEED -4) location.x += velocity.x;
+	else if (location.x >= 0)location.x -= 1;
+	else location.x +=1;
 	if (location.y >= 0 && location.y + BLOCK_SIZE <= WINDOW_HEIGHT) location.y += velocity.y;
 }
 void Character::update()
@@ -142,5 +144,5 @@ void Character::draw(Core::Graphics g)
 	fillRectangle(g, Point(location.x + BLOCK_FIFTH * 2, location.y + BLOCK_FIFTH * 3), BLOCK_FIFTH, BLOCK_FIFTH * 2);
 	g.SetColor(RGB(10, 10, 255));
 	
-	//getBoundingBox().draw(g);
+	getBoundingBox().draw(g);
 }
