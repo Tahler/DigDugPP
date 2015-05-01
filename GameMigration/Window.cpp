@@ -14,8 +14,9 @@ const int WINDOW_HEIGHT = 800;
 
 void Window::shift(Vector& shift)
 {
-	if (box.a.x + shift.x >= 0) box += shift;
-	if (box.a.x + shift.x <= BLOCK_SIZE) box += shift; // hard coded
+	//if (box.a.x + shift.x >= BLOCK_SIZE) box += shift;
+	//if (box.b.x + shift.x <= 0) box += shift; // hard coded
+	box += shift;
 	deadzone += shift;
 }
 void Window::moveUpperLeftTo(Point& newLocation)

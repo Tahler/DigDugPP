@@ -112,6 +112,8 @@ Block& World::getBlockAt(Point& p)
 	int y = p.y / BLOCK_SIZE;
 	
 	// Prevent index out of bounds
+	if (x < 0) x = 0;
+	if (y < 0) y = 0;
 	if (x >= blocks.size()) x = blocks.size() - 1;
 	if (y >= blocks[0].size()) y = blocks[0].size() - 1;
 	
