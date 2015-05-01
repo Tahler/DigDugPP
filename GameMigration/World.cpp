@@ -1,26 +1,25 @@
 
 #include "World.h"
+#include "Physics.h"
 #include <stdlib.h>
 
-// Measured in pixels
-const int BLOCK_SIZE = 50;
-const int WINDOW_WIDTH = 24 * BLOCK_SIZE;
-const int WINDOW_HEIGHT = 16 * BLOCK_SIZE;
+using Physics::Vector;
 
 // Measured in blocks
-const int BLOCKS_PER_WINDOW = (WINDOW_WIDTH / BLOCK_SIZE) * (WINDOW_HEIGHT / BLOCK_SIZE);
-const int WORLD_SIZE_IN_WINDOWS = 20;
+const int WORLD_WIDTH = 48;
+const int WORLD_HEIGHT = 80;
 
 World::World()
 {
-	blocks = vector<vector<Block*>>(24, vector<Block*>(16));
+	blocks = vector<vector<Block*>>(WORLD_WIDTH, vector<Block*>(WORLD_HEIGHT));
+	window = Window(Point(0, 0));
 	init();
 }
 World::~World()
 {
 	for (unsigned int i = 0; i < blocks.size(); i++)
 	{
-		for (unsigned int j = 0; j < blocks[i].size(); j++) // Leave the first four rows blank.
+		for (unsigned int j = 0; j < blocks[i].size(); j++)
 		{
 			delete blocks[i][j];
 		}
@@ -72,18 +71,54 @@ void World::update()
 }
 void World::draw(Core::Graphics& g)
 {
-	for (unsigned int i = 0; i < blocks.size(); i++)
+	// Draw all blocks //
+	//for (unsigned int i = 0; i < blocks.size(); i++)
+	//{
+	//	for (unsigned int j = 0; j < blocks[0].size(); j++)
+	//	{
+	//		blocks[i][j]->draw(g);
+	//	}
+	//}
+
+	// Check if block is on screen, if it is, draw it // 
+	//for (unsigned int i = 0; i < blocks.size(); i++)
+	//{
+	//	for (unsigned int j = 0; j < blocks[0].size(); j++)
+	//	{
+	//		if (blocks[i][j]->intersects(window.box)) blocks[i][j]->draw(g);
+	//	}
+	//}
+
+	// Select all blocks on the screen and draw them //
+	Block* upperLeft = &getBlockAt(window.box.a);
+	Block* lowerRight = &getBlockAt(window.box.b);
+
+	Point begin = Point(upperLeft->a.x / BLOCK_SIZE, upperLeft->a.y / BLOCK_SIZE);
+	Point end = Point(lowerRight->a.x / BLOCK_SIZE, lowerRight->a.y / BLOCK_SIZE);
+
+	for (unsigned int i = begin.x; i <= end.x; i++)
 	{
-		for (unsigned int j = 0; j < blocks[0].size(); j++)
+		for (unsigned int j = begin.y; j <= end.y; j++)
 		{
 			blocks[i][j]->draw(g);
 		}
 	}
 }
-Block& World::getBlockAt(Point& a) // consider returning Block&
+Block& World::getBlockAt(Point& p)
 {
-	return *blocks[a.x / BLOCK_SIZE][a.y / BLOCK_SIZE];
+
+	int x = p.x / BLOCK_SIZE;
+	int y = p.y / BLOCK_SIZE;
+	
+	// Prevent index out of bounds
+	if (x >= blocks.size()) x = blocks.size() - 1;
+	if (y >= blocks[0].size()) y = blocks[0].size() - 1;
+	
+	return *blocks[x][y];
+	//return *blocks[p.x / BLOCK_SIZE][p.y / BLOCK_SIZE];
 }
+
+
 void World::destroyBlockAt(Point& a)
 {
 	int x = a.x / BLOCK_SIZE; 
@@ -91,3 +126,4 @@ void World::destroyBlockAt(Point& a)
 	delete blocks[x][y];
 	blocks[x][y] = new Cave(Point(x, y));
 }
+	

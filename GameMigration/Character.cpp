@@ -21,7 +21,7 @@ int pickStrength = 3;
 
 Physics::Rectangle Character::getBoundingBox()
 {
-	return Physics::Rectangle(Point(location.x + 2, location.y), Point(location.x + BLOCK_SIZE - 2, location.y + BLOCK_SIZE));
+	return Physics::Rectangle(Point(location.x + 2, location.y + 2), Point(location.x + BLOCK_SIZE - 2, location.y + BLOCK_SIZE - 2));
 }
 void Character::checkKeyInput()
 {
@@ -196,4 +196,5 @@ void Character::draw(Core::Graphics g)
 	fillRectangle(g, Point(location.x + BLOCK_FIFTH * 2, location.y + BLOCK_FIFTH * 3), BLOCK_FIFTH, BLOCK_FIFTH * 2);
 	g.SetColor(RGB(10, 10, 255));
 	getBoundingBox().draw(g);
+
 }

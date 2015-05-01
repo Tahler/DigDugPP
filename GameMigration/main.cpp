@@ -3,6 +3,7 @@
 #include "Character.h"
 #include "World.h"
 #include "Blocks.h"
+#include "Window.h"
 
 using namespace std;
 
@@ -12,6 +13,7 @@ int frameRate;
 std::string frames;
 float currentTime;
 float lastTime;
+
 ////////////////////////////////////////////////////////////
 
 bool update(float dt)
@@ -28,9 +30,6 @@ void draw(Core::Graphics& graphics)
 	world.draw(graphics);
 	player.draw(graphics);
 }
-
-
-//extern const int WINDOW_WIDTH, WINDOW_HEIGHT;
 
 void main()
 {
