@@ -84,3 +84,10 @@ Block& World::getBlockAt(Point& a) // consider returning Block&
 {
 	return *blocks[a.x / BLOCK_SIZE][a.y / BLOCK_SIZE];
 }
+void World::destroyBlockAt(Point& a)
+{
+	int x = a.x / BLOCK_SIZE; 
+	int y = a.y / BLOCK_SIZE;
+	delete blocks[x][y];
+	blocks[x][y] = new Cave(Point(x, y));
+}

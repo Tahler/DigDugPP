@@ -4,6 +4,7 @@
 #include "Core.h"
 #include "Physics.h"
 #include "World.h"
+#include <time.h>
 
 using Physics::Gravity;
 using Physics::Point;
@@ -15,6 +16,9 @@ using Physics::operator+;
 const float MAX_SPEED = BLOCK_SIZE / 10;
 const float DRAG = 0.1;
 
+long lastMineMillis = time(0) * 1000;
+int pickStrength = 3;
+
 Physics::Rectangle Character::getBoundingBox()
 {
 	return Physics::Rectangle(Point(location.x + 2, location.y), Point(location.x + BLOCK_SIZE - 2, location.y + BLOCK_SIZE));
@@ -25,7 +29,14 @@ void Character::checkKeyInput()
 	else if (Core::Input::IsPressed(Core::Input::KEY_RIGHT)) velocity.x = MAX_SPEED;
 	else velocity.x = 0;
 
-	if (Core::Input::IsPressed(Core::Input::KEY_UP)) jump();
+	if (!isJumping) 
+	{
+		if (Core::Input::IsPressed(Core::Input::KEY_UP)) jump();
+		if (Core::Input::IsPressed(Core::Input::KEY_S)) mine(0);
+		if (Core::Input::IsPressed(Core::Input::KEY_D)) mine(3);
+		if (Core::Input::IsPressed(Core::Input::KEY_W)) mine(2);
+		if (Core::Input::IsPressed(Core::Input::KEY_A)) mine(1);
+	}
 }
 void Character::jump()
 {
@@ -88,6 +99,47 @@ void Character::checkCollisions()
 		}
 	}
 }
+void Character::mine(int dir)
+{		
+	if ((time(0) - lastMineMillis) > 100)
+		{
+		Physics::Rectangle* box = &getBoundingBox();
+
+		Block* b;
+		switch (dir)
+		{
+		case 0:
+			//down
+			b = &(world->getBlockAt(Point(box->a.x + BLOCK_HALF, box->b.y + MAX_SPEED - 1)));
+			break;
+		case 1:
+			//right
+			b = &(world->getBlockAt(Point(box->a.x - MAX_SPEED + 1, box->a.y + BLOCK_HALF)));
+		
+			break;
+		case 2:
+			//up
+			b = &(world->getBlockAt(Point(box->a.x + BLOCK_HALF, box->b.y - MAX_SPEED + 1)));
+			break;
+		case 3:
+			//left
+			b = &(world->getBlockAt(Point(box->b.x + MAX_SPEED, box->a.y + BLOCK_HALF)));
+			break;
+		}
+	
+		BreakableBlock* b2 = dynamic_cast<BreakableBlock*>(b);
+		if (b2 != NULL)
+		{
+			b2->takeDamage(pickStrength);
+			if (b2->durability <= 0)
+			{
+				world->destroyBlockAt(b->a);
+			}
+		}
+		lastMineMillis = time(0) * 1000;
+	}
+	
+}
 void Character::move()
 {
 	// Don't go outside the window, otherwise allow movement
@@ -143,6 +195,5 @@ void Character::draw(Core::Graphics g)
 	g.SetColor(RGB(38, 88, 158));
 	fillRectangle(g, Point(location.x + BLOCK_FIFTH * 2, location.y + BLOCK_FIFTH * 3), BLOCK_FIFTH, BLOCK_FIFTH * 2);
 	g.SetColor(RGB(10, 10, 255));
-	
 	getBoundingBox().draw(g);
 }

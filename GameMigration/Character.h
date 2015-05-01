@@ -40,6 +40,7 @@ public:
 	void jump();
 	void checkCollisions();
 	void move();
+	void mine(int dir);
 
 	void update();
 	void draw(Core::Graphics);
