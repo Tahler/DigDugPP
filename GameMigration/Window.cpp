@@ -4,6 +4,9 @@
 #include "World.h"
 #include "Physics.h"
 
+#include <iostream>
+using std::cout;
+
 using Physics::Vector;
 
 // Measured in pixels
@@ -11,26 +14,39 @@ using Physics::Vector;
 //const int WINDOW_HEIGHT = 16 * BLOCK_SIZE;
 const int WINDOW_WIDTH = 1200;
 const int WINDOW_HEIGHT = 800;
+//const int DEADZONE_DIVISOR = 3;
 
+bool Window::deadzoneIsCentered()
+{
+	Point center = Point((box.b.x - box.a.x) / 3, (box.b.y - box.a.y) / 3);
+	return (deadzone.a.x < center.x + 50 && deadzone.a.x > center.x - 50); // may need to give a buffer (it may not ever be exact)
+}
 void Window::shift(Vector& shift)
 {
-	//if (box.a.x + shift.x >= BLOCK_SIZE) box += shift;
-	//if (box.b.x + shift.x <= 0) box += shift; // hard coded
+	color = RGB(0x63, 0x19, 0x9c);
+	color = RGB(255, 0, 0); // trace with red
 
-	if (box.a.x > 0 && box.b.x < 2400) box += shift;
-
-	//box += shift;
+	// Don't let the window box go outside the world
+	// The window box should only shift if the deadzone is not in the center
+	
+		//if (deadzoneIsCentered())
+		//box += shift;
+	
+	box += shift;
 	deadzone += shift;
-}
-void Window::moveUpperLeftTo(Point& newLocation)
-{
-	box = Physics::Rectangle(newLocation, Point(newLocation.x + WINDOW_WIDTH, newLocation.y + WINDOW_HEIGHT));
-	//deadzone = Physics::Rectangle(newLocation, Point(newLocation.x + WINDOW_WIDTH, newLocation.y + WINDOW_HEIGHT));
+	update();
 }
 
+void Window::update()
+{
+	//if (deadzone.a.x - box.a.x < 400) box += Vector();
+
+	if (box.a.x < 0) box += Vector(-box.a.x, 0);
+	else if (box.b.x > 1200) box += Vector(1200 - box.b.x, 0);
+}
 void Window::draw(Core::Graphics& g)
 {
-	g.SetColor(RGB(0x63, 0x19, 0x9c));
+	g.SetColor(color);
 	box.draw(g);
 	deadzone.draw(g);
 }

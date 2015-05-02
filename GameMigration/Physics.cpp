@@ -5,13 +5,17 @@ using namespace Physics;
 float Gravity::acceleration = 0.1f;
 
 // Vector //
-Vector operator+(const Vector& left, const Vector& right)
+Vector Physics::operator+(const Vector& left, const Vector& right)
 {
 	return Vector(left.x + right.x, left.y + right.y);
 }
-Vector operator-(const Vector& left, const Vector& right)
+Vector Physics::operator-(const Vector& left, const Vector& right)
 {
 	return Vector(left.x - right.x, left.y - right.y);
+}
+bool Physics::operator==(const Vector& left, const Vector& right)
+{
+	return ((left.x == right.x) && (left.y == right.y));
 }
 void Vector::operator=(const Vector& v)
 {

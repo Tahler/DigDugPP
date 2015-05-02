@@ -33,6 +33,7 @@ namespace Physics
 	// Vector = displacement
 	typedef Vector Point; 
 	
+	bool operator==(const Vector&, const Vector&);
 	Vector operator+(const Vector&, const Vector&);
 	Vector operator-(const Vector&, const Vector&);
 
