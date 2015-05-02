@@ -46,6 +46,10 @@ void Rectangle::setPoints(Point& pa, Point& pb)
 {
 	a = pa, b = pb;
 }
+//void Rectangle::move(Vector& displacement)
+//{
+//	setPoints(Point(a.x - displacement.x, a.y - displacement.y), Point(b.x - displacement.x, b.y - displacement.y));
+//}
 bool Rectangle::contains(Point& p)
 {
 	return (p.x >= a.x && p.x <= b.x)  // within x-axis boundaries
@@ -66,6 +70,15 @@ void Rectangle::draw(Core::Graphics& g)
 	g.DrawLine(b.x, a.y, b.x, b.y);
 	g.DrawLine(b.x, b.y, a.x, b.y);
 	g.DrawLine(a.x, b.y, a.x, a.y);
+}
+void Rectangle::drawAt(Core::Graphics& g, Vector& displacement)
+{
+	Point p1 = a - displacement;
+	Point p2 = b - displacement;
+	g.DrawLine(p1.x, p1.y, p2.x, p1.y);
+	g.DrawLine(p2.x, p1.y, p2.x, p2.y);
+	g.DrawLine(p2.x, p2.y, p1.x, p2.y);
+	g.DrawLine(p1.x, p2.y, p1.x, p1.y);
 }
 void Rectangle::operator+=(const Vector& shift)
 {

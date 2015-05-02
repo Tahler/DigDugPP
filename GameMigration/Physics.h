@@ -64,11 +64,12 @@ namespace Physics
 		{}
 		
 		void setPoints(Point&, Point&);
-
+		//void move(Vector&);
 		bool contains(Point&);
 		bool intersects(Rectangle&);
 
-		virtual void draw(Core::Graphics& g);
+		virtual void draw(Core::Graphics&);
+		virtual void drawAt(Core::Graphics&, Vector&);
 
 		void operator+=(const Vector&);
 	};
