@@ -65,6 +65,8 @@ void World::init()
 	blocks[3][6] = new Iron(Point(3, 6));
 	delete blocks[3][7];
 	blocks[3][7] = new Silver(Point(3, 7));
+	delete blocks[3][8];
+	blocks[3][8] = new Sapphire(Point(3, 8));
 	delete blocks[2][5];
 	blocks[2][5] = new Ladder(Point(2, 5));
 	delete blocks[2][6];

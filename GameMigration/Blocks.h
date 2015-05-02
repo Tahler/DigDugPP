@@ -151,7 +151,7 @@ namespace Blocks
 		{
 			value = 4;
 		}
-		void draw(Core::Graphics& g);
+		void drawAt(Core::Graphics& g, Vector&);
 	};
 
 }

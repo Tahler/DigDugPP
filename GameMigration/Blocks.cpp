@@ -105,14 +105,15 @@ void Copper::drawAt(Core::Graphics &g, Vector& offset)
 	drawCracks(g, a, durability);
 
 }
-void Sapphire::draw(Core::Graphics& g)
+void Sapphire::drawAt(Core::Graphics& g, Vector& offset)
 {
+	Point p = a - offset;
 	g.SetColor(RGB(121,122,122));
-	fillSquare(g, a, BLOCK_SIZE);
-	g.SetColor(RGB(34, 27, 227));
-	fillCircle(g, Point(a.x + BLOCK_FIFTH, a.y + BLOCK_FIFTH * 3), BLOCK_FIFTH); 
-	fillCircle(g, Point(a.x + BLOCK_FIFTH, a.y + BLOCK_FIFTH), BLOCK_FIFTH);
-	fillCircle(g, Point(a.x + BLOCK_FIFTH*2, a.y + BLOCK_FIFTH*2), BLOCK_FIFTH*2);
+	fillSquare(g, p, BLOCK_SIZE);
+	g.SetColor(RGB(51, 51, 153));
+	fillHexagon(g, Point(p.x + BLOCK_FIFTH, p.y + BLOCK_FIFTH * 3), BLOCK_FIFTH); 
+	fillHexagon(g, Point(p.x + BLOCK_FIFTH, p.y + BLOCK_FIFTH), BLOCK_FIFTH);
+	fillHexagon(g, Point(p.x + BLOCK_FIFTH*2, p.y + BLOCK_FIFTH), BLOCK_FIFTH*2);
 	drawCracks(g, a, durability);
 }
 
