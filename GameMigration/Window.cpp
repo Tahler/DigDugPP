@@ -39,11 +39,11 @@ void Window::shift(Vector& shift)
 
 void Window::update()
 {
-	if (deadzone.a.x - box.a.x < 400) box += Vector(-(400 - (deadzone.a.x - box.a.x)), 0);
-	else if (box.b.x - deadzone.b.x < 400) box += Vector((400 - (box.a.x - deadzone.a.x)), 0);
+	if (deadzone.a.x - box.a.x < WINDOW_WIDTH / 3) box += Vector(-(WINDOW_WIDTH / 3 - (deadzone.a.x - box.a.x)), 0);
+	else if (box.b.x - deadzone.b.x < WINDOW_WIDTH / 3) box += Vector((WINDOW_WIDTH / 3 - (box.a.x - deadzone.a.x)), 0);
 
 	if (box.a.x < 0) box += Vector(-box.a.x, 0);
-	else if (box.b.x > 2400) box += Vector(2400 - box.b.x, 0);
+	else if (box.b.x > WORLD_WIDTH * BLOCK_SIZE) box += Vector(WORLD_WIDTH * BLOCK_SIZE - box.b.x, 0);
 }
 void Window::draw(Core::Graphics& g)
 {
