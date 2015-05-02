@@ -48,11 +48,13 @@ void Earth::draw(Core::Graphics &g)
 {
 	g.SetColor(RGB(110,83,9));
 	fillSquare(g, a, BLOCK_SIZE);
+	drawCracks(g, a, durability);
 }
 void Earth2::draw(Core::Graphics &g)
 {
 	g.SetColor(RGB(121, 122, 122));
 	fillSquare(g, a, BLOCK_SIZE);
+	drawCracks(g, a, durability);
 }
 void Grass::draw(Core::Graphics &g)
 {
@@ -60,6 +62,7 @@ void Grass::draw(Core::Graphics &g)
 	fillSquare(g, a, BLOCK_SIZE);
 	g.SetColor(RGB(20, 219, 2));
 	fillRectangle(g, a, BLOCK_SIZE, BLOCK_FIFTH);
+	drawCracks(g, a, durability);
 }
 void Iron::draw(Core::Graphics &g)
 {
@@ -68,7 +71,8 @@ void Iron::draw(Core::Graphics &g)
 			g.SetColor(RGB(199, 174, 141));
 			fillRectangle(g, Point(a.x + BLOCK_FIFTH, a.y + BLOCK_FIFTH), 2*BLOCK_FIFTH, BLOCK_FIFTH);
 			fillSquare(g, Point(a.x + 3*BLOCK_FIFTH, a.y + 2*BLOCK_FIFTH), BLOCK_FIFTH);
-			fillSquare(g, Point(a.x + 2*BLOCK_FIFTH, a.y + 3 * BLOCK_FIFTH), BLOCK_FIFTH);			
+			fillSquare(g, Point(a.x + 2*BLOCK_FIFTH, a.y + 3 * BLOCK_FIFTH), BLOCK_FIFTH);	
+			drawCracks(g, a, durability);
 }
 void Silver::draw(Core::Graphics &g)
 {
@@ -78,6 +82,7 @@ void Silver::draw(Core::Graphics &g)
 			fillRectangle(g, Point(a.x + BLOCK_FIFTH, a.y + BLOCK_FIFTH), 2*BLOCK_FIFTH, BLOCK_FIFTH);
 			fillSquare(g, Point(a.x + 2* BLOCK_FIFTH, a.y + 2 * BLOCK_FIFTH), BLOCK_FIFTH);
 			fillSquare(g, Point(a.x + 3* BLOCK_FIFTH, a.y + 3 * BLOCK_FIFTH), BLOCK_FIFTH);
+			drawCracks(g, a, durability);
 }
 void Copper::draw(Core::Graphics &g)
 {
@@ -87,6 +92,38 @@ void Copper::draw(Core::Graphics &g)
 			fillSquare(g, Point(a.x + BLOCK_FIFTH, a.y + BLOCK_FIFTH), BLOCK_FIFTH);
 			fillSquare(g, Point(a.x + 3 * BLOCK_FIFTH, a.y + 2 * BLOCK_FIFTH), BLOCK_FIFTH);
 			fillSquare(g, Point(a.x + BLOCK_FIFTH, a.y +  3* BLOCK_FIFTH), BLOCK_FIFTH);
+			drawCracks(g, a, durability);
+}
+
+void BreakableBlock::drawCracks(Core::Graphics& g, Point &p, int durability)
+{
+	if (durability < 100)
+		{
+			//A little damaged
+			g.SetColor(RGB(0,0,0));
+			g.DrawLine(p.x + 2*BLOCK_FIFTH, p.y + BLOCK_FIFTH, p.x + 2*BLOCK_FIFTH, p.y + 2*BLOCK_FIFTH);
+			g.DrawLine(p.x + 2*BLOCK_FIFTH, p.y + 2*BLOCK_FIFTH, p.x + 3*BLOCK_FIFTH, p.y + 2*BLOCK_FIFTH);
+			g.DrawLine(p.x + 3*BLOCK_FIFTH, p.y + 2*BLOCK_FIFTH, p.x + 3*BLOCK_FIFTH, p.y + 4*BLOCK_FIFTH);
+			if (durability < 50)
+			{
+				//more damaged
+				g.DrawLine(p.x + BLOCK_FIFTH, p.y + 2*BLOCK_FIFTH, p.x + 2 * BLOCK_FIFTH, p.y + 2*BLOCK_FIFTH);
+				g.DrawLine(p.x + 2*BLOCK_FIFTH, p.y + 2*BLOCK_FIFTH, p.x + 2*BLOCK_FIFTH, p.y + 3*BLOCK_FIFTH);
+				g.DrawLine(p.x + 3*BLOCK_FIFTH, p.y + 3*BLOCK_FIFTH, p.x + 4*BLOCK_FIFTH, p.y + 3*BLOCK_FIFTH);
+				if (durability < 25)
+				{
+					//very damaged
+					g.DrawLine(p.x, p.y + 2*BLOCK_FIFTH, p.x + 4*BLOCK_FIFTH, p.y + 2*BLOCK_FIFTH);
+					g.DrawLine(p.x + BLOCK_FIFTH, p.y + 3*BLOCK_FIFTH, p.x + 2*BLOCK_FIFTH, p.y + 3*BLOCK_FIFTH);
+					g.DrawLine(p.x + 2*BLOCK_FIFTH, p.y, p.x + 2*BLOCK_FIFTH, p.y + 4*BLOCK_FIFTH);
+					g.DrawLine(p.x + 3*BLOCK_FIFTH, p.y + BLOCK_FIFTH, p.x + 3*BLOCK_FIFTH, + p.y + 5*BLOCK_FIFTH);
+					g.DrawLine(p.x +3*BLOCK_FIFTH, p.y + 3* BLOCK_FIFTH, p.x + 5* BLOCK_FIFTH, p.y + 3*BLOCK_FIFTH);
+					g.DrawLine(p.x + 4*BLOCK_FIFTH, p.y + BLOCK_FIFTH, p.x + 4*BLOCK_FIFTH, p.y+ 2*BLOCK_FIFTH);
+
+
+				}
+			}
+		}
 }
 
 int BreakableBlock::takeDamage(int damage)

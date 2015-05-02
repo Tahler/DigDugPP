@@ -30,9 +30,11 @@ void Character::checkKeyInput()
 	else if (Core::Input::IsPressed(Core::Input::KEY_RIGHT)) velocity.x = MAX_SPEED;
 	else velocity.x = 0;
 
-	if (!isJumping) 
+	if (Core::Input::IsPressed(Core::Input::KEY_UP)) jump();
+
+	if (!isJumping && velocity.x == 0) 
 	{
-		if (Core::Input::IsPressed(Core::Input::KEY_UP)) jump();
+		
 		if (Core::Input::IsPressed(Core::Input::KEY_S)) mine(0);
 		if (Core::Input::IsPressed(Core::Input::KEY_D)) mine(3);
 		if (Core::Input::IsPressed(Core::Input::KEY_W)) mine(2);
@@ -45,7 +47,7 @@ void Character::jump()
 	{
 		isJumping = true;
 		// Perhaps there is some calculation to jump exactly one block
-		velocity.y = -MAX_SPEED / 1.5;
+		velocity.y = -(MAX_SPEED / (MAX_SPEED/3.3));
 	}
 }
 void Character::checkCollisions()

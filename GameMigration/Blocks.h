@@ -70,6 +70,7 @@ namespace Blocks
 			durability = 100;
 		}
 		int takeDamage(int damage);
+		void drawCracks(Core::Graphics& g, Point& p, int durability);
 	};
 
 	struct Earth:BreakableBlock
@@ -86,7 +87,9 @@ namespace Blocks
 		//No value, disappears
 		Earth2(Point& a) :
 			BreakableBlock(a)
-		{}
+		{
+			durability = 150;
+		}
 		void draw(Core::Graphics& g);
 	};
 
