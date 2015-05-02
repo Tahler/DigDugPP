@@ -3,7 +3,7 @@
 using namespace Blocks;
 
 // Measured in pixels
-const int BLOCK_SIZE = 50;
+const int BLOCK_SIZE = 20;
 
 // Block //
 void Block::setLocation(Point& pa)
@@ -30,7 +30,7 @@ void Ladder::draw(Core::Graphics& g)
 	//Rails
 	fillRectangle(g, Point(a.x + BLOCK_FIFTH, a.y), BLOCK_FIFTH, BLOCK_SIZE);
 	fillRectangle(g, Point(a.x + 3*BLOCK_FIFTH, a.y), BLOCK_FIFTH, BLOCK_SIZE);
-	//Wrungs
+	//Rungs
 	fillRectangle(g, Point(a.x + 2*BLOCK_FIFTH, a.y + BLOCK_SIXTH), BLOCK_FIFTH, BLOCK_SIXTH);
 	fillRectangle(g, Point(a.x + 2*BLOCK_FIFTH, a.y + 3*BLOCK_SIXTH), BLOCK_FIFTH, BLOCK_SIXTH);
 	fillRectangle(g, Point(a.x + 2*BLOCK_FIFTH, a.y + 5*BLOCK_SIXTH), BLOCK_FIFTH, BLOCK_SIXTH);
@@ -87,4 +87,10 @@ void Copper::draw(Core::Graphics &g)
 			fillSquare(g, Point(a.x + BLOCK_FIFTH, a.y + BLOCK_FIFTH), BLOCK_FIFTH);
 			fillSquare(g, Point(a.x + 3 * BLOCK_FIFTH, a.y + 2 * BLOCK_FIFTH), BLOCK_FIFTH);
 			fillSquare(g, Point(a.x + BLOCK_FIFTH, a.y +  3* BLOCK_FIFTH), BLOCK_FIFTH);
+}
+
+int BreakableBlock::takeDamage(int damage)
+{
+	durability -= damage;
+	return durability;
 }

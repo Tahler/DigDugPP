@@ -113,6 +113,7 @@ void World::draw(Core::Graphics& g)
 }
 Block& World::getBlockAt(Point& p)
 {
+
 	int x = p.x / BLOCK_SIZE;
 	int y = p.y / BLOCK_SIZE;
 	
@@ -123,4 +124,12 @@ Block& World::getBlockAt(Point& p)
 	if (y >= blocks[0].size()) y = blocks[0].size() - 1;
 	
 	return *blocks[x][y];
+}
+
+void World::destroyBlockAt(Point& a)
+{
+	int x = a.x / BLOCK_SIZE; 
+	int y = a.y / BLOCK_SIZE;
+	delete blocks[x][y];
+	blocks[x][y] = new Cave(Point(x, y));
 }

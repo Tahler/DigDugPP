@@ -10,6 +10,7 @@ using Physics::Point;
 extern const int BLOCK_SIZE;
 const int BLOCK_FIFTH = BLOCK_SIZE/5;
 const int BLOCK_SIXTH = (BLOCK_SIZE/6);
+const int BLOCK_HALF = (BLOCK_SIZE/2);
 
 namespace Blocks
 {
@@ -68,6 +69,7 @@ namespace Blocks
 		{
 			durability = 100;
 		}
+		int takeDamage(int damage);
 	};
 
 	struct Earth:BreakableBlock
