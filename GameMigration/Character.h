@@ -39,6 +39,7 @@ public:
 	void checkKeyInput();
 	void jump();
 	void checkCollisions();
+	void shift(Vector&);
 	void move();
 	void mine(int dir);
 
