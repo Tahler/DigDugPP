@@ -9,10 +9,6 @@ using namespace std;
 
 World world;
 Character player(&world, 1, 1);
-int frameRate;
-std::string frames;
-float currentTime;
-float lastTime;
 
 ////////////////////////////////////////////////////////////
 
