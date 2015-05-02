@@ -37,15 +37,15 @@ void World::init()
 		{
 			if (j == 4 && i >= 6 && i <= 18) blocks[i][j] = new Cave(Point(i, j));
 			else if (j==4 || j == 3) blocks[i][j] = new Grass(Point(i, j));
-			else blocks[i][j] = new Earth(Point(i, j));
+			else blocks[i][j] = new Dirt(Point(i, j));
 		}
 		for (unsigned int j = 6; j < 9; j++)
 		{
-			(rand() % 2 == 0) ? blocks[i][j] = new Earth(Point(i, j)) : blocks[i][j] = new Earth2(Point(i, j));
+			(rand() % 2 == 0) ? blocks[i][j] = new Dirt(Point(i, j)) : blocks[i][j] = new Stone(Point(i, j));
 		}
 		for (unsigned int j = 9; j < blocks[i].size(); j++)
 		{
-			blocks[i][j] = new Earth2(Point(i, j));
+			blocks[i][j] = new Stone(Point(i, j));
 		}
 	}
 	for (unsigned int i = 4; i < 16; i++)
@@ -57,8 +57,6 @@ void World::init()
 	blocks[10][4] = new Grass(Point(10, 4));
 	delete blocks[11][5];
 	blocks[11][5] = new Cave(Point(11, 5));
-	delete blocks[3][4];
-	blocks[3][4] = new Stone(Point(3, 4));
 	delete blocks[3][5];
 	blocks[3][5] = new Copper(Point(3, 5));
 	delete blocks[3][6];
@@ -67,6 +65,10 @@ void World::init()
 	blocks[3][7] = new Silver(Point(3, 7));
 	delete blocks[3][8];
 	blocks[3][8] = new Sapphire(Point(3, 8));
+	delete blocks[3][9];
+	blocks[3][9] = new Ruby(Point(3, 9));
+	delete blocks[3][10];
+	blocks[3][10] = new Emerald(Point(3, 10));
 	delete blocks[2][5];
 	blocks[2][5] = new Ladder(Point(2, 5));
 	delete blocks[2][6];
