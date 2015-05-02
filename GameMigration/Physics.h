@@ -23,6 +23,7 @@ namespace Physics
 			x(x), y(y)
 		{}
 		
+		Vector& operator-();
 		void operator=(const Vector&);
 		void operator+=(const Vector&);
 		void operator-=(const Vector&);
