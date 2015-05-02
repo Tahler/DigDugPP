@@ -48,7 +48,6 @@ void World::init()
 			blocks[i][j] = new Earth2(Point(i, j));
 		}
 	}
-	Point p;
 	for (unsigned int i = 4; i < 16; i++)
 	{
 		delete blocks[5][i];

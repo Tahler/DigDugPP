@@ -23,14 +23,6 @@ bool Window::deadzoneIsCentered()
 }
 void Window::shift(Vector& shift)
 {
-	color = RGB(0x63, 0x19, 0x9c);
-	color = RGB(255, 0, 0); // trace with red
-
-	
-	
-		//if (deadzoneIsCentered())
-		//box += shift;
-	
 	box += shift;
 	deadzone += shift;
 	// update() ensures the boxes are in the right place
@@ -46,12 +38,10 @@ void Window::update()
 	// Don't let the window box go outside the world
 	if (box.a.x < 0) box += Vector(-box.a.x, 0);
 	else if (box.b.x > WORLD_WIDTH * BLOCK_SIZE) box += Vector(WORLD_WIDTH * BLOCK_SIZE - box.b.x, 0);
-	//if (box.a.y < 0) box += Vector(-box.a.y, 0);
-	//else if (box.b.y > WORLD_HEIGHT * BLOCK_SIZE) box += Vector(WORLD_HEIGHT * BLOCK_SIZE - box.b.y, 0);
-}
+ }
 void Window::draw(Core::Graphics& g)
 {
-	g.SetColor(color);
+	g.SetColor(RGB(255, 0, 0)); // trace
 	box.draw(g);
 	deadzone.draw(g);
 }
