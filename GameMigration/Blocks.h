@@ -6,6 +6,7 @@
 
 using Physics::Rectangle;
 using Physics::Point;
+using Physics::Vector;
 
 extern const int BLOCK_SIZE;
 const int BLOCK_FIFTH = BLOCK_SIZE/5;
@@ -32,7 +33,7 @@ namespace Blocks
 		Sky(Point& a) : 
 			Block(a, true)
 		{}
-		void draw(Core::Graphics& g);
+		void drawAt(Core::Graphics& g, Vector& p);
 	};
 
 	struct Cave:Block
@@ -40,7 +41,7 @@ namespace Blocks
 		Cave(Point& a) :
 			Block(a, true)
 		{}
-		void draw(Core::Graphics& g);
+		void drawAt(Core::Graphics& g, Vector& p);
 	};
 	
 	struct Ladder:Block
@@ -48,7 +49,7 @@ namespace Blocks
 		Ladder(Point& a) : 
 			Block(a, true)
 		{}
-		void draw(Core::Graphics& g);
+		void drawAt(Core::Graphics&, Vector&);
 	};
 
 	struct Stone:Block
@@ -57,7 +58,7 @@ namespace Blocks
 		Stone(Point& a) :
 			Block(a, false)
 		{}
-		void draw(Core::Graphics& g);
+		void drawAt(Core::Graphics&, Vector&);
 	};
 
 	struct BreakableBlock:Block
@@ -78,7 +79,7 @@ namespace Blocks
 		Earth(Point& a) :
 			BreakableBlock(a)
 		{}
-		void draw(Core::Graphics& g);
+		void drawAt(Core::Graphics& g, Vector&);
 	};
 
 	struct Earth2:BreakableBlock
@@ -87,7 +88,7 @@ namespace Blocks
 		Earth2(Point& a) :
 			BreakableBlock(a)
 		{}
-		void draw(Core::Graphics& g);
+		void drawAt(Core::Graphics& g, Vector&);
 	};
 
 	struct Grass:BreakableBlock
@@ -96,7 +97,7 @@ namespace Blocks
 		Grass(Point& a) :
 			BreakableBlock(a)
 		{}
-		void draw(Core::Graphics& g);
+		void drawAt(Core::Graphics& g, Vector&);
 	};
 
 	struct OreBlock:BreakableBlock
@@ -117,7 +118,7 @@ namespace Blocks
 			value = 1;
 		};
 		
-		void draw(Core::Graphics& g);
+		void drawAt(Core::Graphics& g, Vector&);
 	};
 
 	struct Iron:OreBlock
@@ -129,7 +130,7 @@ namespace Blocks
 			value = 2;
 		};
 		
-		void draw(Core::Graphics& g);
+		void drawAt(Core::Graphics& g, Vector&);
 	};
 
 	struct Silver:OreBlock
@@ -141,7 +142,7 @@ namespace Blocks
 			value = 3;
 		};
 		
-		void draw(Core::Graphics& g);
+		void drawAt(Core::Graphics& g, Vector&);
 	};
 
 }
