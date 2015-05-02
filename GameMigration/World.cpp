@@ -72,6 +72,15 @@ void World::init()
 }
 void World::update()
 {
+	// try moving each block
+	//for (unsigned int i = 0; i < blocks.size(); i++)
+	//{
+	//	for (unsigned int j = 0; j < blocks[0].size(); j++)
+	//	{
+	//		blocks[i][j]->move(window.box.a);
+	//	}
+	//}
+	// then try just drawing in a different place
 	//window.update();
 }
 void World::draw(Core::Graphics& g)
@@ -105,11 +114,12 @@ void World::draw(Core::Graphics& g)
 	{
 		for (unsigned int j = begin.y; j <= end.y; j++)
 		{
-			blocks[i][j]->draw(g);
+			//blocks[i][j]->draw(g);
+			blocks[i][j]->drawAt(g, window.box.a);
 		}
 	}
 
-	window.draw(g);
+	//window.draw(g);
 }
 Block& World::getBlockAt(Point& p)
 {

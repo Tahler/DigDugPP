@@ -3,7 +3,7 @@
 using namespace Blocks;
 
 // Measured in pixels
-const int BLOCK_SIZE = 20;
+const int BLOCK_SIZE = 50;
 
 // Block //
 void Block::setLocation(Point& pa)

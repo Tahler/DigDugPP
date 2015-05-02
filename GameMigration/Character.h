@@ -43,7 +43,8 @@ public:
 	void mine(int dir);
 
 	void update();
-	void draw(Core::Graphics);
+	void draw(Core::Graphics&);
+	void drawAt(Core::Graphics&, Vector&);
 };
 
 #endif
