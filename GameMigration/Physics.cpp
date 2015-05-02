@@ -5,14 +5,22 @@ using namespace Physics;
 float Gravity::acceleration = 0.1f;
 
 // Vector //
-Vector operator+(const Vector& left, const Vector& right)
+Vector Physics::operator+(const Vector& left, const Vector& right)
 {
 	return Vector(left.x + right.x, left.y + right.y);
 }
-//Point operator+(Point& left, Vector& right)
-//{
-//	return Point(left.x + right.x, left.y + right.y);
-//}
+Vector Physics::operator-(const Vector& left, const Vector& right)
+{
+	return Vector(left.x - right.x, left.y - right.y);
+}
+bool Physics::operator==(const Vector& left, const Vector& right)
+{
+	return ((left.x == right.x) && (left.y == right.y));
+}
+Vector& Vector::operator-()
+{
+	return Vector(-x, -y);
+}
 void Vector::operator=(const Vector& v)
 {
 	x = v.x;
@@ -22,6 +30,11 @@ void Vector::operator+=(const Vector& right)
 {
 	x += right.x;
 	y += right.y;	
+}
+void Vector::operator-=(const Vector& right)
+{
+	x -= right.x;
+	y -= right.y;	
 }
 void drawLine(Core::Graphics& g, const Vector& left, const Vector& right)
 {

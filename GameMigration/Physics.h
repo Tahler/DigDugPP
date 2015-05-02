@@ -23,8 +23,10 @@ namespace Physics
 			x(x), y(y)
 		{}
 		
+		Vector& operator-();
 		void operator=(const Vector&);
 		void operator+=(const Vector&);
+		void operator-=(const Vector&);
 	};
 	
 	// They hold the same data, but have different meaning:
@@ -32,7 +34,9 @@ namespace Physics
 	// Vector = displacement
 	typedef Vector Point; 
 	
+	bool operator==(const Vector&, const Vector&);
 	Vector operator+(const Vector&, const Vector&);
+	Vector operator-(const Vector&, const Vector&);
 
 	struct Line
 	{

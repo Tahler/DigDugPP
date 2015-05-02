@@ -10,6 +10,7 @@ using Physics::Point;
 using Physics::Vector;
 using Physics::Rectangle;
 using Physics::operator+;
+using Physics::operator-;
 
 // Character //
 const float MAX_SPEED = BLOCK_SIZE / 10;
@@ -91,10 +92,23 @@ void Character::checkCollisions()
 void Character::move()
 {
 	// Don't go outside the window, otherwise allow movement
-	if (location.x >= 0 && location.x + BLOCK_SIZE <= WINDOW_WIDTH - MAX_SPEED -4) location.x += velocity.x;
-	else if (location.x >= 0)location.x -= 1;
-	else location.x +=1;
-	if (location.y >= 0 && location.y + BLOCK_SIZE <= WINDOW_HEIGHT) location.y += velocity.y;
+	//if (location.x >= 0 && location.x + BLOCK_SIZE <= WINDOW_WIDTH - MAX_SPEED -4) location.x += velocity.x;
+	//else if (location.x >= 0)location.x -= 1;
+	//else location.x +=1;
+	//if (location.y >= 0 && location.y + BLOCK_SIZE <= WINDOW_HEIGHT) location.y += velocity.y;
+
+	// Move the window if needed
+	Window* window = &(world->window); // The larger, viewable screen
+	Physics::Rectangle* deadzone = &(world->window.deadzone); // The invisible small box that the character cannot move out of
+	Physics::Rectangle* character = &(getBoundingBox()); // The character's bounding box
+	
+	// if the character is outside the deadzone, shift the window (which also shifts the deadzone)
+	if (character->a.x < deadzone->a.x) window->shift(Vector(character->a.x - deadzone->a.x, 0));
+	else if (character->b.x > deadzone->b.x) window->shift(Vector(character->b.x - deadzone->b.x, 0));
+	if (character->a.y < deadzone->a.y) window->shift(Vector(0, character->a.y - deadzone->a.y));
+	else if (character->b.y > deadzone->b.y) window->shift(Vector(0, character->b.y - deadzone->b.y));
+
+	location += velocity;
 }
 void Character::update()
 {

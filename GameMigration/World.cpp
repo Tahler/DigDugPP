@@ -48,6 +48,11 @@ void World::init()
 			blocks[i][j] = new Earth2(Point(i, j));
 		}
 	}
+	for (unsigned int i = 4; i < 16; i++)
+	{
+		delete blocks[5][i];
+		blocks[5][i] = new Cave(Point(5, i));
+	}
 	delete blocks[10][4];
 	blocks[10][4] = new Grass(Point(10, 4));
 	delete blocks[11][5];
@@ -67,7 +72,7 @@ void World::init()
 }
 void World::update()
 {
-	
+	//window.update();
 }
 void World::draw(Core::Graphics& g)
 {
@@ -103,6 +108,8 @@ void World::draw(Core::Graphics& g)
 			blocks[i][j]->draw(g);
 		}
 	}
+
+	window.draw(g);
 }
 Block& World::getBlockAt(Point& p)
 {
@@ -110,9 +117,10 @@ Block& World::getBlockAt(Point& p)
 	int y = p.y / BLOCK_SIZE;
 	
 	// Prevent index out of bounds
+	if (x < 0) x = 0;
+	if (y < 0) y = 0;
 	if (x >= blocks.size()) x = blocks.size() - 1;
 	if (y >= blocks[0].size()) y = blocks[0].size() - 1;
 	
 	return *blocks[x][y];
-	//return *blocks[p.x / BLOCK_SIZE][p.y / BLOCK_SIZE];
 }
