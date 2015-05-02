@@ -48,6 +48,12 @@ void World::init()
 			blocks[i][j] = new Earth2(Point(i, j));
 		}
 	}
+	Point p;
+	for (unsigned int i = 4; i < 16; i++)
+	{
+		delete blocks[5][i];
+		blocks[5][i] = new Cave(Point(5, i));
+	}
 	delete blocks[10][4];
 	blocks[10][4] = new Grass(Point(10, 4));
 	delete blocks[11][5];

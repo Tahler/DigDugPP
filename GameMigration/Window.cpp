@@ -26,24 +26,28 @@ void Window::shift(Vector& shift)
 	color = RGB(0x63, 0x19, 0x9c);
 	color = RGB(255, 0, 0); // trace with red
 
-	// Don't let the window box go outside the world
-	// The window box should only shift if the deadzone is not in the center
+	
 	
 		//if (deadzoneIsCentered())
 		//box += shift;
 	
 	box += shift;
 	deadzone += shift;
+	// update() ensures the boxes are in the right place
 	update();
 }
 
 void Window::update()
 {
+	// The window box should only shift if the deadzone is not in the center
 	if (deadzone.a.x - box.a.x < WINDOW_WIDTH / 3) box += Vector(-(WINDOW_WIDTH / 3 - (deadzone.a.x - box.a.x)), 0);
 	else if (box.b.x - deadzone.b.x < WINDOW_WIDTH / 3) box += Vector((WINDOW_WIDTH / 3 - (box.a.x - deadzone.a.x)), 0);
 
+	// Don't let the window box go outside the world
 	if (box.a.x < 0) box += Vector(-box.a.x, 0);
 	else if (box.b.x > WORLD_WIDTH * BLOCK_SIZE) box += Vector(WORLD_WIDTH * BLOCK_SIZE - box.b.x, 0);
+	//if (box.a.y < 0) box += Vector(-box.a.y, 0);
+	//else if (box.b.y > WORLD_HEIGHT * BLOCK_SIZE) box += Vector(WORLD_HEIGHT * BLOCK_SIZE - box.b.y, 0);
 }
 void Window::draw(Core::Graphics& g)
 {
