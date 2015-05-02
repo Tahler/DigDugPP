@@ -3,7 +3,7 @@
 using namespace Blocks;
 
 // Measured in pixels
-const int BLOCK_SIZE = 20;
+const int BLOCK_SIZE = 50;
 
 // Block //
 void Block::setLocation(Point& pa)
@@ -93,6 +93,16 @@ void Copper::draw(Core::Graphics &g)
 			fillSquare(g, Point(a.x + 3 * BLOCK_FIFTH, a.y + 2 * BLOCK_FIFTH), BLOCK_FIFTH);
 			fillSquare(g, Point(a.x + BLOCK_FIFTH, a.y +  3* BLOCK_FIFTH), BLOCK_FIFTH);
 			drawCracks(g, a, durability);
+}
+void Sapphire::draw(Core::Graphics& g)
+{
+	g.SetColor(RGB(121,122,122));
+	fillSquare(g, a, BLOCK_SIZE);
+	g.SetColor(RGB(34, 27, 227));
+	fillCircle(g, Point(a.x + BLOCK_FIFTH, a.y + BLOCK_FIFTH * 3), BLOCK_FIFTH); 
+	fillCircle(g, Point(a.x + BLOCK_FIFTH, a.y + BLOCK_FIFTH), BLOCK_FIFTH);
+	fillCircle(g, Point(a.x + BLOCK_FIFTH*2, a.y + BLOCK_FIFTH*2), BLOCK_FIFTH*2);
+	drawCracks(g, a, durability);
 }
 
 void BreakableBlock::drawCracks(Core::Graphics& g, Point &p, int durability)

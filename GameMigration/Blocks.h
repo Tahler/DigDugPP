@@ -137,13 +137,21 @@ namespace Blocks
 
 	struct Silver:OreBlock
 	{
-		
 		Silver(Point& a) :
 			OreBlock(a)
 		{
 			value = 3;
 		};
-		
+		void draw(Core::Graphics& g);
+	};
+
+	struct Sapphire:OreBlock
+	{
+		Sapphire(Point& a) :
+			OreBlock(a)
+		{
+			value = 4;
+		}
 		void draw(Core::Graphics& g);
 	};
 
