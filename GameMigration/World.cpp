@@ -69,6 +69,10 @@ void World::init()
 	blocks[3][9] = new Ruby(Point(3, 9));
 	delete blocks[3][10];
 	blocks[3][10] = new Emerald(Point(3, 10));
+	delete blocks[3][11];
+	blocks[3][11] = new Gold(Point(3, 11));
+	delete blocks[3][12];
+	blocks[3][12] = new Diamond(Point(3, 12));
 	delete blocks[2][5];
 	blocks[2][5] = new Ladder(Point(2, 5));
 	delete blocks[2][6];

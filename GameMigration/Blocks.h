@@ -165,5 +165,24 @@ namespace Blocks
 		void drawAt(Core::Graphics&g, Vector&);
 	};
 
+	struct Gold:OreBlock
+	{
+		Gold(Point& a) :
+			OreBlock(a)
+		{
+			value = 7;
+		}
+		void drawAt(Core::Graphics&g, Vector&);
+	};
+
+	struct Diamond:OreBlock
+	{
+		Diamond(Point& a) :
+			OreBlock(a)
+		{
+			value = 8;
+		}
+		void drawAt(Core::Graphics&g, Vector&);
+	};
 }
 #endif
