@@ -12,8 +12,8 @@ using Physics::Vector;
 // Measured in pixels
 //const int WINDOW_WIDTH = 24 * BLOCK_SIZE;
 //const int WINDOW_HEIGHT = 16 * BLOCK_SIZE;
-const int WINDOW_WIDTH = 1920;
-const int WINDOW_HEIGHT = 1080;
+const int WINDOW_WIDTH = 1200;
+const int WINDOW_HEIGHT = 800;
 //const int DEADZONE_DIVISOR = 3;
 
 bool Window::deadzoneIsCentered()

@@ -23,6 +23,7 @@ int pickStrength = 3;
 Physics::Rectangle Character::getBoundingBox()
 {
 	return Physics::Rectangle(Point(location.x + BLOCK_FIFTH, location.y + 2), Point(location.x + BLOCK_SIZE - BLOCK_FIFTH, location.y + BLOCK_SIZE - 2));
+	//return Physics::Rectangle(Point(location.x + 2, location.y + 2), Point(location.x + BLOCK_SIZE - 2, location.y + BLOCK_SIZE - 2));
 }
 void Character::checkKeyInput()
 {
@@ -54,6 +55,10 @@ void Character::checkCollisions()
 	Block* neighbor1;
 	Block* neighbor2;
 	Physics::Rectangle* box = &getBoundingBox();
+	/*box->a.x = (int) box->a.x;
+	box->a.y = (int) box->a.y;
+	box->b.x = (int) box->b.x;
+	box->b.y = (int) box->b.y;*/
 
 	if (velocity.y > 0) // moving down
 	{
@@ -65,7 +70,7 @@ void Character::checkCollisions()
 		{
 			isJumping = false;
 			velocity.y = 0;
-			shift(Vector(0, neighbor1->a.y - box->b.y - 3)); // -3 = -1 for buffer and -2 for hitbox buffer
+			shift(Vector(0, neighbor1->a.y - box->b.y - 1)); // -3 = -1 for buffer and -2 for hitbox buffer
 			//location.y = neighbor1->a.y - BLOCK_SIZE - 1;
 		}
 	}
@@ -103,8 +108,6 @@ void Character::checkCollisions()
 			//location.x = neighbor1->a.x - BLOCK_SIZE - 1;
 		}
 	}
-
-
 }
 void Character::shift(Vector& displacement)
 {
@@ -194,7 +197,6 @@ void Character::drawAt(Core::Graphics& g, Vector& displacement)
 	fillSquare(g, Point(p.x + BLOCK_FIFTH * 2, p.y + BLOCK_FIFTH), BLOCK_FIFTH);
 	fillSquare(g, Point(p.x + BLOCK_FIFTH * 2, p.y + BLOCK_FIFTH*2), BLOCK_FIFTH);
 
-
 	g.SetColor(RGB(247, 214, 143));
 	fillSquare(g, Point(p.x + 2 * BLOCK_FIFTH, p.y), BLOCK_FIFTH);
 
@@ -226,5 +228,5 @@ void Character::drawAt(Core::Graphics& g, Vector& displacement)
 	fillRectangle(g, Point(p.x + BLOCK_FIFTH * 2, p.y + BLOCK_FIFTH * 3), BLOCK_FIFTH, BLOCK_FIFTH * 2);
 	g.SetColor(RGB(10, 10, 255));
 
-	//getBoundingBox().draw(g);
+	getBoundingBox().draw(g);
 }
