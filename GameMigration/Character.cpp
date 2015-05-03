@@ -28,7 +28,8 @@ void Character::checkKeyInput()
 {
 	if (Core::Input::IsPressed(Core::Input::KEY_SHIFT)) 
 	{
-		if (!isJumping && velocity.x == 0) 
+		velocity.x = 0;
+		if (!isJumping) 
 		{
 			if (Core::Input::IsPressed(Core::Input::KEY_S)) mine(0);
 			else if (Core::Input::IsPressed(Core::Input::KEY_D)) mine(3);
