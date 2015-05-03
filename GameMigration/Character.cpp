@@ -26,29 +26,25 @@ Physics::Rectangle Character::getBoundingBox()
 }
 void Character::checkKeyInput()
 {
-	if (Core::Input::IsPressed(Core::Input::KEY_A)) 
+	if (Core::Input::IsPressed(Core::Input::KEY_SHIFT)) 
 	{
-		velocity.x = -MAX_SPEED;
-		mine(1);
-	}
-	else if (Core::Input::IsPressed(Core::Input::KEY_D)) 
-	{
-		velocity.x = MAX_SPEED;
-		mine(3);
+		velocity.x = 0;
+		if (!isJumping) 
+		{
+			if (Core::Input::IsPressed(Core::Input::KEY_S)) mine(0);
+			else if (Core::Input::IsPressed(Core::Input::KEY_D)) mine(3);
+			else if (Core::Input::IsPressed(Core::Input::KEY_W)) mine(2);
+			else if (Core::Input::IsPressed(Core::Input::KEY_A)) mine(1);
+		}
 	}
 	else
 	{
-		velocity.x = 0;
-		if (Core::Input::IsPressed(Core::Input::KEY_W)) 
-		{
-			jump();
-			mine(2);
-		}
-		else if (Core::Input::IsPressed(Core::Input::KEY_S)) 
-		{
-			mine(0);
-		}
-	}
+		if (Core::Input::IsPressed(Core::Input::KEY_A)) velocity.x = -MAX_SPEED;
+		else if (Core::Input::IsPressed(Core::Input::KEY_D)) velocity.x = MAX_SPEED;
+		else velocity.x = 0;
+
+		if (Core::Input::IsPressed(Core::Input::KEY_W)) jump();
+	}	
 }
 void Character::jump()
 {
