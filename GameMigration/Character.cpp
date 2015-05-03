@@ -184,11 +184,10 @@ void Character::move()
 void Character::update()
 {
 	checkKeyInput();
-	checkCollisions();
-	move();
-	
 	// Adjust for gravity
 	velocity.y += Gravity::acceleration;
+	move();
+	checkCollisions();
 }
 void Character::draw(Core::Graphics& g)
 {
