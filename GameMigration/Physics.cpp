@@ -2,7 +2,7 @@
 #include "Physics.h"
 using namespace Physics;
 
-float Gravity::acceleration = 1.0f;
+float Gravity::acceleration = 0.6f;
 
 // Vector //
 Vector Physics::operator+(const Vector& left, const Vector& right)
