@@ -17,6 +17,7 @@ public:
 	static const int KEY_ESCAPE	= VK_ESCAPE;
 	static const int BUTTON_LEFT	= VK_LBUTTON;
 	static const int BUTTON_RIGHT	= VK_RBUTTON;
+	static const int KEY_SHIFT = VK_LSHIFT;
 	static const int KEY_S   = 0x53;
 	static const int KEY_A   = 0x41;
 	static const int KEY_W   = 0x57;

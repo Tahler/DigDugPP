@@ -52,15 +52,6 @@ namespace Blocks
 		void drawAt(Core::Graphics&, Vector&);
 	};
 
-	struct Stone:Block
-	{
-		//Has gravity
-		Stone(Point& a) :
-			Block(a, false)
-		{}
-		void drawAt(Core::Graphics&, Vector&);
-	};
-
 	struct BreakableBlock:Block
 	{
 		//Can break
@@ -74,19 +65,19 @@ namespace Blocks
 		void drawCracks(Core::Graphics& g, Point& p, int durability);
 	};
 
-	struct Earth:BreakableBlock
+	struct Dirt:BreakableBlock
 	{
 		//No value, disappears
-		Earth(Point& a) :
+		Dirt(Point& a) :
 			BreakableBlock(a)
 		{}
 		void drawAt(Core::Graphics& g, Vector&);
 	};
 
-	struct Earth2:BreakableBlock
+	struct Stone:BreakableBlock
 	{
 		//No value, disappears
-		Earth2(Point& a) :
+		Stone(Point& a) :
 			BreakableBlock(a)
 		{}
 		void drawAt(Core::Graphics& g, Vector&);
@@ -151,8 +142,47 @@ namespace Blocks
 		{
 			value = 4;
 		}
-		void draw(Core::Graphics& g);
+		void drawAt(Core::Graphics& g, Vector&);
+	};
+	
+	struct Ruby:OreBlock
+	{
+		Ruby(Point & a) :
+			OreBlock(a)
+		{
+			value = 5;
+		}
+		void drawAt(Core::Graphics&g, Vector&);
 	};
 
+	struct Emerald:OreBlock
+	{
+		Emerald(Point& a) :
+			OreBlock(a)
+		{
+			value = 6;
+		}
+		void drawAt(Core::Graphics&g, Vector&);
+	};
+
+	struct Gold:OreBlock
+	{
+		Gold(Point& a) :
+			OreBlock(a)
+		{
+			value = 7;
+		}
+		void drawAt(Core::Graphics&g, Vector&);
+	};
+
+	struct Diamond:OreBlock
+	{
+		Diamond(Point& a) :
+			OreBlock(a)
+		{
+			value = 8;
+		}
+		void drawAt(Core::Graphics&g, Vector&);
+	};
 }
 #endif

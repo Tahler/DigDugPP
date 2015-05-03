@@ -43,10 +43,17 @@ void fillTriangle(Graphics& g, Point p, int width)
 
 void fillHexagon(Graphics& g, Point p, int width)
 {
-	int unit = width/3;
-	for(int ii = 0; ii < width; ii++)
+	float unit = width/3;
+	float half = width/2;
+	float delta = unit/half;
+	for(float ii = 0; ii < half; ii++)
 	{
-		//g.DrawLine(p.x + width - ii
+		g.DrawLine(p.x + unit - (delta*ii), p.y + ii, p.x + unit*2 + (delta*ii), p.y + ii);
+	}
+
+	for (int ii = half; ii < width; ii++)
+	{
+		g.DrawLine(p.x + (delta*(ii-half)), p.y + ii, p.x + unit*3 - (delta*(ii-half)), p.y +ii);
 	}
 
 }

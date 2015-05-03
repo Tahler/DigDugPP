@@ -38,24 +38,15 @@ void Ladder::drawAt(Core::Graphics& g, Vector& offset)
 	fillRectangle(g, Point(p.x + 2*BLOCK_FIFTH, p.y + 3*BLOCK_SIXTH), BLOCK_FIFTH, BLOCK_SIXTH);
 	fillRectangle(g, Point(p.x + 2*BLOCK_FIFTH, p.y + 5*BLOCK_SIXTH), BLOCK_FIFTH, BLOCK_SIXTH);
 }
-void Stone::drawAt(Core::Graphics &g, Vector& offset)
-{
-	Point p = a - offset;
-	g.SetColor(RGB(121,122,122));
-	fillSquare(g, p, BLOCK_SIZE);
-	g.SetColor(RGB(102,102,102));
-	fillSquare(g, Point(p.x + BLOCK_FIFTH, p.y + 2 * BLOCK_FIFTH), BLOCK_FIFTH * 2);
-	g.SetColor(RGB(110, 110, 100));
-	fillSquare(g, Point(p.x + 2* BLOCK_FIFTH, p.y + BLOCK_FIFTH), BLOCK_FIFTH * 2);
-}
-void Earth::drawAt(Core::Graphics &g, Vector& offset)
+
+void Dirt::drawAt(Core::Graphics &g, Vector& offset)
 {
 	Point p = a - offset;
 	g.SetColor(RGB(110,83,9));
 	fillSquare(g, p, BLOCK_SIZE);
 	drawCracks(g, p, durability);
 }
-void Earth2::drawAt(Core::Graphics &g, Vector& offset)
+void Stone::drawAt(Core::Graphics &g, Vector& offset)
 {
 	Point p = a - offset;
 	g.SetColor(RGB(121, 122, 122));
@@ -87,11 +78,11 @@ void Silver::drawAt(Core::Graphics &g, Vector& offset)
 	Point p = a - offset;
 	g.SetColor(RGB(121,122,122));
 	fillSquare(g, p, BLOCK_SIZE);
-	g.SetColor(RGB(207, 207, 207));
+	g.SetColor(RGB(192, 192, 192));
 	fillRectangle(g, Point(p.x + BLOCK_FIFTH, p.y + BLOCK_FIFTH), 2*BLOCK_FIFTH, BLOCK_FIFTH);
 	fillSquare(g, Point(p.x + 2* BLOCK_FIFTH, p.y + 2 * BLOCK_FIFTH), BLOCK_FIFTH);
-	fillSquare(g, Point(p.x + 3* BLOCK_FIFTH, p.y + 3 * BLOCK_FIFTH), BLOCK_FIFTH);
-	drawCracks(g, a, durability);
+	fillSquare(g, Point(p.x + 3* BLOCK_FIFTH, p.y + 3 * BLOCK_FIFTH), BLOCK_SIXTH);
+	drawCracks(g, p, durability);
 }
 void Copper::drawAt(Core::Graphics &g, Vector& offset)
 {
@@ -100,20 +91,69 @@ void Copper::drawAt(Core::Graphics &g, Vector& offset)
 	fillSquare(g, p, BLOCK_SIZE);
 	g.SetColor(RGB(245, 151, 29));
 	fillSquare(g, Point(p.x + BLOCK_FIFTH, p.y + BLOCK_FIFTH), BLOCK_FIFTH);
-	fillSquare(g, Point(p.x + 3 * BLOCK_FIFTH, p.y + 2 * BLOCK_FIFTH), BLOCK_FIFTH);
+	fillSquare(g, Point(p.x + 3 * BLOCK_FIFTH, p.y + 2 * BLOCK_FIFTH), BLOCK_SIXTH);
 	fillSquare(g, Point(p.x + BLOCK_FIFTH, p.y +  3* BLOCK_FIFTH), BLOCK_FIFTH);
-	drawCracks(g, a, durability);
+	drawCracks(g, p, durability);
 
 }
-void Sapphire::draw(Core::Graphics& g)
+void Sapphire::drawAt(Core::Graphics& g, Vector& offset)
+{
+	Point p = a - offset;
+	g.SetColor(RGB(121,122,122));
+	fillSquare(g, p, BLOCK_SIZE);
+	g.SetColor(RGB(51, 51, 153));
+	fillHexagon(g, Point(p.x + BLOCK_FIFTH, p.y + BLOCK_FIFTH), BLOCK_FIFTH); 
+	fillHexagon(g, Point(p.x + BLOCK_FIFTH*3, p.y + BLOCK_FIFTH), BLOCK_FIFTH);
+	fillHexagon(g, Point(p.x + BLOCK_FIFTH*2, p.y + BLOCK_FIFTH*3), BLOCK_SIXTH);
+	drawCracks(g, p, durability);
+}
+
+void Ruby::drawAt(Core::Graphics& g, Vector& offset)
+{
+	Point p = a - offset;
+	g.SetColor(RGB(121,122,122));
+	fillSquare(g, p, BLOCK_SIZE);
+	g.SetColor(RGB(155, 17, 30));
+	fillHexagon(g, Point(p.x + BLOCK_FIFTH*3, p.y + BLOCK_FIFTH), BLOCK_SIXTH); 
+	fillHexagon(g, Point(p.x + BLOCK_FIFTH, p.y + BLOCK_FIFTH*2), BLOCK_FIFTH);
+	fillHexagon(g, Point(p.x + BLOCK_FIFTH*3, p.y + BLOCK_FIFTH*3), BLOCK_FIFTH);
+	drawCracks(g, p, durability);
+}
+
+void Emerald::drawAt(Core::Graphics& g, Vector& offset)
+{
+	Point p = a - offset;
+	g.SetColor(RGB(121,122,122));
+	fillSquare(g, p, BLOCK_SIZE);
+	g.SetColor(RGB(80, 200, 120));
+	fillHexagon(g, Point(p.x + BLOCK_FIFTH, p.y + BLOCK_FIFTH*3), BLOCK_FIFTH); 
+	fillHexagon(g, Point(p.x + BLOCK_FIFTH*2, p.y + BLOCK_FIFTH*2), BLOCK_FIFTH);
+	fillHexagon(g, Point(p.x + BLOCK_FIFTH*3, p.y + BLOCK_FIFTH*4), BLOCK_FIFTH);
+	drawCracks(g, p, durability);
+}
+
+void Gold::drawAt(Core::Graphics &g, Vector& offset)
 {
 	g.SetColor(RGB(121,122,122));
-	fillSquare(g, a, BLOCK_SIZE);
-	g.SetColor(RGB(34, 27, 227));
-	fillCircle(g, Point(a.x + BLOCK_FIFTH, a.y + BLOCK_FIFTH * 3), BLOCK_FIFTH); 
-	fillCircle(g, Point(a.x + BLOCK_FIFTH, a.y + BLOCK_FIFTH), BLOCK_FIFTH);
-	fillCircle(g, Point(a.x + BLOCK_FIFTH*2, a.y + BLOCK_FIFTH*2), BLOCK_FIFTH*2);
-	drawCracks(g, a, durability);
+	Point p = a - offset;
+	fillSquare(g, p, BLOCK_SIZE);
+	g.SetColor(RGB(212, 175, 55));
+	fillRectangle(g, Point(p.x + BLOCK_FIFTH, p.y + BLOCK_FIFTH), BLOCK_FIFTH*2, BLOCK_FIFTH);
+	fillSquare(g, Point(p.x + BLOCK_FIFTH, p.y + BLOCK_FIFTH * 3), BLOCK_FIFTH);
+	fillSquare(g, Point(p.x + BLOCK_FIFTH*3, p.y + BLOCK_FIFTH * 3), BLOCK_FIFTH);
+	drawCracks(g, p, durability);
+}
+
+void Diamond::drawAt(Core::Graphics& g, Vector& offset)
+{
+	Point p = a - offset;
+	g.SetColor(RGB(121,122,122));
+	fillSquare(g, p, BLOCK_SIZE);
+	g.SetColor(RGB(185, 242, 255));
+	fillHexagon(g, Point(p.x + BLOCK_FIFTH, p.y + BLOCK_FIFTH * 3), BLOCK_FIFTH); 
+	fillHexagon(g, Point(p.x + BLOCK_FIFTH, p.y + BLOCK_FIFTH), BLOCK_FIFTH);
+	fillHexagon(g, Point(p.x + BLOCK_FIFTH*2, p.y + BLOCK_FIFTH), BLOCK_FIFTH*2);
+	drawCracks(g, p, durability);
 }
 
 void BreakableBlock::drawCracks(Core::Graphics& g, Point &p, int durability)
