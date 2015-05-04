@@ -60,12 +60,9 @@ void Character::checkCollisions()
 	// No matter what direction, there are two corners that have to be checked.
 	Block* neighbor1;
 	Block* neighbor2;
-	Physics::Rectangle* box = &getBoundingBox();
-	/*box->a.x = (int) box->a.x;
-	box->a.y = (int) box->a.y;
-	box->b.x = (int) box->b.x;
-	box->b.y = (int) box->b.y;*/
-
+	Physics::Rectangle* box;
+	
+	box = &getBoundingBox();
 	if (velocity.x < 0) // moving left
 	{
 		neighbor1 = &(world->getBlockAt(Point(box->a.x, box->a.y)));
@@ -90,7 +87,6 @@ void Character::checkCollisions()
 	}
 
 	box = &getBoundingBox();
-	
 	if (velocity.y > 0) // moving down
 	{
 		isJumping = true; // If the character is falling he should not be able to jump
