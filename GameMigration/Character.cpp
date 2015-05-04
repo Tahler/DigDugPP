@@ -15,7 +15,6 @@ using Physics::operator-;
 
 // Character //
 const float MAX_SPEED = BLOCK_SIZE / 10;
-const float DRAG = 0.1;
 
 long lastMineMillis = time(0) * 1000;
 int pickStrength = 3;
