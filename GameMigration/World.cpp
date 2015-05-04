@@ -95,16 +95,12 @@ void World::draw(Core::Graphics& g)
 	{
 		for (unsigned int j = begin.y; j <= end.y; j++)
 		{
-			//blocks[i][j]->draw(g);
 			blocks[i][j]->drawAt(g, window.box.a);
 		}
 	}
-
-	//window.draw(g);
 }
 Block& World::getBlockAt(Point& p)
 {
-
 	int x = p.x / BLOCK_SIZE;
 	int y = p.y / BLOCK_SIZE;
 	

@@ -83,6 +83,7 @@ void Character::checkCollisions()
 			velocity.x = 0;
 			shift(Vector(neighbor1->b.x - box->a.x, 0));
 		}
+		else if (box->a.x < 0) shift(Vector(-box->a.x, 0));
 	}
 	else if (velocity.x > 0) // moving right
 	{
@@ -93,6 +94,8 @@ void Character::checkCollisions()
 			velocity.x = 0;
 			shift(Vector(neighbor1->a.x - box->b.x - 1, 0));
 		}
+		else if (box->b.x > world->blocks.size() * BLOCK_SIZE) 
+			shift(Vector(-(box->b.x - world->blocks.size() * BLOCK_SIZE), 0));
 	}
 
 	box = &getBoundingBox();
@@ -108,6 +111,7 @@ void Character::checkCollisions()
 			velocity.y = 0;
 			shift(Vector(0, neighbor1->a.y - box->b.y - 1));
 		}
+		else if (box->b.y > world->blocks[0].size() * BLOCK_SIZE) shift(Vector(0, -(box->b.y - world->blocks[0].size() * BLOCK_SIZE)));
 	}
 	else if (velocity.y < 0) // moving up
 	{
@@ -239,5 +243,5 @@ void Character::drawAt(Core::Graphics& g, Vector& displacement)
 	fillRectangle(g, Point(p.x + BLOCK_FIFTH * 2, p.y + BLOCK_FIFTH * 3), BLOCK_FIFTH, BLOCK_FIFTH * 2);
 	g.SetColor(RGB(10, 10, 255));
 
-	getBoundingBox().draw(g);
+	//getBoundingBox().draw(g);
 }
