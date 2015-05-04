@@ -22,7 +22,7 @@ int pickStrength = 3;
 
 Physics::Rectangle Character::getBoundingBox()
 {
-	return Physics::Rectangle(Point(location.x + BLOCK_FIFTH, location.y + 2), Point(location.x + BLOCK_SIZE - BLOCK_FIFTH, location.y + BLOCK_SIZE - 2));
+	return Physics::Rectangle(Point(location.x + BLOCK_FIFTH, location.y + 2), Point(location.x + BLOCK_SIZE - BLOCK_FIFTH, location.y + BLOCK_SIZE));
 	//return Physics::Rectangle(Point(location.x + 2, location.y + 2), Point(location.x + BLOCK_SIZE - 2, location.y + BLOCK_SIZE - 2));
 }
 void Character::checkKeyInput()
@@ -66,36 +66,10 @@ void Character::checkCollisions()
 	box->b.x = (int) box->b.x;
 	box->b.y = (int) box->b.y;*/
 
-	if (velocity.y > 0) // moving down
-	{
-		isJumping = true; // If the character is falling he should not be able to jump
-
-		neighbor1 = &(world->getBlockAt(Point(box->a.x, box->b.y + MAX_SPEED - 1)));
-		neighbor2 = &(world->getBlockAt(Point(box->b.x, box->b.y + MAX_SPEED - 1)));
-		if (!neighbor1->isTraversable || !neighbor2->isTraversable)
-		{
-			isJumping = false;
-			velocity.y = 0;
-			shift(Vector(0, neighbor1->a.y - box->b.y - 1)); // -3 = -1 for buffer and -2 for hitbox buffer
-			//location.y = neighbor1->a.y - BLOCK_SIZE - 1;
-		}
-	}
-	else if (velocity.y < 0) // moving up
-	{
-		neighbor1 = &(world->getBlockAt(Point(box->a.x, box->a.y - MAX_SPEED + 1)));
-		neighbor2 = &(world->getBlockAt(Point(box->b.x, box->a.y - MAX_SPEED + 1)));
-		if (!neighbor1->isTraversable || !neighbor2->isTraversable)
-		{
-			velocity.y = 0;
-			shift(Vector(0, neighbor1->b.y - box->a.y));
-			//location.y = neighbor1->b.y;
-		}
-	}
-
 	if (velocity.x < 0) // moving left
 	{
-		neighbor1 = &(world->getBlockAt(Point(box->a.x - MAX_SPEED + 1, box->a.y)));
-		neighbor2 = &(world->getBlockAt(Point(box->a.x - MAX_SPEED + 1, box->b.y)));
+		neighbor1 = &(world->getBlockAt(Point(box->a.x, box->a.y)));
+		neighbor2 = &(world->getBlockAt(Point(box->a.x, box->b.y)));
 		if (!neighbor1->isTraversable || !neighbor2->isTraversable) // collision incoming
 		{
 			velocity.x = 0;
@@ -105,13 +79,41 @@ void Character::checkCollisions()
 	}
 	else if (velocity.x > 0) // moving right
 	{
-		neighbor1 = &(world->getBlockAt(Point(box->b.x + MAX_SPEED, box->a.y)));
-		neighbor2 = &(world->getBlockAt(Point(box->b.x + MAX_SPEED, box->b.y)));
+		neighbor1 = &(world->getBlockAt(Point(box->b.x, box->a.y)));
+		neighbor2 = &(world->getBlockAt(Point(box->b.x, box->b.y)));
 		if (!neighbor1->isTraversable || !neighbor2->isTraversable) 
 		{
 			velocity.x = 0;
 			shift(Vector(neighbor1->a.x - box->b.x - 1, 0));
 			//location.x = neighbor1->a.x - BLOCK_SIZE - 1;
+		}
+	}
+
+	box = &getBoundingBox();
+	
+	if (velocity.y > 0) // moving down
+	{
+		isJumping = true; // If the character is falling he should not be able to jump
+
+		neighbor1 = &(world->getBlockAt(Point(box->a.x, box->b.y + velocity.y)));
+		neighbor2 = &(world->getBlockAt(Point(box->b.x, box->b.y + velocity.y))); // why do these "+ velocity.y" need to be there
+		if (!neighbor1->isTraversable || !neighbor2->isTraversable)
+		{
+			isJumping = false;
+			velocity.y = 0;
+			shift(Vector(0, neighbor1->a.y - box->b.y - 1));
+			//location.y = neighbor1->a.y - BLOCK_SIZE - 1;
+		}
+	}
+	else if (velocity.y < 0) // moving up
+	{
+		neighbor1 = &(world->getBlockAt(Point(box->a.x, box->a.y)));
+		neighbor2 = &(world->getBlockAt(Point(box->b.x, box->a.y)));
+		if (!neighbor1->isTraversable || !neighbor2->isTraversable)
+		{
+			velocity.y = 0;
+			shift(Vector(0, neighbor1->b.y - box->a.y));
+			//location.y = neighbor1->b.y;
 		}
 	}
 }
@@ -180,12 +182,13 @@ void Character::move()
 	else if (character->b.y > deadzone->b.y) window->shift(Vector(0, character->b.y - deadzone->b.y));
 
 	location += velocity;
+
+	// Adjust for gravity
+	velocity.y += Gravity::acceleration;
 }
 void Character::update()
 {
 	checkKeyInput();
-	// Adjust for gravity
-	velocity.y += Gravity::acceleration;
 	move();
 	checkCollisions();
 }
