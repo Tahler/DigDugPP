@@ -105,8 +105,7 @@ void World::addMinerals()
 		switchVals(numOccurences, upperBound, lowerBound, minVein, maxVein, hh);
 		for (int ii = 0; ii < numOccurences; ii++) 
 		{
-			int currentVein = (rand() % (maxVein - minVein)) + minVein;
-			if (currentVein == 1) delete blocks[0][0], blocks[0][0] = new Copper(Point(0,0));
+			int currentVein = (rand() % (maxVein - minVein + 1)) + minVein;
 			int currentX = rand() % blocks.size();
 			int currentY = (rand() % (lowerBound - upperBound)) + upperBound;
 			replaceBlock(currentX, currentY, hh);
@@ -185,15 +184,15 @@ void World::switchVals(int& numOcc, int&  up, int& low, int& minVein, int& maxVe
 	{
 	case 0:
 		//copper
-		numOcc = 50;
+		numOcc = 30;
 		up = 9;
 		low = 50;
 		minVein = 2;
-		maxVein = 4;
+		maxVein = 3;
 		break;
 	case 1:
 		//iron
-		numOcc = 40;
+		numOcc = 20;
 		up = 30;
 		low = 75;
 		minVein = 2;
@@ -225,7 +224,7 @@ void World::switchVals(int& numOcc, int&  up, int& low, int& minVein, int& maxVe
 		break;
 	case 5:
 		//emerald
-		numOcc = 20;
+		numOcc = 15;
 		up = 99;
 		low = 130;
 		minVein = 2;
@@ -233,19 +232,19 @@ void World::switchVals(int& numOcc, int&  up, int& low, int& minVein, int& maxVe
 		break;
 	case 6: 
 		//gold
-		numOcc = 30;
+		numOcc = 20;
 		up = 110;
 		low = 150;
 		minVein = 2;
-		maxVein = 5;
+		maxVein = 3;
 		break;
 	case 7:
 		//diamond
-		numOcc = 30;
+		numOcc = 15;
 		up = 120;
 		low = 159;
 		minVein = 2;
-		maxVein = 3;
+		maxVein = 2;
 		break;
 	}
 }
