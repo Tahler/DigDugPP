@@ -62,6 +62,18 @@ void Character::checkCollisions()
 	Physics::Rectangle* box;
 	
 	box = &getBoundingBox();
+	if (velocity.y < 0) // moving up
+	{
+		neighbor1 = &(world->getBlockAt(Point(box->a.x, box->a.y)));
+		neighbor2 = &(world->getBlockAt(Point(box->b.x, box->a.y)));
+		if (!neighbor1->isTraversable || !neighbor2->isTraversable)
+		{
+			velocity.y = 0;
+			shift(Vector(0, neighbor1->b.y - box->a.y));
+		}
+	}
+	box = &getBoundingBox();
+
 	if (velocity.x < 0) // moving left
 	{
 		neighbor1 = &(world->getBlockAt(Point(box->a.x, box->a.y)));
@@ -70,7 +82,6 @@ void Character::checkCollisions()
 		{
 			velocity.x = 0;
 			shift(Vector(neighbor1->b.x - box->a.x, 0));
-			//location.x = neighbor1->b.x; // it does not matter which neighbor we set the location to
 		}
 	}
 	else if (velocity.x > 0) // moving right
@@ -81,7 +92,6 @@ void Character::checkCollisions()
 		{
 			velocity.x = 0;
 			shift(Vector(neighbor1->a.x - box->b.x - 1, 0));
-			//location.x = neighbor1->a.x - BLOCK_SIZE - 1;
 		}
 	}
 
@@ -97,7 +107,6 @@ void Character::checkCollisions()
 			isJumping = false;
 			velocity.y = 0;
 			shift(Vector(0, neighbor1->a.y - box->b.y - 1));
-			//location.y = neighbor1->a.y - BLOCK_SIZE - 1;
 		}
 	}
 	else if (velocity.y < 0) // moving up
@@ -108,7 +117,6 @@ void Character::checkCollisions()
 		{
 			velocity.y = 0;
 			shift(Vector(0, neighbor1->b.y - box->a.y));
-			//location.y = neighbor1->b.y;
 		}
 	}
 }
