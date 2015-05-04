@@ -29,7 +29,7 @@ void Vector::operator=(const Vector& v)
 void Vector::operator+=(const Vector& right)
 {
 	x += right.x;
-	y += right.y;	
+	y += right.y;
 }
 void Vector::operator-=(const Vector& right)
 {
