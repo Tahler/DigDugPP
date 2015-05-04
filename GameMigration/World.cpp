@@ -27,6 +27,35 @@ World::~World()
 }
 void World::init()
 {
+	addEarth();
+	addMinerals();
+	//delete blocks[10][4];
+	//blocks[10][4] = new Grass(Point(10, 4));
+	//delete blocks[11][5];
+	//blocks[11][5] = new Cave(Point(11, 5));
+	//delete blocks[3][5];
+	//blocks[3][5] = new Copper(Point(3, 5));
+	//delete blocks[3][6];
+	//blocks[3][6] = new Iron(Point(3, 6));
+	//delete blocks[3][7];
+	//blocks[3][7] = new Silver(Point(3, 7));
+	//delete blocks[3][8];
+	//blocks[3][8] = new Sapphire(Point(3, 8));
+	//delete blocks[3][9];
+	//blocks[3][9] = new Ruby(Point(3, 9));
+	//delete blocks[3][10];
+	//blocks[3][10] = new Emerald(Point(3, 10));
+	//delete blocks[3][11];
+	//blocks[3][11] = new Gold(Point(3, 11));
+	//delete blocks[3][12];
+	//blocks[3][12] = new Diamond(Point(3, 12));
+	//delete blocks[2][5];
+	//blocks[2][5] = new Ladder(Point(2, 5));
+	//delete blocks[2][6];
+	//blocks[2][6] = new Ladder(Point(2, 6));
+}
+void World::addEarth()
+{
 	for (unsigned int i = 0; i < blocks.size(); i++)
 	{
 		//0-3 100% sky
@@ -61,30 +90,164 @@ void World::init()
 			(rand() % 20 == 0) ? blocks[i][j] = new Dirt(Point(i, j)) : blocks[i][j] = new Stone(Point(i, j));
 		}
 	}
-	/*delete blocks[10][4];
-	blocks[10][4] = new Grass(Point(10, 4));
-	delete blocks[11][5];
-	blocks[11][5] = new Cave(Point(11, 5));
-	delete blocks[3][5];
-	blocks[3][5] = new Copper(Point(3, 5));
-	delete blocks[3][6];
-	blocks[3][6] = new Iron(Point(3, 6));
-	delete blocks[3][7];
-	blocks[3][7] = new Silver(Point(3, 7));
-	delete blocks[3][8];
-	blocks[3][8] = new Sapphire(Point(3, 8));
-	delete blocks[3][9];
-	blocks[3][9] = new Ruby(Point(3, 9));
-	delete blocks[3][10];
-	blocks[3][10] = new Emerald(Point(3, 10));
-	delete blocks[3][11];
-	blocks[3][11] = new Gold(Point(3, 11));
-	delete blocks[3][12];
-	blocks[3][12] = new Diamond(Point(3, 12));
-	delete blocks[2][5];
-	blocks[2][5] = new Ladder(Point(2, 5));
-	delete blocks[2][6];
-	blocks[2][6] = new Ladder(Point(2, 6));*/
+}
+void World::addMinerals()
+{
+	int numOccurences;
+	int upperBound;
+	int lowerBound;
+	int minVein;
+	int maxVein;
+	int neg1 = -1;
+	//Copper
+	for (int hh = 0; hh < 8; hh++)
+	{
+		switchVals(numOccurences, upperBound, lowerBound, minVein, maxVein, hh);
+		for (int ii = 0; ii < numOccurences; ii++) 
+		{
+			int currentVein = (rand() % (maxVein - minVein)) + minVein;
+			if (currentVein == 1) delete blocks[0][0], blocks[0][0] = new Copper(Point(0,0));
+			int currentX = rand() % blocks.size();
+			int currentY = (rand() % (lowerBound - upperBound)) + upperBound;
+			replaceBlock(currentX, currentY, hh);
+			for (int jj = 0; jj < currentVein; jj++) 
+			{
+				switch (rand() % 4)
+				{
+				case 0:
+					currentX++;
+					break;
+				case 1:
+					currentX--;
+					break;
+				case 2:
+					currentY++;
+					break;
+				case 3:
+					currentY--;
+					break;
+				}
+				//Ensure in bounds
+				if(currentX < 0) currentX = 0;
+				if (currentY < 0) currentY = 0;
+				if (currentX > blocks.size() - 1) currentX = blocks.size() -1;
+				replaceBlock(currentX, currentY, hh);
+			}
+		}
+
+	}
+}
+void World::replaceBlock(int& x, int& y, int& id)
+{
+	delete blocks[x][y];
+	switch (id)
+	{
+	case -1:
+		blocks[x][y] = new Sky(Point(x, y));
+		break;
+	case 0:
+		//copper
+		blocks[x][y] = new Copper(Point(x, y));
+		break;
+	case 1:
+		//iron
+		blocks[x][y] = new Iron(Point(x, y));
+		break;
+	case 2:
+		//silver
+		blocks[x][y] = new Silver(Point(x, y));
+		break;
+	case 3:
+		//sapphire
+		blocks[x][y] = new Sapphire(Point(x, y));
+		break;
+	case 4:
+		//ruby
+		blocks[x][y] = new Ruby(Point(x, y));
+		break;
+	case 5:
+		//emerald
+		blocks[x][y] = new Emerald(Point(x, y));
+		break;
+	case 6: 
+		//gold
+		blocks[x][y] = new Gold(Point(x, y));
+		break;
+	case 7:
+		//diamond
+		blocks[x][y] = new Diamond(Point(x, y));
+		break;
+	}
+}
+void World::switchVals(int& numOcc, int&  up, int& low, int& minVein, int& maxVein, int& id)
+{
+	switch (id)
+	{
+	case 0:
+		//copper
+		numOcc = 50;
+		up = 9;
+		low = 50;
+		minVein = 2;
+		maxVein = 4;
+		break;
+	case 1:
+		//iron
+		numOcc = 40;
+		up = 30;
+		low = 75;
+		minVein = 2;
+		maxVein = 4;
+		break;
+	case 2:
+		//silver
+		numOcc = 30;
+		up = 53;
+		low = 86;
+		minVein = 3;
+		maxVein = 4;
+		break;
+	case 3:
+		//sapphire
+		numOcc = 20;
+		up = 62;
+		low = 100;
+		minVein = 2;
+		maxVein = 3;
+		break;
+	case 4:
+		//ruby
+		numOcc = 20;
+		up = 85;
+		low = 115;
+		minVein = 2;
+		maxVein = 5;
+		break;
+	case 5:
+		//emerald
+		numOcc = 20;
+		up = 99;
+		low = 130;
+		minVein = 2;
+		maxVein = 4;
+		break;
+	case 6: 
+		//gold
+		numOcc = 30;
+		up = 110;
+		low = 150;
+		minVein = 2;
+		maxVein = 5;
+		break;
+	case 7:
+		//diamond
+		numOcc = 30;
+		up = 120;
+		low = 159;
+		minVein = 2;
+		maxVein = 3;
+		break;
+	}
 }
 void World::update()
 {

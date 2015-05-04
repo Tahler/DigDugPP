@@ -22,6 +22,10 @@ public:
 	World();
 	~World();
 	void init();
+	void addEarth();
+	void addMinerals();
+	void replaceBlock(int&, int&, int&);
+	void switchVals(int&, int&, int&, int&, int&, int&);
 
 	void update();
 	void draw(Core::Graphics&);
