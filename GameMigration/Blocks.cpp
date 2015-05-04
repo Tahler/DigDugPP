@@ -161,7 +161,7 @@ void BreakableBlock::drawCracks(Core::Graphics& g, Point &p, int durability)
 	if (durability < 100)
 	{
 		//A little damaged
-		g.SetColor(RGB(0,0,0));
+		g.SetColor(RGB(30,30,30));
 		g.DrawLine(p.x + 2*BLOCK_FIFTH, p.y + BLOCK_FIFTH, p.x + 2*BLOCK_FIFTH, p.y + 2*BLOCK_FIFTH);
 		g.DrawLine(p.x + 2*BLOCK_FIFTH, p.y + 2*BLOCK_FIFTH, p.x + 3*BLOCK_FIFTH, p.y + 2*BLOCK_FIFTH);
 		g.DrawLine(p.x + 3*BLOCK_FIFTH, p.y + 2*BLOCK_FIFTH, p.x + 3*BLOCK_FIFTH, p.y + 4*BLOCK_FIFTH);

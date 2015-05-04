@@ -29,31 +29,39 @@ void World::init()
 {
 	for (unsigned int i = 0; i < blocks.size(); i++)
 	{
+		//0-3 100% sky
 		for (unsigned int j = 0; j < 4; j++) // Leave the first four rows blank.
 		{
 			blocks[i][j] = new Sky(Point(i, j));
 		}
-		for (unsigned int j = 4; j < 6; j++) 
+		//4 - 9 100% dirt
+		for (unsigned int j = 4; j < 9; j++) 
 		{
-			if (j == 4 && i >= 6 && i <= 18) blocks[i][j] = new Cave(Point(i, j));
-			else if (j==4 || j == 3) blocks[i][j] = new Grass(Point(i, j));
+			if (j == 4) blocks[i][j] = new Grass(Point(i, j));
 			else blocks[i][j] = new Dirt(Point(i, j));
 		}
-		for (unsigned int j = 6; j < 9; j++)
+		//9 - 11 80% dirt 20% stone
+		for (unsigned int j = 9; j < 20; j++) 
 		{
-			(rand() % 2 == 0) ? blocks[i][j] = new Dirt(Point(i, j)) : blocks[i][j] = new Stone(Point(i, j));
+			(rand() % 10 < 2) ? blocks[i][j] = new Stone(Point(i,  j)) : blocks[i][j] = new Dirt(Point(i, j));
 		}
-		for (unsigned int j = 9; j < blocks[i].size(); j++)
+		for (unsigned int j = 20; j < 40; j++) {
+			(rand() % 2 == 0) ? blocks[i][j] = new Stone(Point(i, j)) : blocks[i][j] = new Dirt(Point(i, j));
+		}
+		for (unsigned int j = 40; j < 60; j++) {
+			(rand() % 10 < 7) ? blocks[i][j] = new Stone(Point(i, j)) : blocks[i][j] = new Dirt(Point(i, j));
+		}
+		//20 - end 90% stone
+		for (unsigned int j = 60; j < 100; j++)
 		{
-			blocks[i][j] = new Stone(Point(i, j));
+			(rand() % 10 == 0) ? blocks[i][j] = new Dirt(Point(i, j)) : blocks[i][j] = new Stone(Point(i, j));
+		}
+		for (unsigned int j = 100; j < blocks[i].size(); j++)
+		{
+			(rand() % 20 == 0) ? blocks[i][j] = new Dirt(Point(i, j)) : blocks[i][j] = new Stone(Point(i, j));
 		}
 	}
-	for (unsigned int i = 4; i < 16; i++)
-	{
-		delete blocks[5][i];
-		blocks[5][i] = new Cave(Point(5, i));
-	}
-	delete blocks[10][4];
+	/*delete blocks[10][4];
 	blocks[10][4] = new Grass(Point(10, 4));
 	delete blocks[11][5];
 	blocks[11][5] = new Cave(Point(11, 5));
@@ -76,7 +84,7 @@ void World::init()
 	delete blocks[2][5];
 	blocks[2][5] = new Ladder(Point(2, 5));
 	delete blocks[2][6];
-	blocks[2][6] = new Ladder(Point(2, 6));
+	blocks[2][6] = new Ladder(Point(2, 6));*/
 }
 void World::update()
 {
