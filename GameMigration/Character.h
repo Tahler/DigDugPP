@@ -4,6 +4,7 @@
 
 #include "Physics.h"
 #include "World.h"
+#include "Inventory.h"
 
 using Physics::Point;
 using Physics::Vector;
@@ -15,26 +16,20 @@ private:
 	World* world; // WORLD-STAR
 
 public:
+	static Inventory inventory;
 	Point location; // The upper left corner of his block
 	Vector velocity;
 	bool isColliding;
 	bool isJumping;
 
 	Character() :
-		world(NULL),
+		world(nullptr),
 		location(0, 0),
 		velocity(0, 0),
 		isColliding(false),
 		isJumping(false)
 	{}
-	Character(World* w, float x, float y) : 
-		world(w),
-		location(x * BLOCK_SIZE, y * BLOCK_SIZE),
-		velocity(0, 0),
-		isColliding(false),
-		isJumping(false)
-	{}
-
+	Character(World* world, float x, float y);
 	Physics::Rectangle getBoundingBox();
 	void checkKeyInput();
 	void jump();

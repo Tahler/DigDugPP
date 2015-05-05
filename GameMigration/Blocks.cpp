@@ -1,15 +1,11 @@
+
 #include "Blocks.h"
+#include "Character.h"
 using namespace Blocks;
 using Physics::Vector;
 
 // Measured in pixels
 const int BLOCK_SIZE = 50;
-
-// Block //
-void Block::setLocation(Point& pa)
-{
-	setPoints(pa, Point(pa.x + BLOCK_SIZE, pa.y + BLOCK_SIZE));
-}
 
 //Draw functions for each block
 void Sky::drawAt(Core::Graphics& g, Vector& offset)
@@ -62,6 +58,7 @@ void Grass::drawAt(Core::Graphics &g, Vector& offset)
 	fillRectangle(g, p, BLOCK_SIZE, BLOCK_FIFTH);
 	drawCracks(g, p, durability);
 }
+
 void UnbreakableGrass::drawAt(Core::Graphics &g, Vector& offset)
 {
 	Point p = a - offset;
@@ -69,6 +66,27 @@ void UnbreakableGrass::drawAt(Core::Graphics &g, Vector& offset)
 	fillSquare(g, p, BLOCK_SIZE);
 	g.SetColor(RGB(20, 219, 2));
 	fillRectangle(g, p, BLOCK_SIZE, BLOCK_FIFTH);
+}
+
+Copper::~Copper()
+{
+	Character::inventory.addCopper();
+}
+void Copper::drawAt(Core::Graphics &g, Vector& offset)
+{
+	g.SetColor(RGB(121,122,122));
+	Point p = a - offset;
+	fillSquare(g, p, BLOCK_SIZE);
+	g.SetColor(RGB(245, 151, 29));
+	fillSquare(g, Point(p.x + BLOCK_FIFTH, p.y + BLOCK_FIFTH), BLOCK_FIFTH);
+	fillSquare(g, Point(p.x + 3 * BLOCK_FIFTH, p.y + 2 * BLOCK_FIFTH), BLOCK_SIXTH);
+	fillSquare(g, Point(p.x + BLOCK_FIFTH, p.y +  3* BLOCK_FIFTH), BLOCK_FIFTH);
+	drawCracks(g, p, durability);
+}
+
+Iron::~Iron()
+{
+	Character::inventory.addIron();
 }
 void Iron::drawAt(Core::Graphics &g, Vector& offset)
 {
@@ -81,6 +99,11 @@ void Iron::drawAt(Core::Graphics &g, Vector& offset)
 	fillSquare(g, Point(p.x + 2*BLOCK_FIFTH, p.y + 3 * BLOCK_FIFTH), BLOCK_FIFTH);		
 	drawCracks(g, p, durability);
 }
+
+Silver::~Silver()
+{
+	Character::inventory.addSilver();
+}
 void Silver::drawAt(Core::Graphics &g, Vector& offset)
 {
 	Point p = a - offset;
@@ -92,17 +115,10 @@ void Silver::drawAt(Core::Graphics &g, Vector& offset)
 	fillSquare(g, Point(p.x + 3* BLOCK_FIFTH, p.y + 3 * BLOCK_FIFTH), BLOCK_SIXTH);
 	drawCracks(g, p, durability);
 }
-void Copper::drawAt(Core::Graphics &g, Vector& offset)
-{
-	g.SetColor(RGB(121,122,122));
-	Point p = a - offset;
-	fillSquare(g, p, BLOCK_SIZE);
-	g.SetColor(RGB(245, 151, 29));
-	fillSquare(g, Point(p.x + BLOCK_FIFTH, p.y + BLOCK_FIFTH), BLOCK_FIFTH);
-	fillSquare(g, Point(p.x + 3 * BLOCK_FIFTH, p.y + 2 * BLOCK_FIFTH), BLOCK_SIXTH);
-	fillSquare(g, Point(p.x + BLOCK_FIFTH, p.y +  3* BLOCK_FIFTH), BLOCK_FIFTH);
-	drawCracks(g, p, durability);
 
+Sapphire::~Sapphire()
+{
+	Character::inventory.addSapphire();
 }
 void Sapphire::drawAt(Core::Graphics& g, Vector& offset)
 {
@@ -116,6 +132,10 @@ void Sapphire::drawAt(Core::Graphics& g, Vector& offset)
 	drawCracks(g, p, durability);
 }
 
+Ruby::~Ruby()
+{
+	Character::inventory.addRuby();
+}
 void Ruby::drawAt(Core::Graphics& g, Vector& offset)
 {
 	Point p = a - offset;
@@ -128,6 +148,10 @@ void Ruby::drawAt(Core::Graphics& g, Vector& offset)
 	drawCracks(g, p, durability);
 }
 
+Emerald::~Emerald()
+{
+	Character::inventory.addRuby();
+}
 void Emerald::drawAt(Core::Graphics& g, Vector& offset)
 {
 	Point p = a - offset;
@@ -140,6 +164,10 @@ void Emerald::drawAt(Core::Graphics& g, Vector& offset)
 	drawCracks(g, p, durability);
 }
 
+Gold::~Gold()
+{
+	Character::inventory.addGold();
+}
 void Gold::drawAt(Core::Graphics &g, Vector& offset)
 {
 	g.SetColor(RGB(121,122,122));
@@ -152,6 +180,10 @@ void Gold::drawAt(Core::Graphics &g, Vector& offset)
 	drawCracks(g, p, durability);
 }
 
+Diamond::~Diamond()
+{
+	Character::inventory.addDiamond();
+}
 void Diamond::drawAt(Core::Graphics& g, Vector& offset)
 {
 	Point p = a - offset;

@@ -19,6 +19,13 @@ const float MAX_SPEED = BLOCK_SIZE / 10;
 long lastMineMillis = time(0) * 1000;
 int pickStrength = 3;
 
+Character::Character(World* world, float x, float y)
+{
+	Character::world = world;
+	location = Point(x * BLOCK_SIZE, y * BLOCK_SIZE);
+	velocity = Vector(0, 0);
+	isJumping = false;
+}
 Physics::Rectangle Character::getBoundingBox()
 {
 	return Physics::Rectangle(Point(location.x + BLOCK_FIFTH, location.y + 2), Point(location.x + BLOCK_SIZE - BLOCK_FIFTH, location.y + BLOCK_SIZE));
@@ -154,14 +161,18 @@ void Character::mine(int dir)
 			//left
 			b = &(world->getBlockAt(Point(box->b.x + MAX_SPEED, box->a.y + BLOCK_HALF)));
 			break;
+		default:
+			b = nullptr;
+			break;
 		}
-	
+
 		BreakableBlock* b2 = dynamic_cast<BreakableBlock*>(b);
-		if (b2 != NULL)
+		if (b2 != nullptr)
 		{
 			b2->takeDamage(pickStrength);
 			if (b2->durability <= 0)
 			{
+
 				world->destroyBlockAt(b->a);
 			}
 		}
@@ -171,12 +182,6 @@ void Character::mine(int dir)
 }
 void Character::move()
 {
-	// Don't go outside the window, otherwise allow movement
-	//if (location.x >= 0 && location.x + BLOCK_SIZE <= WINDOW_WIDTH - MAX_SPEED -4) location.x += velocity.x;
-	//else if (location.x >= 0)location.x -= 1;
-	//else location.x +=1;
-	//if (location.y >= 0 && location.y + BLOCK_SIZE <= WINDOW_HEIGHT) location.y += velocity.y;
-
 	// Move the window if needed
 	Window* window = &(world->window); // The larger, viewable screen
 	Physics::Rectangle* deadzone = &(world->window.deadzone); // The invisible small box that the character cannot move out of
