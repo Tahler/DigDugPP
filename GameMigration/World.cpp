@@ -71,6 +71,12 @@ void World::init()
 	blocks[5][5] = new Ladder(Point(5, 5));
 	delete blocks[5][6];
 	blocks[5][6] = new Ladder(Point(5, 6));
+	delete blocks[5][7];
+	blocks[5][7] = new Ladder(Point(5, 7));
+	delete blocks[5][8];
+	blocks[5][8] = new Ladder(Point(5, 8));
+	delete blocks[5][9];
+	blocks[5][9] = new Ladder(Point(5, 9));
 }
 void World::addEarth()
 {

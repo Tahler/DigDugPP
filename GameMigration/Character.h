@@ -19,15 +19,15 @@ public:
 	static Inventory inventory;
 	Point location; // The upper left corner of his block
 	Vector velocity;
-	bool isColliding;
 	bool isJumping;
+	bool isOnLadder;
 
 	Character() :
 		world(nullptr),
 		location(0, 0),
 		velocity(0, 0),
-		isColliding(false),
-		isJumping(false)
+		isJumping(false),
+		isOnLadder(false)
 	{}
 	Character(World* world, int x, int y);
 

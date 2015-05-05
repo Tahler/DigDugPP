@@ -26,6 +26,7 @@ Character::Character(World* world, int x, int y)
 	setLocation(x, y);
 	velocity = Vector(0, 0);
 	isJumping = false;
+	isOnLadder = false;
 }
 Physics::Rectangle Character::getBoundingBox()
 {
@@ -171,6 +172,11 @@ void Character::moveY()
 	}
 }
 
+/* 
+	Moves based on WASD
+	W jumps if not on ladder
+	If on ladder, W moves up ladder
+*/
 void Character::checkKeyInput()
 {
 	if (Core::Input::IsPressed(VK_BACK)) reset();
@@ -191,13 +197,15 @@ void Character::checkKeyInput()
 		else if (Core::Input::IsPressed(Core::Input::KEY_D)) velocity.x = MAX_SPEED;
 		else velocity.x = 0;
 
-		// If on a ladder, w and s move up and down the ladder...
 		Block* b = &world->getBlockAt(getCenterPoint());
 		Ladder* ladder = dynamic_cast<Ladder*>(b);
-		if (ladder != nullptr)
+		isOnLadder = (ladder != nullptr);
+		// If on a ladder, w and s move up and down the ladder...
+		if (isOnLadder)
 		{
 			if (Core::Input::IsPressed(Core::Input::KEY_W)) velocity.y = -MAX_SPEED;
 			else if (Core::Input::IsPressed(Core::Input::KEY_S)) velocity.y = MAX_SPEED;
+			else velocity.y = 0;
 		}
 		// Else, the s key does nothing and w jumps
 		else
@@ -235,7 +243,7 @@ void Character::update()
 	}
 
 	// Adjust for gravity
-	velocity.y += Gravity::acceleration;
+	if (!isOnLadder) velocity.y += Gravity::acceleration;
 }
 void Character::draw(Core::Graphics& g)
 {
@@ -270,7 +278,6 @@ void Character::drawAt(Core::Graphics& g, Vector& displacement)
 	} 
 	else 
 	{
-
 		fillSquare(g, Point(p.x + BLOCK_FIFTH, p.y + BLOCK_FIFTH * 2), BLOCK_FIFTH);
 		fillSquare(g, Point(p.x + 3 * BLOCK_FIFTH, p.y + BLOCK_FIFTH * 2), BLOCK_FIFTH);
 		g.SetColor(RGB(28, 212, 52));
