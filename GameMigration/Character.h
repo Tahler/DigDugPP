@@ -29,8 +29,9 @@ public:
 		isColliding(false),
 		isJumping(false)
 	{}
-	Character(World* world, float x, float y);
+	Character(World* world, int x, int y);
 	Physics::Rectangle getBoundingBox();
+	void setLocation(int x, int y);
 	void checkKeyInput();
 	void jump();
 	void resolveXCollisions();
