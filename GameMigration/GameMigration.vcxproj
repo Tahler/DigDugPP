@@ -98,6 +98,7 @@
     <ClInclude Include="Blocks.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Fill.h" />
+    <ClInclude Include="Inventory.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="World.h" />
