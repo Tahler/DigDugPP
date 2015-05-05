@@ -33,7 +33,8 @@ public:
 	Physics::Rectangle getBoundingBox();
 	void checkKeyInput();
 	void jump();
-	void checkCollisions();
+	void resolveXCollisions();
+	void resolveYCollisions();
 	void shift(Vector&);
 	void move();
 	void mine(int dir);
