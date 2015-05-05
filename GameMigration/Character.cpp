@@ -115,11 +115,18 @@ void Character::mine(int dir)
 		lastMineMillis = time(0) * 1000;
 	}
 }
-void Character::resolveXCollisions()
+
+// Used for collision detection
+Block* neighbor1;
+Block* neighbor2;
+Physics::Rectangle* box;
+void Character::moveX()
 {
-	Block* neighbor1;
-	Block* neighbor2;
-	Physics::Rectangle* box = &getBoundingBox();
+	// Move
+	location.x += velocity.x;
+
+	// Resolve collisions
+	box = &getBoundingBox();
 	if (velocity.x < 0) // moving left
 	{
 		neighbor1 = &(world->getBlockAt(Point(box->a.x, box->a.y)));
@@ -144,11 +151,13 @@ void Character::resolveXCollisions()
 			shift(Vector(-(box->b.x - world->blocks.size() * BLOCK_SIZE), 0));
 	}
 }
-void Character::resolveYCollisions()
+void Character::moveY()
 {
-	Block* neighbor1;
-	Block* neighbor2;
-	Physics::Rectangle* box = &getBoundingBox();
+	// Move
+	location.y += velocity.y;
+
+	// Resolve collisions
+	box = &getBoundingBox();
 	if (velocity.y > 0) // moving down
 	{
 		isJumping = true; // If the character is falling he should not be able to jump
@@ -174,43 +183,35 @@ void Character::resolveYCollisions()
 		}
 	}
 }
-void Character::move()
+void Character::update()
 {
+	checkKeyInput();
+	
 	// Move the window if needed
 	Window* window = &(world->window); // The larger, viewable screen
 	Physics::Rectangle* deadzone = &(world->window.deadzone); // The invisible small box that the character cannot move out of
 	Physics::Rectangle* character = &(getBoundingBox()); // The character's bounding box
-	
-	// if the character is outside the deadzone, shift the window (which also shifts the deadzone)
+
+	// If the character is outside the deadzone, shift the window (which also shifts the deadzone)
 	if (character->a.x < deadzone->a.x) window->shift(Vector(character->a.x - deadzone->a.x, 0));
 	else if (character->b.x > deadzone->b.x) window->shift(Vector(character->b.x - deadzone->b.x, 0));
 	if (character->a.y < deadzone->a.y) window->shift(Vector(0, character->a.y - deadzone->a.y));
 	else if (character->b.y > deadzone->b.y) window->shift(Vector(0, character->b.y - deadzone->b.y));
 
+	// Move the character
 	if (abs(velocity.x) > abs(velocity.y))
 	{
-		location.x += velocity.x;
-		resolveXCollisions();
-
-		location.y += velocity.y;
-		resolveYCollisions();
+		moveX();
+		moveY();
 	}
 	else
 	{
-		location.y += velocity.y;
-		resolveYCollisions();
-
-		location.x += velocity.x;
-		resolveXCollisions();
+		moveY();
+		moveX();
 	}
 
 	// Adjust for gravity
 	velocity.y += Gravity::acceleration;
-}
-void Character::update()
-{
-	checkKeyInput();
-	move();
 }
 void Character::draw(Core::Graphics& g)
 {

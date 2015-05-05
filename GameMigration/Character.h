@@ -34,10 +34,9 @@ public:
 	void setLocation(int x, int y);
 	void checkKeyInput();
 	void jump();
-	void resolveXCollisions();
-	void resolveYCollisions();
+	void moveX();
+	void moveY();
 	void shift(Vector&);
-	void move();
 	void mine(int dir);
 
 	void update();
