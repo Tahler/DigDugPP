@@ -26,6 +26,7 @@ public:
 	Inventory(int invSize, int items[8], int money);
 
 	int size();
+	bool isFull();
 
 	void addItem(int);
 	void addCopper();
