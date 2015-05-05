@@ -25,6 +25,7 @@ namespace Blocks
 			Rectangle(Point(a.x * BLOCK_SIZE, a.y * BLOCK_SIZE), Point(a.x * BLOCK_SIZE + BLOCK_SIZE, a.y * BLOCK_SIZE + BLOCK_SIZE)), // point in rectangle is pixel coordinates
 			isTraversable(isTraversable)
 		{}
+		virtual ~Block() {}
 		void setLocation(Point&);
 	};
 
@@ -109,6 +110,7 @@ namespace Blocks
 		{
 			value = 1;
 		};
+		~Copper();
 		
 		void drawAt(Core::Graphics& g, Vector&);
 	};
@@ -121,6 +123,7 @@ namespace Blocks
 		{
 			value = 2;
 		};
+		~Iron();
 		
 		void drawAt(Core::Graphics& g, Vector&);
 	};
@@ -132,6 +135,8 @@ namespace Blocks
 		{
 			value = 3;
 		};
+		~Silver();
+
 		void drawAt(Core::Graphics& g, Vector&);
 	};
 
@@ -142,6 +147,8 @@ namespace Blocks
 		{
 			value = 4;
 		}
+		~Sapphire();
+
 		void drawAt(Core::Graphics& g, Vector&);
 	};
 	
@@ -152,6 +159,8 @@ namespace Blocks
 		{
 			value = 5;
 		}
+		~Ruby();
+
 		void drawAt(Core::Graphics&g, Vector&);
 	};
 
@@ -162,6 +171,8 @@ namespace Blocks
 		{
 			value = 6;
 		}
+		~Emerald();
+
 		void drawAt(Core::Graphics&g, Vector&);
 	};
 
@@ -172,6 +183,8 @@ namespace Blocks
 		{
 			value = 7;
 		}
+		~Gold();
+
 		void drawAt(Core::Graphics&g, Vector&);
 	};
 
@@ -182,6 +195,8 @@ namespace Blocks
 		{
 			value = 8;
 		}
+		~Diamond();
+
 		void drawAt(Core::Graphics&g, Vector&);
 	};
 }

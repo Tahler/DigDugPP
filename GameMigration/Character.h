@@ -14,9 +14,9 @@ class Character
 { // it may be necessary to eventually have a bool moving left, right, up, down for optimization (do this instead of checking velocities every frame)
 private:
 	World* world; // WORLD-STAR
-	Inventory inventory;
 
 public:
+	static Inventory inventory;
 	Point location; // The upper left corner of his block
 	Vector velocity;
 	bool isColliding;
@@ -29,7 +29,7 @@ public:
 		isColliding(false),
 		isJumping(false)
 	{}
-	Character(World* world, float x, float y, int invSize, int items[8], int money);
+	Character(World* world, float x, float y);
 	Physics::Rectangle getBoundingBox();
 	void checkKeyInput();
 	void jump();
