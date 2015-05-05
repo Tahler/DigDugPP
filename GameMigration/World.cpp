@@ -64,10 +64,12 @@ void World::init()
 	//blocks[3][11] = new Gold(Point(3, 11));
 	//delete blocks[3][12];
 	//blocks[3][12] = new Diamond(Point(3, 12));
-	//delete blocks[2][5];
-	//blocks[2][5] = new Ladder(Point(2, 5));
-	//delete blocks[2][6];
-	//blocks[2][6] = new Ladder(Point(2, 6));
+	delete blocks[5][4];
+	blocks[5][4] = new Ladder(Point(5, 4));
+	delete blocks[5][5];
+	blocks[5][5] = new Ladder(Point(5, 5));
+	delete blocks[5][6];
+	blocks[5][6] = new Ladder(Point(5, 6));
 }
 void World::addEarth()
 {
