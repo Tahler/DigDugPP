@@ -27,7 +27,6 @@ public:
 	void replaceBlock(int&, int&, int&);
 	void switchVals(int&, int&, int&, int&, int&, int&);
 
-	void update();
 	void draw(Core::Graphics&);
 
 	Block& getBlockAt(Point&);

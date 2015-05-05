@@ -55,7 +55,7 @@ void World::init()
 	//delete blocks[3][7];
 	//blocks[3][7] = new Silver(Point(3, 7));
 	//delete blocks[3][8];
-	//blocks[3][8] = new Sapphire(Point(3, 8))
+	//blocks[3][8] = new Sapphire(Point(3, 8));
 	//delete blocks[3][9];
 	//blocks[3][9] = new Ruby(Point(3, 9));
 	//delete blocks[3][10];
@@ -262,10 +262,6 @@ void World::switchVals(int& numOcc, int&  up, int& low, int& minVein, int& maxVe
 		maxVein = 2;
 		break;
 	}
-}
-void World::update()
-{
-	
 }
 void World::draw(Core::Graphics& g)
 {

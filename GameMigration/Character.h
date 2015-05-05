@@ -11,7 +11,7 @@ using Physics::Vector;
 using Physics::Rectangle;
 
 class Character
-{ // it may be necessary to eventually have a bool moving left, right, up, down for optimization (do this instead of checking velocities every frame)
+{
 private:
 	World* world; // WORLD-STAR
 
@@ -29,13 +29,14 @@ public:
 		isColliding(false),
 		isJumping(false)
 	{}
-	Character(World* world, float x, float y);
+	Character(World* world, int x, int y);
 	Physics::Rectangle getBoundingBox();
+	void setLocation(int x, int y);
 	void checkKeyInput();
 	void jump();
-	void checkCollisions();
+	void moveX();
+	void moveY();
 	void shift(Vector&);
-	void move();
 	void mine(int dir);
 
 	void update();

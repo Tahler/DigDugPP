@@ -2,7 +2,6 @@
 #include "Core.h"
 #include "Character.h"
 #include "World.h"
-#include "Blocks.h"
 #include "Window.h"
 #include "Store.h"
 
@@ -18,8 +17,6 @@ Store store;
 
 bool update(float dt)
 {
-	//tri.isColliding = (!tri.getBoundingBox().intersects(rect));
-	world.update();
 	player.update();
 	//store.update();
 	return false;
@@ -27,7 +24,6 @@ bool update(float dt)
 
 void draw(Core::Graphics& graphics)
 {
-	//graphics.SetBackgroundColor(RGB(127, 127, 127));
 	world.draw(graphics);
 	player.draw(graphics);
 	//store.draw(graphics);
