@@ -4,6 +4,7 @@
 #include "Core.h"
 #include "Physics.h"
 #include "World.h"
+#include "Fill.h"
 #include <time.h>
 
 using Physics::Gravity;
@@ -29,12 +30,18 @@ Character::Character(World* world, int x, int y)
 Physics::Rectangle Character::getBoundingBox()
 {
 	return Physics::Rectangle(Point(location.x + BLOCK_FIFTH, location.y + 2), Point(location.x + BLOCK_SIZE - BLOCK_FIFTH, location.y + BLOCK_SIZE));
-	//return Physics::Rectangle(Point(location.x + 2, location.y + 2), Point(location.x + BLOCK_SIZE - 2, location.y + BLOCK_SIZE - 2));
 }
+
+// Sets an x and y value based on the grid (BLOCK_SIZE)
 void Character::setLocation(int x, int y)
 {
 	location.x = x * BLOCK_SIZE;
 	location.y = y * BLOCK_SIZE;
+}
+void Character::reset()
+{
+	inventory.empty();
+	setLocation(3, 3);
 }
 
 void Character::jump()
@@ -165,7 +172,7 @@ void Character::shift(Vector& displacement)
 
 void Character::checkKeyInput()
 {
-	if (Core::Input::IsPressed(VK_BACK)) setLocation(4, 3);
+	if (Core::Input::IsPressed(VK_BACK)) reset();
 	if (Core::Input::IsPressed(Core::Input::KEY_SHIFT))
 	{
 		velocity.x = 0;
