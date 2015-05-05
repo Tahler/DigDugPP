@@ -3,7 +3,7 @@ using namespace Blocks;
 using Physics::Vector;
 
 // Measured in pixels
-const int BLOCK_SIZE = 5;
+const int BLOCK_SIZE = 50;
 
 // Block //
 void Block::setLocation(Point& pa)
