@@ -15,6 +15,7 @@ void fillSquare(Graphics& g, Point p, int width)
 
 void fillRectangle(Graphics& g, Point p, int width, int height)
 {
+	++width;
 	if (width < height) 
 	{
 		for (int ii = 0; ii < width; ++ii)
