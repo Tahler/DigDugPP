@@ -22,9 +22,14 @@ int Inventory::size()
 	return count;
 }
 
+bool Inventory::isFull()
+{
+	return size() >= maxSize;
+}
+
 void Inventory::addItem(int i)
 {
-	items[i]++;
+	if (!isFull()) items[i]++;
 }
 void Inventory::addCopper()
 {
