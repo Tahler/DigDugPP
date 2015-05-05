@@ -23,7 +23,7 @@ public:
 	Inventory() : 
 		maxSize(10) // default size is 10
 	{};
-	Inventory(int, int[8], int);
+	Inventory(int invSize, int items[8], int money);
 
 	int size();
 

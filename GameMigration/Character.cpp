@@ -19,6 +19,14 @@ const float MAX_SPEED = BLOCK_SIZE / 10;
 long lastMineMillis = time(0) * 1000;
 int pickStrength = 3;
 
+Character::Character(World* world, float x, float y, int invSize, int items[8], int money)
+{
+	Character::world = world;
+	location = Point(x * BLOCK_SIZE, y * BLOCK_SIZE);
+	velocity = Vector(0, 0);
+	isJumping = false;
+	inventory = Inventory(invSize, items, money);
+}
 Physics::Rectangle Character::getBoundingBox()
 {
 	return Physics::Rectangle(Point(location.x + BLOCK_FIFTH, location.y + 2), Point(location.x + BLOCK_SIZE - BLOCK_FIFTH, location.y + BLOCK_SIZE));

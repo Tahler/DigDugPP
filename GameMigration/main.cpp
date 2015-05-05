@@ -7,8 +7,9 @@
 
 using namespace std;
 
+int invItems[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 World world;
-Character player(&world, 1, 3);
+Character player(&world, 1, 3, 10, invItems, 0);
 
 ////////////////////////////////////////////////////////////
 
