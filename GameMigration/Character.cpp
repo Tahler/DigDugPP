@@ -192,10 +192,18 @@ void Character::checkKeyInput()
 		else velocity.x = 0;
 
 		// If on a ladder, w and s move up and down the ladder...
-		//if (world->getBlockAt())
-		if (Core::Input::IsPressed(Core::Input::KEY_W)) jump();
-
+		Block* b = &world->getBlockAt(getCenterPoint());
+		Ladder* ladder = dynamic_cast<Ladder*>(b);
+		if (ladder != nullptr)
+		{
+			if (Core::Input::IsPressed(Core::Input::KEY_W)) velocity.y = -MAX_SPEED;
+			else if (Core::Input::IsPressed(Core::Input::KEY_S)) velocity.y = MAX_SPEED;
+		}
 		// Else, the s key does nothing and w jumps
+		else
+		{
+			if (Core::Input::IsPressed(Core::Input::KEY_W)) jump();
+		}
 	}
 }
 

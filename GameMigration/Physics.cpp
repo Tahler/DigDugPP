@@ -44,7 +44,7 @@ void drawLine(Core::Graphics& g, const Vector& left, const Vector& right)
 // Rectangle //
 Point Rectangle::getCenterPoint()
 {
-	return Point(b.x - a.x, b.y - a.y);
+	return Point(a.x + (b.x - a.x) / 2, a.y + (b.y - a.y) / 2);
 }
 bool Rectangle::contains(Point& p)
 {
