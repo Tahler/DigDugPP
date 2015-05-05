@@ -36,29 +36,7 @@ void Character::setLocation(int x, int y)
 	location.x = x * BLOCK_SIZE;
 	location.y = y * BLOCK_SIZE;
 }
-void Character::checkKeyInput()
-{
-	if (Core::Input::IsPressed(VK_BACK)) setLocation(4, 3);
-	if (Core::Input::IsPressed(Core::Input::KEY_SHIFT)) 
-	{
-		velocity.x = 0;
-		if (!isJumping) 
-		{
-			if (Core::Input::IsPressed(Core::Input::KEY_S)) mine(0);
-			else if (Core::Input::IsPressed(Core::Input::KEY_D)) mine(3);
-			else if (Core::Input::IsPressed(Core::Input::KEY_W)) mine(2);
-			else if (Core::Input::IsPressed(Core::Input::KEY_A)) mine(1);
-		}
-	}
-	else
-	{
-		if (Core::Input::IsPressed(Core::Input::KEY_A)) velocity.x = -MAX_SPEED;
-		else if (Core::Input::IsPressed(Core::Input::KEY_D)) velocity.x = MAX_SPEED;
-		else velocity.x = 0;
 
-		if (Core::Input::IsPressed(Core::Input::KEY_W)) jump();
-	}	
-}
 void Character::jump()
 {
 	if (!isJumping)
@@ -67,10 +45,7 @@ void Character::jump()
 		velocity.y = -sqrt(2 * Gravity::acceleration * BLOCK_SIZE);
 	}
 }
-void Character::shift(Vector& displacement)
-{
-	location += displacement;
-}
+
 void Character::mine(int dir)
 {		
 	if ((time(0) - lastMineMillis) > 100)
@@ -183,6 +158,35 @@ void Character::moveY()
 		}
 	}
 }
+void Character::shift(Vector& displacement)
+{
+	location += displacement;
+}
+
+void Character::checkKeyInput()
+{
+	if (Core::Input::IsPressed(VK_BACK)) setLocation(4, 3);
+	if (Core::Input::IsPressed(Core::Input::KEY_SHIFT))
+	{
+		velocity.x = 0;
+		if (!isJumping)
+		{
+			if (Core::Input::IsPressed(Core::Input::KEY_S)) mine(0);
+			else if (Core::Input::IsPressed(Core::Input::KEY_D)) mine(3);
+			else if (Core::Input::IsPressed(Core::Input::KEY_W)) mine(2);
+			else if (Core::Input::IsPressed(Core::Input::KEY_A)) mine(1);
+		}
+	}
+	else
+	{
+		if (Core::Input::IsPressed(Core::Input::KEY_A)) velocity.x = -MAX_SPEED;
+		else if (Core::Input::IsPressed(Core::Input::KEY_D)) velocity.x = MAX_SPEED;
+		else velocity.x = 0;
+
+		if (Core::Input::IsPressed(Core::Input::KEY_W)) jump();
+	}
+}
+
 void Character::update()
 {
 	checkKeyInput();
