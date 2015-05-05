@@ -116,9 +116,9 @@ void Character::moveX()
 		if (!neighbor1->isTraversable || !neighbor2->isTraversable) // collision incoming
 		{
 			velocity.x = 0;
-			shift(Vector(neighbor1->b.x - box->a.x, 0));
+			location.x += neighbor1->b.x - box->a.x;
 		}
-		else if (box->a.x < 0) shift(Vector(-box->a.x, 0));
+		else if (box->a.x < 0) location.x += -box->a.x;
 	}
 	else if (velocity.x > 0) // moving right
 	{
@@ -127,10 +127,9 @@ void Character::moveX()
 		if (!neighbor1->isTraversable || !neighbor2->isTraversable)
 		{
 			velocity.x = 0;
-			shift(Vector(neighbor1->a.x - box->b.x - 1, 0));
+			location.x += neighbor1->a.x - box->b.x - 1;
 		}
-		else if (box->b.x > world->blocks.size() * BLOCK_SIZE)
-			shift(Vector(-(box->b.x - world->blocks.size() * BLOCK_SIZE), 0));
+		else if (box->b.x > world->blocks.size() * BLOCK_SIZE) location.x += -(box->b.x - world->blocks.size() * BLOCK_SIZE);
 	}
 }
 void Character::moveY()
@@ -150,9 +149,9 @@ void Character::moveY()
 		{
 			isJumping = false;
 			velocity.y = 0;
-			shift(Vector(0, neighbor1->a.y - box->b.y - 1));
+			location.y += neighbor1->a.y - box->b.y - 1;
 		}
-		else if (box->b.y > world->blocks[0].size() * BLOCK_SIZE) shift(Vector(0, -(box->b.y - world->blocks[0].size() * BLOCK_SIZE)));
+		else if (box->b.y > world->blocks[0].size() * BLOCK_SIZE) location.y += -(box->b.y - world->blocks[0].size() * BLOCK_SIZE);
 	}
 	else if (velocity.y < 0) // moving up
 	{
@@ -161,13 +160,10 @@ void Character::moveY()
 		if (!neighbor1->isTraversable || !neighbor2->isTraversable)
 		{
 			velocity.y = 0;
-			shift(Vector(0, neighbor1->b.y - box->a.y));
+			location.y += neighbor1->b.y - box->a.y;
 		}
+		// No need for boundaries with the top of the screen
 	}
-}
-void Character::shift(Vector& displacement)
-{
-	location += displacement;
 }
 
 void Character::checkKeyInput()

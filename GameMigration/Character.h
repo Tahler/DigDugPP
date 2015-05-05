@@ -37,7 +37,6 @@ public:
 	void jump();
 	void moveX();
 	void moveY();
-	void shift(Vector&);
 	void mine(int dir);
 
 	void update();
