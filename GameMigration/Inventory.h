@@ -27,6 +27,7 @@ public:
 
 	int size();
 	bool isFull();
+	void emptyMinerals();
 
 	void addItem(int);
 	void addCopper();

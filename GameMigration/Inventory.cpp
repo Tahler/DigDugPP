@@ -22,6 +22,11 @@ int Inventory::size()
 	return count;
 }
 
+void Inventory::emptyMinerals()
+{
+	int length = sizeof(items) / sizeof(*items);
+	for (int i = 0; i < length; ++i) items[i] = 0;
+}
 bool Inventory::isFull()
 {
 	return size() >= maxSize;
