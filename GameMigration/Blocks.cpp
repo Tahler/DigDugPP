@@ -1,5 +1,6 @@
 
 #include "Blocks.h"
+#include "Fill.h"
 #include "Character.h"
 using namespace Blocks;
 using Physics::Vector;

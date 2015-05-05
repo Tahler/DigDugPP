@@ -33,6 +33,7 @@ public:
 	Physics::Rectangle getBoundingBox();
 	void setLocation(int x, int y);
 	void checkKeyInput();
+	void reset();
 	void jump();
 	void moveX();
 	void moveY();

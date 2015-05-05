@@ -21,11 +21,22 @@ int Inventory::size()
 	for (int i = 0; i < length; ++i) count += items[i];
 	return count;
 }
-
 bool Inventory::isFull()
 {
 	return size() >= maxSize;
 }
+void Inventory::emptyMinerals()
+{
+	int length = sizeof(items) / sizeof(*items);
+	for (int i = 0; i < length; ++i) items[i] = 0;
+}
+void Inventory::empty()
+{
+	emptyMinerals();
+	money = 0;
+	// will also empty ladders and money?
+}
+
 
 void Inventory::addItem(int i)
 {
