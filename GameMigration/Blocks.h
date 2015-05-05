@@ -27,7 +27,20 @@ namespace Blocks
 		{}
 		void setLocation(Point&);
 	};
-
+	struct StoreLeft:Block
+	{
+		StoreLeft(Point& a) :
+			Block(a, false)
+		{}
+		void drawAt(Core::Graphics& g, Vector& p);
+	};
+	struct StoreRight:Block
+	{
+		StoreRight(Point& a) :
+			Block(a, false)
+		{}
+		void drawAt(Core::Graphics& g, Vector& p);
+	};
 	struct Sky:Block
 	{
 		Sky(Point& a) : 
@@ -35,7 +48,13 @@ namespace Blocks
 		{}
 		void drawAt(Core::Graphics& g, Vector& p);
 	};
-
+	struct UnbreakableGrass:Block
+	{
+		UnbreakableGrass(Point& a) : 
+			Block(a, false)
+		{}
+		void drawAt(Core::Graphics& g, Vector& p);
+	};
 	struct Cave:Block
 	{
 		Cave(Point& a) :

@@ -8,7 +8,7 @@
 using namespace std;
 
 World world;
-Character player(&world, 1, 3);
+Character player(&world, 4, 3);
 
 ////////////////////////////////////////////////////////////
 

@@ -2,6 +2,7 @@
 #include "World.h"
 #include "Physics.h"
 #include <stdlib.h>
+#include <time.h>
 
 using Physics::Vector;
 
@@ -27,8 +28,22 @@ World::~World()
 }
 void World::init()
 {
+	//srand(time(NULL));
 	addEarth();
 	addMinerals();
+	delete blocks[1][3];
+	delete blocks[2][3];
+	delete blocks[1][4];
+	delete blocks[2][4];
+	delete blocks[3][4];
+	delete blocks[0][4];
+	blocks[1][3] = new StoreLeft(Point(1,3));
+	blocks[2][3] = new StoreRight(Point(2,3));
+	blocks[2][2]->isTraversable = false;
+	blocks[1][4] = new UnbreakableGrass(Point(1,4));
+	blocks[2][4] = new UnbreakableGrass(Point(2,4));
+	blocks[3][4] = new UnbreakableGrass(Point(3,4));
+	blocks[0][4] = new UnbreakableGrass(Point(0,4));
 	//delete blocks[10][4];
 	//blocks[10][4] = new Grass(Point(10, 4));
 	//delete blocks[11][5];
@@ -40,7 +55,7 @@ void World::init()
 	//delete blocks[3][7];
 	//blocks[3][7] = new Silver(Point(3, 7));
 	//delete blocks[3][8];
-	//blocks[3][8] = new Sapphire(Point(3, 8));
+	//blocks[3][8] = new Sapphire(Point(3, 8))
 	//delete blocks[3][9];
 	//blocks[3][9] = new Ruby(Point(3, 9));
 	//delete blocks[3][10];

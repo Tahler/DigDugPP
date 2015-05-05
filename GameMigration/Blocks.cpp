@@ -62,6 +62,14 @@ void Grass::drawAt(Core::Graphics &g, Vector& offset)
 	fillRectangle(g, p, BLOCK_SIZE, BLOCK_FIFTH);
 	drawCracks(g, p, durability);
 }
+void UnbreakableGrass::drawAt(Core::Graphics &g, Vector& offset)
+{
+	Point p = a - offset;
+	g.SetColor(RGB(110,83,9));
+	fillSquare(g, p, BLOCK_SIZE);
+	g.SetColor(RGB(20, 219, 2));
+	fillRectangle(g, p, BLOCK_SIZE, BLOCK_FIFTH);
+}
 void Iron::drawAt(Core::Graphics &g, Vector& offset)
 {
 	Point p = a - offset;
@@ -154,6 +162,47 @@ void Diamond::drawAt(Core::Graphics& g, Vector& offset)
 	fillSquare(g, Point(p.x + BLOCK_FIFTH, p.y + BLOCK_FIFTH), BLOCK_FIFTH);
 	fillSquare(g, Point(p.x + BLOCK_FIFTH*2, p.y + BLOCK_FIFTH), BLOCK_FIFTH*2);
 	drawCracks(g, p, durability);
+}
+
+void StoreLeft::drawAt(Core::Graphics& g, Vector& offset)
+{
+	Point p = a - offset;
+	g.SetColor(RGB(120, 207, 227));
+	fillSquare(g, p, BLOCK_SIZE);
+	//Counter
+	g.SetColor(RGB(181, 101, 29));
+	fillRectangle(g, Point(p.x, p.y + BLOCK_FIFTH * 2), BLOCK_SIZE, BLOCK_FIFTH);
+	fillRectangle(g, Point(p.x + BLOCK_FIFTH, p.y + BLOCK_FIFTH * 3), BLOCK_FIFTH, BLOCK_FIFTH * 2);
+	//Gold bar
+	g.SetColor(RGB(212, 175, 55));
+	fillRectangle(g, Point(p.x + BLOCK_FIFTH, p.y + BLOCK_FIFTH), BLOCK_SIXTH * 2, BLOCK_FIFTH);
+	//shirt
+	g.SetColor(RGB(159, 0, 197));
+	fillRectangle(g, Point(p.x + BLOCK_FIFTH * 3, p.y + BLOCK_FIFTH), BLOCK_FIFTH*2, BLOCK_FIFTH);
+	//legs
+	g.SetColor(RGB(0xf0, 0xf0, 0xf0));
+	fillRectangle(g, Point(p.x + BLOCK_FIFTH*4, p.y + BLOCK_FIFTH*3), BLOCK_FIFTH, BLOCK_FIFTH*2);
+	//head
+	g.SetColor(RGB(0x53, 0x37, 0x19));
+	fillSquare(g, Point(p.x + BLOCK_FIFTH*4, p.y), BLOCK_FIFTH);
+}
+
+void StoreRight::drawAt(Core::Graphics& g, Vector& offset)
+{
+
+	Point p = a - offset;
+	g.SetColor(RGB(120, 207, 227));
+	fillSquare(g, p, BLOCK_SIZE);
+	//Counnter
+	g.SetColor(RGB(181, 101, 29));
+	fillRectangle(g, Point(p.x, p.y + BLOCK_FIFTH * 2), BLOCK_SIZE, BLOCK_FIFTH);
+	fillRectangle(g, Point(p.x + BLOCK_FIFTH * 3, p.y + BLOCK_FIFTH * 3), BLOCK_FIFTH, BLOCK_FIFTH *2);
+	//Emerald
+	g.SetColor(RGB(155, 17, 30));
+	fillHexagon(g, Point(p.x + BLOCK_FIFTH *2, p.y + BLOCK_FIFTH), BLOCK_FIFTH);
+	//shirt
+	g.SetColor(RGB(159, 0, 197));
+	fillSquare(g, Point(p.x, p.y + BLOCK_FIFTH), BLOCK_FIFTH);
 }
 
 void BreakableBlock::drawCracks(Core::Graphics& g, Point &p, int durability)
