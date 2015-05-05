@@ -30,8 +30,11 @@ public:
 		isJumping(false)
 	{}
 	Character(World* world, int x, int y);
+
 	Physics::Rectangle getBoundingBox();
+	Point getCenterPoint();
 	void setLocation(int x, int y);
+	
 	void checkKeyInput();
 	void reset();
 	void jump();

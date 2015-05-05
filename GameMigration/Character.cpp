@@ -32,6 +32,11 @@ Physics::Rectangle Character::getBoundingBox()
 	return Physics::Rectangle(Point(location.x + BLOCK_FIFTH, location.y + 2), Point(location.x + BLOCK_SIZE - BLOCK_FIFTH, location.y + BLOCK_SIZE));
 }
 
+Point Character::getCenterPoint()
+{
+	return getBoundingBox().getCenterPoint();
+}
+
 // Sets an x and y value based on the grid (BLOCK_SIZE)
 void Character::setLocation(int x, int y)
 {
@@ -186,7 +191,11 @@ void Character::checkKeyInput()
 		else if (Core::Input::IsPressed(Core::Input::KEY_D)) velocity.x = MAX_SPEED;
 		else velocity.x = 0;
 
+		// If on a ladder, w and s move up and down the ladder...
+		//if (world->getBlockAt())
 		if (Core::Input::IsPressed(Core::Input::KEY_W)) jump();
+
+		// Else, the s key does nothing and w jumps
 	}
 }
 

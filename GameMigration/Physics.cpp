@@ -42,6 +42,10 @@ void drawLine(Core::Graphics& g, const Vector& left, const Vector& right)
 }
 
 // Rectangle //
+Point Rectangle::getCenterPoint()
+{
+	return Point(b.x - a.x, b.y - a.y);
+}
 bool Rectangle::contains(Point& p)
 {
 	return (p.x >= a.x && p.x <= b.x)  // within x-axis boundaries

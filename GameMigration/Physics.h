@@ -63,8 +63,8 @@ namespace Physics
 			a(a), b(b) 
 		{}
 		
-		void setPoints(Point&, Point&);
-		//void move(Vector&);
+		Point getCenterPoint();
+
 		bool contains(Point&);
 		bool intersects(Rectangle&);
 
