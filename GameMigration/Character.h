@@ -11,7 +11,7 @@ using Physics::Vector;
 using Physics::Rectangle;
 
 class Character
-{ // it may be necessary to eventually have a bool moving left, right, up, down for optimization (do this instead of checking velocities every frame)
+{
 private:
 	World* world; // WORLD-STAR
 

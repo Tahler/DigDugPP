@@ -2,7 +2,6 @@
 #include "Core.h"
 #include "Character.h"
 #include "World.h"
-#include "Blocks.h"
 #include "Window.h"
 
 using namespace std;
@@ -16,15 +15,12 @@ Character player(&world, 4, 3);
 
 bool update(float dt)
 {
-	//tri.isColliding = (!tri.getBoundingBox().intersects(rect));
-	world.update();
 	player.update();
 	return false;
 }
 
 void draw(Core::Graphics& graphics)
 {
-	//graphics.SetBackgroundColor(RGB(127, 127, 127));
 	world.draw(graphics);
 	player.draw(graphics);
 }

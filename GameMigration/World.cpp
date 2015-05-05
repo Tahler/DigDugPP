@@ -263,10 +263,6 @@ void World::switchVals(int& numOcc, int&  up, int& low, int& minVein, int& maxVe
 		break;
 	}
 }
-void World::update()
-{
-	
-}
 void World::draw(Core::Graphics& g)
 {
 	// Select all blocks on the screen and draw them //

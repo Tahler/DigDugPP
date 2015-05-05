@@ -13,7 +13,6 @@ extern const int WINDOW_WIDTH, WINDOW_HEIGHT; //, DEADZONE_DIVISOR;
 class Window
 {
 public:
-	int color;
 	Physics::Rectangle box;
 	Physics::Rectangle deadzone;
 
@@ -29,7 +28,7 @@ public:
 	void shift(Vector&);
 
 	void update();
-	void draw(Core::Graphics&);
+	//void draw(Core::Graphics&);
 };
 
 #endif

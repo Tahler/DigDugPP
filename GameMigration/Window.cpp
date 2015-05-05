@@ -4,14 +4,9 @@
 #include "World.h"
 #include "Physics.h"
 
-#include <iostream>
-using std::cout;
-
 using Physics::Vector;
 
 // Measured in pixels
-//const int WINDOW_WIDTH = 24 * BLOCK_SIZE;
-//const int WINDOW_HEIGHT = 16 * BLOCK_SIZE;
 const int WINDOW_WIDTH = 1200;
 const int WINDOW_HEIGHT = 800;
 //const int DEADZONE_DIVISOR = 3;
@@ -43,9 +38,10 @@ void Window::update()
 	if (box.a.y < 0) box += Vector(0, -box.a.y);
 	else if (box.b.y > WORLD_HEIGHT * BLOCK_SIZE) box += Vector(0, WORLD_HEIGHT * BLOCK_SIZE - box.b.y);
  }
-void Window::draw(Core::Graphics& g)
-{
-	g.SetColor(RGB(255, 0, 0)); // trace
-	box.draw(g);
-	deadzone.draw(g);
-}
+//// Only used for tracing
+//void Window::draw(Core::Graphics& g)
+//{
+//	g.SetColor(RGB(255, 0, 0)); 
+//	box.draw(g);
+//	deadzone.draw(g);
+//}
