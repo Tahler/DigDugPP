@@ -61,46 +61,44 @@ void Character::jump()
 
 void Character::mine(int dir)
 {		
-	if ((time(0) - lastMineMillis) > 100)
+
+	Physics::Rectangle* box = &getBoundingBox();
+	Point& p = getCenterPoint();
+
+	Block* b;
+	switch (dir)
 	{
-		Physics::Rectangle* box = &getBoundingBox();
+	case 0:
+		//down
+		b = &(world->getBlockAt(Point(p.x, box->b.y + MAX_SPEED - 1)));
+		break;
+	case 1:
+		//right
+		b = &(world->getBlockAt(Point(box->a.x - MAX_SPEED + 1, p.y)));
+	
+		break;
+	case 2:
+		//up
+		b = &(world->getBlockAt(Point(p.x, box->a.y - MAX_SPEED + 1)));
+		break;
+	case 3:
+		//left
+		b = &(world->getBlockAt(Point(box->b.x + MAX_SPEED, p.y)));
+		break;
+	default:
+		b = nullptr;
+		break;
+	}
 
-		Block* b;
-		switch (dir)
+	BreakableBlock* b2 = dynamic_cast<BreakableBlock*>(b);
+	if (b2 != nullptr)
+	{
+		b2->takeDamage(pickStrength);
+		if (b2->durability <= 0)
 		{
-		case 0:
-			//down
-			b = &(world->getBlockAt(Point(box->a.x + BLOCK_HALF, box->b.y + MAX_SPEED - 1)));
-			break;
-		case 1:
-			//right
-			b = &(world->getBlockAt(Point(box->a.x - MAX_SPEED + 1, box->a.y + BLOCK_HALF)));
-		
-			break;
-		case 2:
-			//up
-			b = &(world->getBlockAt(Point(box->a.x + BLOCK_HALF, box->a.y - MAX_SPEED + 1)));
-			break;
-		case 3:
-			//left
-			b = &(world->getBlockAt(Point(box->b.x + MAX_SPEED, box->a.y + BLOCK_HALF)));
-			break;
-		default:
-			b = nullptr;
-			break;
-		}
 
-		BreakableBlock* b2 = dynamic_cast<BreakableBlock*>(b);
-		if (b2 != nullptr)
-		{
-			b2->takeDamage(pickStrength);
-			if (b2->durability <= 0)
-			{
-
-				world->destroyBlockAt(b->a);
-			}
+			world->destroyBlockAt(b->a);
 		}
-		lastMineMillis = time(0) * 1000;
 	}
 }
 
@@ -214,7 +212,6 @@ void Character::checkKeyInput()
 		}
 	}
 }
-
 void Character::update()
 {
 	checkKeyInput();
