@@ -162,10 +162,13 @@ void Character::mine(int dir)
 			//left
 			b = &(world->getBlockAt(Point(box->b.x + MAX_SPEED, box->a.y + BLOCK_HALF)));
 			break;
+		default:
+			b = nullptr;
+			break;
 		}
-	
+
 		BreakableBlock* b2 = dynamic_cast<BreakableBlock*>(b);
-		if (b2 != NULL)
+		if (b2 != nullptr)
 		{
 			b2->takeDamage(pickStrength);
 			if (b2->durability <= 0)
