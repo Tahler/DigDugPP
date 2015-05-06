@@ -33,7 +33,7 @@ public:
 		isJumping(false),
 		isOnLadder(false)
 	{}
-	Character(World* world, int x, int y);
+	Character(World* world);
 
 	Physics::Rectangle getBoundingBox();
 	Point getCenterPoint();

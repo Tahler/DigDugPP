@@ -23,7 +23,7 @@ const float MAX_SPEED = BLOCK_SIZE / 10;
 long lastMineMillis = time(0) * 1000;
 int pickStrength = 3;
 
-Character::Character(World* world, int x, int y)
+Character::Character(World* world)
 {
 	Character::world = world;
 	setLocation(spawnPoint);
