@@ -4,6 +4,7 @@
 #include "Fill.h"
 #include <string>
 #include "DrawText.h"
+#include "Inventory.h"
 
 using Physics::Point;
 
@@ -85,9 +86,12 @@ void Store::draw(Core::Graphics& g)
 	bagBar.draw(g);
 
 	//Text
+	g.SetColor(RGB(0,0,0));
 	writeMoney(g, Point(pickPoint.x + boxUnit * 3, pickPoint.y + boxUnit * 21), 150);
 	writeMoney(g, Point(bagPoint.x + boxUnit * 3, bagPoint.y + boxUnit * 21), 350);
-	writeMoney(g, Point(ladderPoint.x + boxUnit * 4, ladderPoint.y + boxUnit * 21), 50);
+	writeMoney(g, Point(ladderPoint.x + boxUnit * 4, ladderPoint.y + boxUnit * 21), 30);
+	g.SetColor(RGB(255, 255, 50));
+	writeMoney(g, Point(25,25), c->inventory.money);
 }
 
 void Store::addLadder(){};
