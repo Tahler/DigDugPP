@@ -3,6 +3,7 @@
 #include "Physics.h"
 #include <stdlib.h>
 #include <time.h>
+#include "Fill.h"
 
 using Physics::Vector;
 
@@ -271,6 +272,25 @@ void World::switchVals(int& numOcc, int&  up, int& low, int& minVein, int& maxVe
 		break;
 	}
 }
+
+// Flash the screen for a short time
+void World::flash(Core::Graphics& g)
+{
+	static int count;
+	if (count == 0)
+	{
+		if (shouldFlash) count = 15; // happens when World::draw() calls this function and shouldFlash is suddenly on (Character::reset() did this)
+	}
+	else
+	{
+		g.SetColor(RGB(255, 255, 255));
+		fillRectangle(g, window.box.a, window.box.b.x - window.box.a.x, window.box.b.y - window.box.a.y);
+		count--;
+		// if we've just reached the end of the timer, don't flash anymore
+		if (count == 0) shouldFlash = false;
+	}
+}
+
 void World::draw(Core::Graphics& g)
 {
 	// Select all blocks on the screen and draw them //
@@ -287,6 +307,8 @@ void World::draw(Core::Graphics& g)
 			blocks[i][j]->drawAt(g, window.box.a);
 		}
 	}
+
+	flash(g);
 }
 
 Block& World::getBlockAt(Point p)

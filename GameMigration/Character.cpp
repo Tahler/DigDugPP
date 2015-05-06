@@ -52,6 +52,7 @@ void Character::setLocation(Point& spot)
 }
 void Character::reset()
 {
+	world->shouldFlash = true;
 	inventory.empty();
 	setLocation(spawnPoint);
 }
@@ -162,10 +163,10 @@ void Character::moveY()
 		if (!neighbor1->isTraversable || !neighbor2->isTraversable)
 		{
 			isJumping = false;
-			
 			if (velocity.y >= Gravity::deathVelocity)
 			{
 				reset();
+				velocity.y = 0;
 				return;
 			}
 			velocity.y = 0;

@@ -22,7 +22,7 @@ bool update(float dt)
 void draw(Core::Graphics& graphics)
 {
 	world.draw(graphics);
-	player.draw(graphics);
+	if (!world.shouldFlash) player.draw(graphics);
 	//store.draw(graphics);
 }
 
