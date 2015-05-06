@@ -6,6 +6,7 @@
 #include "World.h"
 #include "Fill.h"
 #include <time.h>
+#include <string>
 
 using Physics::Gravity;
 using Physics::Point;
@@ -15,6 +16,7 @@ using Physics::operator+;
 using Physics::operator-;
 
 // Character //
+string Character::notification = "";
 const float MAX_SPEED = BLOCK_SIZE / 10;
 
 long lastMineMillis = time(0) * 1000;
@@ -27,10 +29,13 @@ Character::Character(World* world, int x, int y)
 	velocity = Vector(0, 0);
 	isJumping = false;
 	isOnLadder = false;
+
+	inventory.empty();
+	notification = "";
 }
 Physics::Rectangle Character::getBoundingBox()
 {
-	return Physics::Rectangle(Point(location.x + BLOCK_FIFTH, location.y + 2), Point(location.x + BLOCK_SIZE - BLOCK_FIFTH, location.y + BLOCK_SIZE));
+	return Physics::Rectangle(Point(location.x + BLOCK_FIFTH, location.y + 2), Point(location.x + BLOCK_SIZE - BLOCK_FIFTH, location.y + BLOCK_SIZE - 2));
 }
 
 Point Character::getCenterPoint()
@@ -96,7 +101,6 @@ void Character::mine(int dir)
 		b2->takeDamage(pickStrength);
 		if (b2->durability <= 0)
 		{
-
 			world->destroyBlockAt(b->a);
 		}
 	}
@@ -181,6 +185,7 @@ void Character::checkKeyInput()
 	if (Core::Input::IsPressed(Core::Input::KEY_SHIFT))
 	{
 		velocity.x = 0;
+		if (isOnLadder) velocity.y = 0;
 		if (!isJumping)
 		{
 			if (Core::Input::IsPressed(Core::Input::KEY_S)) mine(0);
@@ -201,6 +206,7 @@ void Character::checkKeyInput()
 		// If on a ladder, w and s move up and down the ladder...
 		if (isOnLadder)
 		{
+			isJumping = false;
 			if (Core::Input::IsPressed(Core::Input::KEY_W)) velocity.y = -MAX_SPEED;
 			else if (Core::Input::IsPressed(Core::Input::KEY_S)) velocity.y = MAX_SPEED;
 			else velocity.y = 0;
@@ -212,6 +218,7 @@ void Character::checkKeyInput()
 		}
 	}
 }
+
 void Character::update()
 {
 	checkKeyInput();
@@ -242,6 +249,7 @@ void Character::update()
 	// Adjust for gravity
 	if (!isOnLadder) velocity.y += Gravity::acceleration;
 }
+
 void Character::draw(Core::Graphics& g)
 {
 	drawAt(g, world->window.box.a);
@@ -286,4 +294,19 @@ void Character::drawAt(Core::Graphics& g, Vector& displacement)
 	g.SetColor(RGB(10, 10, 255));
 
 	//getBoundingBox().draw(g);
+
+	static int count;
+	if (count == 0)
+	{
+		if (notification != "") count = 90; // make this equal to framerate * 2? 2 seconds?
+		// Then it's just been changed to some text, we need to show it
+	}
+	else
+	{
+		g.SetColor(RGB(255, 255, 255));
+		g.DrawString(p.x, p.y + BLOCK_SIZE + BLOCK_FIFTH, notification.c_str());
+		count--;
+		// if we've just reached the end of the two seconds, set the string to ""
+		if (count == 0) notification = "";
+	}
 }

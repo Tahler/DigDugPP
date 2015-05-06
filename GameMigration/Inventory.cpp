@@ -1,5 +1,12 @@
 
 #include "Inventory.h"
+#include "Character.h"
+#include <string>
+
+enum Minerals
+{
+	COPPER, IRON, SILVER, SAPPHIRE, RUBY, EMERALD, GOLD, DIAMOND
+};
 
 Inventory::Inventory(int invSize, int copy[8], int money)
 {
@@ -37,10 +44,46 @@ void Inventory::empty()
 	// will also empty ladders and money?
 }
 
-
 void Inventory::addItem(int i)
 {
-	if (!isFull()) items[i]++;
+	if (!isFull())
+	{
+		items[i]++;
+
+		string s;
+		Minerals m = (Minerals) i;
+		switch (m)
+		{
+		case COPPER:
+			s = "Copper";
+			break;
+		case IRON:
+			s = "Iron";
+			break;
+		case SILVER:
+			s = "Silver";
+			break;
+		case SAPPHIRE:
+			s = "Sapphire";
+			break;
+		case RUBY:
+			s = "Ruby";
+			break;
+		case EMERALD:
+			s = "Emerald";
+			break;
+		case GOLD:
+			s = "Gold";
+			break;
+		case DIAMOND:
+			s = "Diamond";
+			break;
+		default:
+			s = "Unknown";
+		}
+		Character::notification = "+1 " + s;
+	}
+	else Character::notification = "Inventory full.";
 }
 void Inventory::addCopper()
 {

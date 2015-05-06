@@ -5,10 +5,12 @@
 #include "Physics.h"
 #include "World.h"
 #include "Inventory.h"
+//#include <string.h>
 
 using Physics::Point;
 using Physics::Vector;
 using Physics::Rectangle;
+using std::string;
 
 class Character
 {
@@ -21,6 +23,7 @@ public:
 	Vector velocity;
 	bool isJumping;
 	bool isOnLadder;
+	static string notification;
 
 	Character() :
 		world(nullptr),

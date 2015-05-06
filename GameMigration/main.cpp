@@ -4,8 +4,6 @@
 #include "Window.h"
 #include "Store.h"
 
-using namespace std;
-
 int invItems[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 Inventory Character::inventory = Inventory(10, invItems, 0);
 World world;

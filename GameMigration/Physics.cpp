@@ -17,7 +17,7 @@ bool Physics::operator==(const Vector& left, const Vector& right)
 {
 	return ((left.x == right.x) && (left.y == right.y));
 }
-Vector& Vector::operator-()
+Vector Vector::operator-()
 {
 	return Vector(-x, -y);
 }
