@@ -37,6 +37,18 @@ void Inventory::emptyMinerals()
 	int length = sizeof(items) / sizeof(*items);
 	for (int i = 0; i < length; ++i) items[i] = 0;
 }
+
+void Inventory::sellMinerals()
+{
+	const static int VALUES[8] = { 1, 2, 3, 4, 5, 6, 7, 8 };
+
+	int length = sizeof(items) / sizeof(*items);
+	for (int i = 0; i < length; ++i)
+	{
+		money += items[i] * VALUES[i];
+	}
+}
+
 void Inventory::empty()
 {
 	emptyMinerals();

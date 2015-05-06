@@ -20,12 +20,12 @@ public:
 		box(Physics::Rectangle(Point(0, 0), Point(0, 0))),
 		deadzone(Physics::Rectangle(Point(0, 0), Point(0, 0)))
 	{}
-	Window(Point& upperLeft) :
+	Window(Point upperLeft) :
 		box(Physics::Rectangle(upperLeft, Point(upperLeft.x + WINDOW_WIDTH, upperLeft.y + WINDOW_HEIGHT))),
 		deadzone(Physics::Rectangle(Point((box.b.x - box.a.x) / 3, (box.b.y - box.a.y) / 3), Point((box.b.x - box.a.x) * 2 / 3, (box.b.y - box.a.y) * 2 / 3))) // 1/3 size of box
 	{}
 	bool deadzoneIsCentered();
-	void shift(Vector&);
+	void shift(Vector);
 
 	void update();
 	//void draw(Core::Graphics&);

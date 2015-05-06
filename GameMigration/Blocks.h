@@ -20,52 +20,51 @@ namespace Blocks
 		bool isTraversable;
 
 		Block() {}
-		Block(Point& a, bool isTraversable) : // block is based on grid coordinates
+		Block(Point a, bool isTraversable) : // block is based on grid coordinates
 			Rectangle(Point(a.x * BLOCK_SIZE, a.y * BLOCK_SIZE), Point(a.x * BLOCK_SIZE + BLOCK_SIZE, a.y * BLOCK_SIZE + BLOCK_SIZE)), // point in rectangle is pixel coordinates
 			isTraversable(isTraversable)
 		{}
 		virtual ~Block() {}
-		void setLocation(Point&);
 	};
 	struct StoreLeft:Block
 	{
-		StoreLeft(Point& a) :
+		StoreLeft(Point a) :
 			Block(a, false)
 		{}
-		void drawAt(Core::Graphics& g, Vector& p);
+		void drawAt(Core::Graphics&, Vector&);
 	};
 	struct StoreRight:Block
 	{
-		StoreRight(Point& a) :
+		StoreRight(Point a) :
 			Block(a, false)
 		{}
-		void drawAt(Core::Graphics& g, Vector& p);
+		void drawAt(Core::Graphics&, Vector&);
 	};
 	struct Sky:Block
 	{
-		Sky(Point& a) : 
+		Sky(Point a) : 
 			Block(a, true)
 		{}
-		void drawAt(Core::Graphics& g, Vector& p);
+		void drawAt(Core::Graphics&, Vector&);
 	};
 	struct UnbreakableGrass:Block
 	{
-		UnbreakableGrass(Point& a) : 
+		UnbreakableGrass(Point a) : 
 			Block(a, false)
 		{}
-		void drawAt(Core::Graphics& g, Vector& p);
+		void drawAt(Core::Graphics&, Vector&);
 	};
 	struct Cave:Block
 	{
-		Cave(Point& a) :
+		Cave(Point a) :
 			Block(a, true)
 		{}
-		void drawAt(Core::Graphics& g, Vector& p);
+		void drawAt(Core::Graphics&, Vector&);
 	};
 	
 	struct Ladder:Block
 	{
-		Ladder(Point& a) : 
+		Ladder(Point a) : 
 			Block(a, true)
 		{}
 		void drawAt(Core::Graphics&, Vector&);
@@ -75,47 +74,47 @@ namespace Blocks
 	{
 		//Can break
 		int durability;
-		BreakableBlock(Point& a) :
+		BreakableBlock(Point a) :
 			Block(a, false)
 		{
 			durability = 100;
 		}
 		int takeDamage(int damage);
-		void drawCracks(Core::Graphics& g, Point& p, int durability);
+		void drawCracks(Core::Graphics&, Vector& p, int durability);
 	};
 
 	struct Dirt:BreakableBlock
 	{
 		//No value, disappears
-		Dirt(Point& a) :
+		Dirt(Point a) :
 			BreakableBlock(a)
 		{}
-		void drawAt(Core::Graphics& g, Vector&);
+		void drawAt(Core::Graphics&, Vector&);
 	};
 
 	struct Stone:BreakableBlock
 	{
 		//No value, disappears
-		Stone(Point& a) :
+		Stone(Point a) :
 			BreakableBlock(a)
 		{}
-		void drawAt(Core::Graphics& g, Vector&);
+		void drawAt(Core::Graphics&, Vector&);
 	};
 
 	struct Grass:BreakableBlock
 	{
 		//No value, disappears
-		Grass(Point& a) :
+		Grass(Point a) :
 			BreakableBlock(a)
 		{}
-		void drawAt(Core::Graphics& g, Vector&);
+		void drawAt(Core::Graphics&, Vector&);
 	};
 
 	struct OreBlock:BreakableBlock
 	{
 		//Has value, goes to inv
 		int value;
-		OreBlock(Point& a) :
+		OreBlock(Point a) :
 			BreakableBlock(a)
 		{}
 	};
@@ -123,99 +122,99 @@ namespace Blocks
 	struct Copper:OreBlock
 	{
 		
-		Copper(Point& a) :
+		Copper(Point a) :
 			OreBlock(a)
 		{
 			value = 1;
 		};
 		~Copper();
 		
-		void drawAt(Core::Graphics& g, Vector&);
+		void drawAt(Core::Graphics&, Vector&);
 	};
 
 	struct Iron:OreBlock
 	{
 	
-		Iron(Point& a) :
+		Iron(Point a) :
 			OreBlock(a)
 		{
 			value = 2;
 		};
 		~Iron();
 		
-		void drawAt(Core::Graphics& g, Vector&);
+		void drawAt(Core::Graphics&, Vector&);
 	};
 
 	struct Silver:OreBlock
 	{
-		Silver(Point& a) :
+		Silver(Point a) :
 			OreBlock(a)
 		{
 			value = 3;
 		};
 		~Silver();
 
-		void drawAt(Core::Graphics& g, Vector&);
+		void drawAt(Core::Graphics&, Vector&);
 	};
 
 	struct Sapphire:OreBlock
 	{
-		Sapphire(Point& a) :
+		Sapphire(Point a) :
 			OreBlock(a)
 		{
 			value = 4;
 		}
 		~Sapphire();
 
-		void drawAt(Core::Graphics& g, Vector&);
+		void drawAt(Core::Graphics&, Vector&);
 	};
 	
 	struct Ruby:OreBlock
 	{
-		Ruby(Point & a) :
+		Ruby(Point a) :
 			OreBlock(a)
 		{
 			value = 5;
 		}
 		~Ruby();
 
-		void drawAt(Core::Graphics&g, Vector&);
+		void drawAt(Core::Graphics&, Vector&);
 	};
 
 	struct Emerald:OreBlock
 	{
-		Emerald(Point& a) :
+		Emerald(Point a) :
 			OreBlock(a)
 		{
 			value = 6;
 		}
 		~Emerald();
 
-		void drawAt(Core::Graphics&g, Vector&);
+		void drawAt(Core::Graphics&, Vector&);
 	};
 
 	struct Gold:OreBlock
 	{
-		Gold(Point& a) :
+		Gold(Point a) :
 			OreBlock(a)
 		{
 			value = 7;
 		}
 		~Gold();
 
-		void drawAt(Core::Graphics&g, Vector&);
+		void drawAt(Core::Graphics&, Vector&);
 	};
 
 	struct Diamond:OreBlock
 	{
-		Diamond(Point& a) :
+		Diamond(Point a) :
 			OreBlock(a)
 		{
 			value = 8;
 		}
 		~Diamond();
 
-		void drawAt(Core::Graphics&g, Vector&);
+		void drawAt(Core::Graphics&, Vector&);
 	};
 }
 #endif

@@ -16,6 +16,7 @@ extern const int WORLD_WIDTH, WORLD_HEIGHT;
 class World
 {
 public:
+	bool shouldFlash;
 	vector<vector<Block*>> blocks;
 	Window window;
 
@@ -27,10 +28,11 @@ public:
 	void replaceBlock(int&, int&, int&);
 	void switchVals(int&, int&, int&, int&, int&, int&);
 
+	void flash(Core::Graphics&);
 	void draw(Core::Graphics&);
 
-	Block& getBlockAt(Point&);
-	void destroyBlockAt(Point&);
+	Block& getBlockAt(Point);
+	void destroyBlockAt(Point);
 };
 
 #endif

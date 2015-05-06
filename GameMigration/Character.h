@@ -15,6 +15,7 @@ using std::string;
 class Character
 {
 private:
+	static Point spawnPoint;
 	World* world; // WORLD-STAR
 
 public:
@@ -31,15 +32,15 @@ public:
 		location(0, 0),
 		velocity(0, 0),
 		isJumping(false),
-		isOnLadder(false)
-	{
-		storeOpen = false;
-	}
-	Character(World* world, int x, int y);
+		isOnLadder(false),
+		storeOpen(false)	
+	{}
+
+	Character(World* world);
 
 	Physics::Rectangle getBoundingBox();
 	Point getCenterPoint();
-	void setLocation(int x, int y);
+	void setLocation(Point&);
 	
 	void checkKeyInput();
 	void reset();

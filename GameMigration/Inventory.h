@@ -30,6 +30,8 @@ public:
 	void empty();
 	void emptyMinerals();
 
+	void sellMinerals();
+
 	void addItem(int);
 	void addCopper();
 	void addIron();

@@ -1,8 +1,12 @@
 
 #include "Physics.h"
+#include "Blocks.h"
+#include <math.h>
 using namespace Physics;
 
 float Gravity::acceleration = 0.6f;
+int Gravity::deathHeightInBlocks = 6;
+const float Gravity::deathVelocity = sqrt(2 * Gravity::acceleration * Gravity::deathHeightInBlocks * BLOCK_SIZE);
 
 // Vector //
 Vector Physics::operator+(const Vector& left, const Vector& right)

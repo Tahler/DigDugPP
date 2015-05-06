@@ -3,6 +3,7 @@
 #include "Physics.h"
 #include <stdlib.h>
 #include <time.h>
+#include "Fill.h"
 
 using Physics::Vector;
 
@@ -18,9 +19,9 @@ World::World()
 }
 World::~World()
 {
-	for (unsigned int i = 0; i < blocks.size(); i++)
+	for (int i = 0; i < blocks.size(); i++)
 	{
-		for (unsigned int j = 0; j < blocks[i].size(); j++)
+		for (int j = 0; j < blocks[i].size(); j++)
 		{
 			delete blocks[i][j];
 		}
@@ -80,36 +81,36 @@ void World::init()
 }
 void World::addEarth()
 {
-	for (unsigned int i = 0; i < blocks.size(); i++)
+	for (int i = 0; i < blocks.size(); i++)
 	{
 		//0-3 100% sky
-		for (unsigned int j = 0; j < 4; j++) // Leave the first four rows blank.
+		for (int j = 0; j < 4; j++) // Leave the first four rows blank.
 		{
 			blocks[i][j] = new Sky(Point(i, j));
 		}
 		//4 - 9 100% dirt
-		for (unsigned int j = 4; j < 9; j++) 
+		for (int j = 4; j < 9; j++) 
 		{
 			if (j == 4) blocks[i][j] = new Grass(Point(i, j));
 			else blocks[i][j] = new Dirt(Point(i, j));
 		}
 		//9 - 11 80% dirt 20% stone
-		for (unsigned int j = 9; j < 20; j++) 
+		for (int j = 9; j < 20; j++) 
 		{
 			(rand() % 10 < 2) ? blocks[i][j] = new Stone(Point(i,  j)) : blocks[i][j] = new Dirt(Point(i, j));
 		}
-		for (unsigned int j = 20; j < 40; j++) {
+		for (int j = 20; j < 40; j++) {
 			(rand() % 2 == 0) ? blocks[i][j] = new Stone(Point(i, j)) : blocks[i][j] = new Dirt(Point(i, j));
 		}
-		for (unsigned int j = 40; j < 60; j++) {
+		for (int j = 40; j < 60; j++) {
 			(rand() % 10 < 7) ? blocks[i][j] = new Stone(Point(i, j)) : blocks[i][j] = new Dirt(Point(i, j));
 		}
 		//20 - end 90% stone
-		for (unsigned int j = 60; j < 100; j++)
+		for (int j = 60; j < 100; j++)
 		{
 			(rand() % 10 == 0) ? blocks[i][j] = new Dirt(Point(i, j)) : blocks[i][j] = new Stone(Point(i, j));
 		}
-		for (unsigned int j = 100; j < blocks[i].size(); j++)
+		for (int j = 100; j < blocks[i].size(); j++)
 		{
 			(rand() % 20 == 0) ? blocks[i][j] = new Dirt(Point(i, j)) : blocks[i][j] = new Stone(Point(i, j));
 		}
@@ -122,7 +123,6 @@ void World::addMinerals()
 	int lowerBound;
 	int minVein;
 	int maxVein;
-	int neg1 = -1;
 	//Copper
 	for (int hh = 0; hh < 8; hh++)
 	{
@@ -272,6 +272,25 @@ void World::switchVals(int& numOcc, int&  up, int& low, int& minVein, int& maxVe
 		break;
 	}
 }
+
+// Flash the screen for a short time
+void World::flash(Core::Graphics& g)
+{
+	static int count;
+	if (shouldFlash)
+	{
+		if (count == 0) count = 15; // happens when World::draw() calls this function and shouldFlash is suddenly on (Character::reset() did this)
+		else
+		{
+			g.SetColor(RGB(255, 255, 255));
+			fillRectangle(g, window.box.a, window.box.b.x - window.box.a.x, window.box.b.y - window.box.a.y);
+			count--;
+			// if we've just reached the end of the timer, don't flash anymore
+			if (count == 0) shouldFlash = false;
+		}
+	}
+}
+
 void World::draw(Core::Graphics& g)
 {
 	// Select all blocks on the screen and draw them //
@@ -281,15 +300,18 @@ void World::draw(Core::Graphics& g)
 	Point begin = Point(upperLeft->a.x / BLOCK_SIZE, upperLeft->a.y / BLOCK_SIZE);
 	Point end = Point(lowerRight->a.x / BLOCK_SIZE, lowerRight->a.y / BLOCK_SIZE);
 
-	for (unsigned int i = begin.x; i <= end.x; i++)
+	for (int i = begin.x; i <= end.x; i++)
 	{
-		for (unsigned int j = begin.y; j <= end.y; j++)
+		for (int j = begin.y; j <= end.y; j++)
 		{
 			blocks[i][j]->drawAt(g, window.box.a);
 		}
 	}
+
+	flash(g);
 }
-Block& World::getBlockAt(Point& p)
+
+Block& World::getBlockAt(Point p)
 {
 	int x = p.x / BLOCK_SIZE;
 	int y = p.y / BLOCK_SIZE;
@@ -302,8 +324,7 @@ Block& World::getBlockAt(Point& p)
 	
 	return *blocks[x][y];
 }
-
-void World::destroyBlockAt(Point& a)
+void World::destroyBlockAt(Point a)
 {
 	int x = a.x / BLOCK_SIZE; 
 	int y = a.y / BLOCK_SIZE;

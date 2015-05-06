@@ -9,6 +9,8 @@ namespace Physics
 	struct Gravity
 	{
 		static float acceleration;
+		static int deathHeightInBlocks; // How high the character can fall from without dying
+		const static float deathVelocity;
 	};
 
 	// In a typical convention, this would be called Vector2f (vector - 2 dimensional - float)
@@ -46,7 +48,7 @@ namespace Physics
 		Line() : 
 			a(0, 0), b(0, 0)
 		{}
-		Line(Point& a, Point& b) : 
+		Line(Point a, Point b) : 
 			a(a), b(b)
 		{}
 	};
@@ -54,12 +56,14 @@ namespace Physics
 	//	a - upper left point, b - lower right point	
 	struct Rectangle
 	{
+		virtual ~Rectangle() {}
+
 		Point a, b;
 
 		Rectangle() :
 			a(0, 0), b(0, 0)
 		{}
-		Rectangle(Point& a, Point& b) : 
+		Rectangle(Point a, Point b) : 
 			a(a), b(b) 
 		{}
 		

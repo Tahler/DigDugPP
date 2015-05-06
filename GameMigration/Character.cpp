@@ -16,17 +16,18 @@ using Physics::operator+;
 using Physics::operator-;
 
 // Character //
+Point Character::spawnPoint = Point(3, 3);
 string Character::notification = "";
 const float MAX_SPEED = BLOCK_SIZE / 10;
 
-long lastMineMillis = time(0) * 1000;
+time_t lastMineMillis = time(nullptr) * 1000;
 int pickStrength = 3;
 //extern bool storeClosed;
 
-Character::Character(World* world, int x, int y)
+Character::Character(World* world)
 {
 	Character::world = world;
-	setLocation(x, y);
+	setLocation(spawnPoint);
 	velocity = Vector(0, 0);
 	isJumping = false;
 	isOnLadder = false;
@@ -45,15 +46,17 @@ Point Character::getCenterPoint()
 }
 
 // Sets an x and y value based on the grid (BLOCK_SIZE)
-void Character::setLocation(int x, int y)
+void Character::setLocation(Point& spot)
 {
-	location.x = x * BLOCK_SIZE;
-	location.y = y * BLOCK_SIZE;
+	location.x = spot.x * BLOCK_SIZE;
+	location.y = spot.y * BLOCK_SIZE;
 }
 void Character::reset()
 {
+	world->shouldFlash = true;
+	notification = "";
 	inventory.empty();
-	setLocation(3, 3);
+	setLocation(spawnPoint);
 }
 
 void Character::jump()
@@ -113,6 +116,8 @@ void Character::mine(int dir)
 Block* neighbor1;
 Block* neighbor2;
 Physics::Rectangle* box;
+// Step forward horizontally, then resolve collisions
+// Do not let the character leave the world
 void Character::moveX()
 {
 	// Move
@@ -143,6 +148,9 @@ void Character::moveX()
 		else if (box->b.x > world->blocks.size() * BLOCK_SIZE) location.x += -(box->b.x - world->blocks.size() * BLOCK_SIZE);
 	}
 }
+// Step forward vertically, then resolve collisions
+// Do not let the character leave the bottom of the world
+// Kill the character if the fall is too great
 void Character::moveY()
 {
 	// Move
@@ -159,6 +167,12 @@ void Character::moveY()
 		if (!neighbor1->isTraversable || !neighbor2->isTraversable)
 		{
 			isJumping = false;
+			if (velocity.y >= Gravity::deathVelocity)
+			{
+				reset();
+				velocity.y = 0;
+				return;
+			}
 			velocity.y = 0;
 			location.y += neighbor1->a.y - box->b.y - 1;
 		}
@@ -283,7 +297,6 @@ void Character::drawAt(Core::Graphics& g, Vector& displacement)
 	// Hands
 	if(velocity.x > 0)
 	{
-		//fillSquare(g, Point(p.x + BLOCK_FIFTH, p.y + BLOCK_FIFTH * 2), BLOCK_FIFTH);
 		fillSquare(g, Point(p.x + 4 * BLOCK_FIFTH, p.y + BLOCK_FIFTH), BLOCK_FIFTH);
 		g.SetColor(RGB(28, 212, 52));
 		fillSquare(g, Point(p.x + BLOCK_FIFTH * 3, p.y + BLOCK_FIFTH), BLOCK_FIFTH);
@@ -291,7 +304,6 @@ void Character::drawAt(Core::Graphics& g, Vector& displacement)
 	else if (velocity.x < 0)
 	{
 		fillSquare(g, Point(p.x, p.y + BLOCK_FIFTH), BLOCK_FIFTH);
-		//fillSquare(g, Point(p.x + 3 * BLOCK_FIFTH, p.y + BLOCK_FIFTH * 2), BLOCK_FIFTH);
 		g.SetColor(RGB(28, 212, 52));
 		fillSquare(g, Point(p.x + BLOCK_FIFTH, p.y + BLOCK_FIFTH), BLOCK_FIFTH);
 	} 
