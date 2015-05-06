@@ -317,7 +317,7 @@ void Character::drawAt(Core::Graphics& g, Vector& displacement)
 	}
 	g.SetColor(RGB(38, 88, 158));
 	fillRectangle(g, Point(p.x + BLOCK_FIFTH * 2, p.y + BLOCK_FIFTH * 3), BLOCK_FIFTH, BLOCK_FIFTH * 2);
-	g.SetColor(RGB(10, 10, 255));
+	//g.SetColor(RGB(10, 10, 255));
 
 	// Draw the notifications
 	static int count;
