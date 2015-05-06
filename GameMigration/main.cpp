@@ -8,14 +8,15 @@ int invItems[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 Inventory Character::inventory = Inventory(10, invItems, 0);
 World world;
 Character player(&world, 3, 3);
-Store store;
+Store store(player);
+
 
 ////////////////////////////////////////////////////////////
 
 bool update(float dt)
 {
-	player.update();
-	//store.update();
+	if (!player.storeOpen) player.update();
+	else store.update();
 	return false;
 }
 
@@ -23,6 +24,8 @@ void draw(Core::Graphics& graphics)
 {
 	world.draw(graphics);
 	player.draw(graphics);
+	if (player.storeOpen) store.draw(graphics);
+	//player.draw(graphics);
 	//store.draw(graphics);
 }
 

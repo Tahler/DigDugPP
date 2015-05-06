@@ -38,7 +38,7 @@
     <ClCompile Include="Store.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Write.cpp">
+    <ClCompile Include="DrawText.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -67,7 +67,7 @@
     <ClInclude Include="Store.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Write.h">
+    <ClInclude Include="DrawText.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

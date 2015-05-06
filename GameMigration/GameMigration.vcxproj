@@ -96,7 +96,7 @@
     <ClCompile Include="Store.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="World.cpp" />
-    <ClCompile Include="Write.cpp" />
+    <ClCompile Include="DrawText.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Blocks.h" />
@@ -107,7 +107,7 @@
     <ClInclude Include="Store.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="World.h" />
-    <ClInclude Include="Write.h" />
+    <ClInclude Include="DrawText.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

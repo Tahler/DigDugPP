@@ -6,6 +6,11 @@
 
 struct Store 
 {
+	Character* c;
+	Store(Character& ch)
+	{
+		c = &ch;
+	}
 	void draw(Core::Graphics&);
 	void update();
 	void addLadder();

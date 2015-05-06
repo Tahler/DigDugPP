@@ -23,6 +23,7 @@ public:
 	Vector velocity;
 	bool isJumping;
 	bool isOnLadder;
+	bool storeOpen;
 	static string notification;
 
 	Character() :
@@ -31,7 +32,9 @@ public:
 		velocity(0, 0),
 		isJumping(false),
 		isOnLadder(false)
-	{}
+	{
+		storeOpen = false;
+	}
 	Character(World* world, int x, int y);
 
 	Physics::Rectangle getBoundingBox();

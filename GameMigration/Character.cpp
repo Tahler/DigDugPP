@@ -21,6 +21,7 @@ const float MAX_SPEED = BLOCK_SIZE / 10;
 
 long lastMineMillis = time(0) * 1000;
 int pickStrength = 3;
+//extern bool storeClosed;
 
 Character::Character(World* world, int x, int y)
 {
@@ -104,6 +105,8 @@ void Character::mine(int dir)
 			world->destroyBlockAt(b->a);
 		}
 	}
+
+	
 }
 
 // Used for collision detection
@@ -216,6 +219,17 @@ void Character::checkKeyInput()
 		{
 			if (Core::Input::IsPressed(Core::Input::KEY_W)) jump();
 		}
+	}
+
+	
+	if (Core::Input::IsPressed(VK_RETURN))
+	{
+		Point& p = getCenterPoint();
+		Physics::Rectangle* box = &getBoundingBox();
+		Block* b;
+		b = &(world->getBlockAt(Point(box->a.x - MAX_SPEED+1, p.y)));
+		StoreRight* s = dynamic_cast<StoreRight*>(b);
+		if(s != nullptr) storeOpen = true;
 	}
 }
 

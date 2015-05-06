@@ -151,7 +151,7 @@ void Ruby::drawAt(Core::Graphics& g, Vector& offset)
 
 Emerald::~Emerald()
 {
-	Character::inventory.addRuby();
+	Character::inventory.addEmerald();
 }
 void Emerald::drawAt(Core::Graphics& g, Vector& offset)
 {

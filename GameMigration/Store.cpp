@@ -3,7 +3,7 @@
 #include "Physics.h"
 #include "Fill.h"
 #include <string>
-#include "Write.h"
+#include "DrawText.h"
 
 using Physics::Point;
 
@@ -85,7 +85,9 @@ void Store::draw(Core::Graphics& g)
 	bagBar.draw(g);
 
 	//Text
-	writeMoney(g, Point(0,0), 15, 30, 30);
+	writeMoney(g, Point(pickPoint.x + boxUnit * 3, pickPoint.y + boxUnit * 21), 150);
+	writeMoney(g, Point(bagPoint.x + boxUnit * 3, bagPoint.y + boxUnit * 21), 350);
+	writeMoney(g, Point(ladderPoint.x + boxUnit * 4, ladderPoint.y + boxUnit * 21), 50);
 }
 
 void Store::addLadder(){};
@@ -118,6 +120,8 @@ void Store::update()
 	
 	if (selection > 2) selection = 0;
 	if (selection < 0) selection = 2;
+
+	if (Core::Input::IsPressed(VK_ESCAPE)) c->storeOpen = false, selection += 1;
 }
 void Store::upgradeBag(){};
 void Store::upgradePick(){};
