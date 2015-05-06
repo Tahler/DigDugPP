@@ -20,7 +20,7 @@ Point Character::spawnPoint = Point(3, 3);
 string Character::notification = "";
 const float MAX_SPEED = BLOCK_SIZE / 10;
 
-long lastMineMillis = time(0) * 1000;
+time_t lastMineMillis = time(nullptr) * 1000;
 int pickStrength = 3;
 
 Character::Character(World* world)

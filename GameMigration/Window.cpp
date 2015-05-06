@@ -16,7 +16,7 @@ bool Window::deadzoneIsCentered()
 	Point center = Point((box.b.x - box.a.x) / 3, (box.b.y - box.a.y) / 3);
 	return (deadzone.a.x < center.x + 50 && deadzone.a.x > center.x - 50); // may need to give a buffer (it may not ever be exact)
 }
-void Window::shift(Vector& shift)
+void Window::shift(Vector shift)
 {
 	box += shift;
 	deadzone += shift;

@@ -29,8 +29,8 @@ public:
 
 	void draw(Core::Graphics&);
 
-	Block& getBlockAt(Point&);
-	void destroyBlockAt(Point&);
+	Block& getBlockAt(Point);
+	void destroyBlockAt(Point);
 };
 
 #endif
