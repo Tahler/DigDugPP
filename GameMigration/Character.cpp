@@ -293,8 +293,7 @@ void Character::drawAt(Core::Graphics& g, Vector& displacement)
 	fillRectangle(g, Point(p.x + BLOCK_FIFTH * 2, p.y + BLOCK_FIFTH * 3), BLOCK_FIFTH, BLOCK_FIFTH * 2);
 	g.SetColor(RGB(10, 10, 255));
 
-	//getBoundingBox().draw(g);
-
+	// Draw the notifications
 	static int count;
 	if (count == 0)
 	{
@@ -309,4 +308,6 @@ void Character::drawAt(Core::Graphics& g, Vector& displacement)
 		// if we've just reached the end of the two seconds, set the string to ""
 		if (count == 0) notification = "";
 	}
+	
+	//getBoundingBox().draw(g);
 }
