@@ -44,8 +44,8 @@ void Store::draw(Core::Graphics& g)
 	g.SetColor(RGB(228,132,0));
 	fillRectangle(g, Point(pickPoint.x - padding + (WidthSixth * 4 * selection), pickPoint.y -padding), padding, boxHeight + padding*2); 
 	fillRectangle(g, Point(pickPoint.x + boxLength + (WidthSixth * 4 * selection), pickPoint.y -padding), padding, boxHeight + padding*2);
-	fillRectangle(g, Point(pickPoint.x + (WidthSixth * 4 * selection), pickPoint.y - padding), boxLength, padding);
-	fillRectangle(g, Point(pickPoint.x + (WidthSixth * 4 * selection), pickPoint.y + boxHeight-1), boxLength, padding);
+	fillRectangle(g, Point(pickPoint.x + (WidthSixth * 4 * selection), pickPoint.y - padding), boxLength + 1, padding);
+	fillRectangle(g, Point(pickPoint.x + (WidthSixth * 4 * selection), pickPoint.y + boxHeight-1), boxLength + 1, padding);
 
 	//Pick content
 	g.SetColor(RGB(204, 151, 6));
@@ -77,8 +77,8 @@ void Store::draw(Core::Graphics& g)
 	g.SetColor(RGB(204, 151, 6));
 	fillRectangle(g, Point(ladderPoint.x + 3*boxUnit, ladderPoint.y + boxUnit*3), boxUnit*3, boxUnit * 15);
 	fillRectangle(g, Point(ladderPoint.x + boxUnit * 9, ladderPoint.y + boxUnit * 3), boxUnit*3, boxUnit * 15);
-	fillSquare(g, Point(ladderPoint.x + boxUnit* 6, ladderPoint.y + boxUnit *6), boxUnit*3);
-	fillSquare(g, Point(ladderPoint.x + boxUnit* 6, ladderPoint.y + boxUnit *12), boxUnit*3);
+	fillSquare(g, Point(ladderPoint.x + boxUnit* 6, ladderPoint.y + boxUnit *6), boxUnit*3 + 1);
+	fillSquare(g, Point(ladderPoint.x + boxUnit* 6, ladderPoint.y + boxUnit *12), boxUnit*3 + 1);
 
 	//Upgrade bar
 	g.SetColor(RGB(40,40,40));
@@ -126,6 +126,30 @@ void Store::update()
 	if (selection < 0) selection = 2;
 
 	if (Core::Input::IsPressed(VK_ESCAPE)) c->storeOpen = false, selection += 1;
+
+	if (Core::Input::IsPressed(VK_RETURN)) 
+	{
+		switch (selection)
+		{
+		case 0:
+			upgradePick();
+			break;
+		case 1:
+			upgradeBag();
+			break;
+		case 2:
+			addLadder();
+			break;
+		default:
+			break;
+		}
+	}
 }
-void Store::upgradeBag(){};
-void Store::upgradePick(){};
+void Store::upgradeBag()
+{
+};
+
+void Store::upgradePick()
+{
+
+};
