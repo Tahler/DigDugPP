@@ -17,7 +17,7 @@ class Inventory
 private:
 	int maxSize;
 	int items[8];
-	int money;
+	
 
 public:
 	Inventory() : 
@@ -25,6 +25,7 @@ public:
 	{};
 	Inventory(int invSize, int items[8], int money);
 
+	int money;
 	int size();
 	bool isFull();
 	void empty();
