@@ -40,7 +40,7 @@ void Inventory::emptyMinerals()
 
 void Inventory::sellMinerals()
 {
-	const static int VALUES[8] = { 1, 2, 3, 4, 5, 6, 7, 8 };
+	const static int VALUES[8] = { 30, 50, 70, 90, 120, 150, 180, 200 };
 
 	int length = sizeof(items) / sizeof(*items);
 	for (int i = 0; i < length; ++i)

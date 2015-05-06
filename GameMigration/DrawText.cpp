@@ -6,7 +6,6 @@ using std::string;
 void writeMoney(Core::Graphics& g, Point p,int amount)
 {
 	int height = 30;
-	g.SetColor(RGB(0,0,0));
 	string s1 = std::to_string(amount);
 	int charWidth = 20;
 	int pad = 5;
