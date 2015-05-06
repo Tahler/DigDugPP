@@ -7,6 +7,7 @@ using Physics::Point;
 
 void fillSquare(Graphics& g, Point p, int width)
 {
+	++width;
 	for (int ii = 0; ii < width; ++ii) 
 	{
 		g.DrawLine(p.x + ii, p.y, p.x + ii, p.y + width);
