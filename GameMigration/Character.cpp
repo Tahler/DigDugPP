@@ -7,6 +7,7 @@
 #include "Fill.h"
 #include <time.h>
 #include <string>
+#include <mmsystem.h>
 
 using Physics::Gravity;
 using Physics::Point;
@@ -105,6 +106,10 @@ void Character::mine(int dir)
 		if (b2->durability <= 0)
 		{
 			world->destroyBlockAt(b->a);
+			// Stop the sound so that it can play again.
+			mciSendString(TEXT("stop breakBlock.wav"), nullptr, 0, nullptr);
+			// Play sound effect
+			mciSendString(TEXT("play breakBlock.wav"), nullptr, 0, nullptr);
 		}
 	}
 }
