@@ -6,4 +6,5 @@
 
 void writeMoney(Core::Graphics&, Point p, int, int, int);
 void drawZero(Core::Graphics&, Point p, int, int);
+
 #endif

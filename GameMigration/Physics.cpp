@@ -5,7 +5,7 @@
 using namespace Physics;
 
 float Gravity::acceleration = 0.6f;
-int Gravity::deathHeightInBlocks = 7;
+int Gravity::deathHeightInBlocks = 6;
 const float Gravity::deathVelocity = sqrt(2 * Gravity::acceleration * Gravity::deathHeightInBlocks * BLOCK_SIZE);
 
 // Vector //
