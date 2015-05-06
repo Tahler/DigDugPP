@@ -277,17 +277,17 @@ void World::switchVals(int& numOcc, int&  up, int& low, int& minVein, int& maxVe
 void World::flash(Core::Graphics& g)
 {
 	static int count;
-	if (count == 0)
+	if (shouldFlash)
 	{
-		if (shouldFlash) count = 15; // happens when World::draw() calls this function and shouldFlash is suddenly on (Character::reset() did this)
-	}
-	else
-	{
-		g.SetColor(RGB(255, 255, 255));
-		fillRectangle(g, window.box.a, window.box.b.x - window.box.a.x, window.box.b.y - window.box.a.y);
-		count--;
-		// if we've just reached the end of the timer, don't flash anymore
-		if (count == 0) shouldFlash = false;
+		if (count == 0) count = 15; // happens when World::draw() calls this function and shouldFlash is suddenly on (Character::reset() did this)
+		else
+		{
+			g.SetColor(RGB(255, 255, 255));
+			fillRectangle(g, window.box.a, window.box.b.x - window.box.a.x, window.box.b.y - window.box.a.y);
+			count--;
+			// if we've just reached the end of the timer, don't flash anymore
+			if (count == 0) shouldFlash = false;
+		}
 	}
 }
 

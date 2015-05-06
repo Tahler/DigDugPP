@@ -53,6 +53,7 @@ void Character::setLocation(Point& spot)
 void Character::reset()
 {
 	world->shouldFlash = true;
+	notification = "";
 	inventory.empty();
 	setLocation(spawnPoint);
 }
@@ -282,7 +283,6 @@ void Character::drawAt(Core::Graphics& g, Vector& displacement)
 	// Hands
 	if(velocity.x > 0)
 	{
-		//fillSquare(g, Point(p.x + BLOCK_FIFTH, p.y + BLOCK_FIFTH * 2), BLOCK_FIFTH);
 		fillSquare(g, Point(p.x + 4 * BLOCK_FIFTH, p.y + BLOCK_FIFTH), BLOCK_FIFTH);
 		g.SetColor(RGB(28, 212, 52));
 		fillSquare(g, Point(p.x + BLOCK_FIFTH * 3, p.y + BLOCK_FIFTH), BLOCK_FIFTH);
@@ -290,7 +290,6 @@ void Character::drawAt(Core::Graphics& g, Vector& displacement)
 	else if (velocity.x < 0)
 	{
 		fillSquare(g, Point(p.x, p.y + BLOCK_FIFTH), BLOCK_FIFTH);
-		//fillSquare(g, Point(p.x + 3 * BLOCK_FIFTH, p.y + BLOCK_FIFTH * 2), BLOCK_FIFTH);
 		g.SetColor(RGB(28, 212, 52));
 		fillSquare(g, Point(p.x + BLOCK_FIFTH, p.y + BLOCK_FIFTH), BLOCK_FIFTH);
 	} 
