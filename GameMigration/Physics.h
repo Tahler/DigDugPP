@@ -9,6 +9,8 @@ namespace Physics
 	struct Gravity
 	{
 		static float acceleration;
+		static int deathHeightInBlocks; // How high the character can fall from without dying
+		const static float deathVelocity;
 	};
 
 	// In a typical convention, this would be called Vector2f (vector - 2 dimensional - float)

@@ -16,6 +16,7 @@ using Physics::operator+;
 using Physics::operator-;
 
 // Character //
+Point Character::spawnPoint = Point(3, 3);
 string Character::notification = "";
 const float MAX_SPEED = BLOCK_SIZE / 10;
 
@@ -25,7 +26,7 @@ int pickStrength = 3;
 Character::Character(World* world, int x, int y)
 {
 	Character::world = world;
-	setLocation(x, y);
+	setLocation(spawnPoint);
 	velocity = Vector(0, 0);
 	isJumping = false;
 	isOnLadder = false;
@@ -44,15 +45,15 @@ Point Character::getCenterPoint()
 }
 
 // Sets an x and y value based on the grid (BLOCK_SIZE)
-void Character::setLocation(int x, int y)
+void Character::setLocation(Point& spot)
 {
-	location.x = x * BLOCK_SIZE;
-	location.y = y * BLOCK_SIZE;
+	location.x = spot.x * BLOCK_SIZE;
+	location.y = spot.y * BLOCK_SIZE;
 }
 void Character::reset()
 {
 	inventory.empty();
-	setLocation(3, 3);
+	setLocation(spawnPoint);
 }
 
 void Character::jump()
@@ -110,6 +111,8 @@ void Character::mine(int dir)
 Block* neighbor1;
 Block* neighbor2;
 Physics::Rectangle* box;
+// Step forward horizontally, then resolve collisions
+// Do not let the character leave the world
 void Character::moveX()
 {
 	// Move
@@ -140,6 +143,9 @@ void Character::moveX()
 		else if (box->b.x > world->blocks.size() * BLOCK_SIZE) location.x += -(box->b.x - world->blocks.size() * BLOCK_SIZE);
 	}
 }
+// Step forward vertically, then resolve collisions
+// Do not let the character leave the bottom of the world
+// Kill the character if the fall is too great
 void Character::moveY()
 {
 	// Move
@@ -156,6 +162,12 @@ void Character::moveY()
 		if (!neighbor1->isTraversable || !neighbor2->isTraversable)
 		{
 			isJumping = false;
+			
+			if (velocity.y >= Gravity::deathVelocity)
+			{
+				reset();
+				return;
+			}
 			velocity.y = 0;
 			location.y += neighbor1->a.y - box->b.y - 1;
 		}

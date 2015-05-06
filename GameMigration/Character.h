@@ -15,6 +15,7 @@ using std::string;
 class Character
 {
 private:
+	static Point spawnPoint;
 	World* world; // WORLD-STAR
 
 public:
@@ -36,7 +37,7 @@ public:
 
 	Physics::Rectangle getBoundingBox();
 	Point getCenterPoint();
-	void setLocation(int x, int y);
+	void setLocation(Point&);
 	
 	void checkKeyInput();
 	void reset();
