@@ -21,7 +21,7 @@ float barLength = boxLength * .75;
 bool aDownLastFrame = false;
 bool dDownLastFrame = false;
 bool enterDownLastFrame = true;
-int ladderCost = 50;
+int ladderCost = 30;
 int pickCost = 100;
 int bagCost = 150;
 Point p = Point((WINDOW_WIDTH - storeWidth)/2, (WINDOW_HEIGHT - storeHeight)/2);
@@ -204,7 +204,7 @@ void Store::update()
 
 void Store::addLadder()
 {
-	if (c->inventory.ladderCount <= c->inventory.maxSize)
+	if (c->inventory.money >= ladderCost && c->inventory.ladderCount <= c->inventory.maxSize)
 	{
 		c->inventory.money -= ladderCost;
 		c->inventory.ladderCount++;
