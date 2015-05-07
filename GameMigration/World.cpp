@@ -2,8 +2,10 @@
 #include "World.h"
 #include "Physics.h"
 #include <stdlib.h>
-#include <time.h>
 #include "Fill.h"
+#include "Character.h"
+#include <time.h>
+#include "Sound.h"
 
 using Physics::Vector;
 
@@ -11,6 +13,7 @@ using Physics::Vector;
 const int WORLD_WIDTH = 48;
 const int WORLD_HEIGHT = 160;
 
+// World //
 World::World()
 {
 	blocks = vector<vector<Block*>>(WORLD_WIDTH, vector<Block*>(WORLD_HEIGHT));
@@ -324,10 +327,55 @@ Block& World::getBlockAt(Point p)
 	
 	return *blocks[x][y];
 }
-void World::destroyBlockAt(Point a)
+void World::destroyBlockAt(Point p)
 {
-	int x = a.x / BLOCK_SIZE; 
-	int y = a.y / BLOCK_SIZE;
+	int x = p.x / BLOCK_SIZE;
+	int y = p.y / BLOCK_SIZE;
+
+	OreBlock* b = dynamic_cast<OreBlock*>(blocks[x][y]);
+	if (b != nullptr)
+	{
+		switch (b->value)
+		{
+		case 1: // Copper
+			Character::inventory.addCopper();
+			Sound::playResourceBreak(); 
+			break;
+		case 2: // Iron
+			Character::inventory.addIron();
+			Sound::playResourceBreak(); 
+			break;
+		case 3: // Silver
+			Character::inventory.addSilver();
+			Sound::playResourceBreak();
+			break;
+		case 4: // Sapphire
+			Character::inventory.addSapphire();
+			Sound::playGemBreak();
+			break;
+		case 5: // Ruby
+			Character::inventory.addRuby();
+			Sound::playGemBreak();
+			break;
+		case 6: // Emerald
+			Character::inventory.addEmerald();
+			Sound::playGemBreak();
+			break;
+		case 7: // Gold
+			Character::inventory.addGold();
+			Sound::playResourceBreak();
+			break;
+		case 8: // Diamond
+			Character::inventory.addDiamond();
+			Sound::playGemBreak();
+			break;
+		}
+	}
+	else
+	{
+		Sound::playBlockBreak();
+	}
+
 	delete blocks[x][y];
 	blocks[x][y] = new Cave(Point(x, y));
 }

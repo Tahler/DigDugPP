@@ -7,7 +7,7 @@
 #include "Fill.h"
 #include <time.h>
 #include <string>
-#include <mmsystem.h>
+#include "Sound.h"
 
 using Physics::Gravity;
 using Physics::Point;
@@ -54,6 +54,7 @@ void Character::setLocation(Point& spot)
 void Character::reset()
 {
 	world->shouldFlash = true;
+	Sound::playDeath();
 	notification = "";
 	inventory.empty();
 	setLocation(spawnPoint);
@@ -106,10 +107,6 @@ void Character::mine(int dir)
 		if (b2->durability <= 0)
 		{
 			world->destroyBlockAt(b->a);
-			// Stop the sound so that it can play again.
-			mciSendString(TEXT("stop breakBlock.wav"), nullptr, 0, nullptr);
-			// Play sound effect
-			mciSendString(TEXT("play breakBlock.wav"), nullptr, 0, nullptr);
 		}
 	}
 }

@@ -89,6 +89,7 @@ namespace Blocks
 		Dirt(Point a) :
 			BreakableBlock(a)
 		{}
+
 		void drawAt(Core::Graphics&, Vector&);
 	};
 
@@ -98,6 +99,7 @@ namespace Blocks
 		Stone(Point a) :
 			BreakableBlock(a)
 		{}
+
 		void drawAt(Core::Graphics&, Vector&);
 	};
 
@@ -121,26 +123,22 @@ namespace Blocks
 
 	struct Copper:OreBlock
 	{
-		
 		Copper(Point a) :
 			OreBlock(a)
 		{
 			value = 1;
 		};
-		~Copper();
 		
 		void drawAt(Core::Graphics&, Vector&);
 	};
 
 	struct Iron:OreBlock
 	{
-	
 		Iron(Point a) :
 			OreBlock(a)
 		{
 			value = 2;
 		};
-		~Iron();
 		
 		void drawAt(Core::Graphics&, Vector&);
 	};
@@ -152,7 +150,6 @@ namespace Blocks
 		{
 			value = 3;
 		};
-		~Silver();
 
 		void drawAt(Core::Graphics&, Vector&);
 	};
@@ -164,7 +161,6 @@ namespace Blocks
 		{
 			value = 4;
 		}
-		~Sapphire();
 
 		void drawAt(Core::Graphics&, Vector&);
 	};
@@ -176,7 +172,6 @@ namespace Blocks
 		{
 			value = 5;
 		}
-		~Ruby();
 
 		void drawAt(Core::Graphics&, Vector&);
 	};
@@ -188,7 +183,6 @@ namespace Blocks
 		{
 			value = 6;
 		}
-		~Emerald();
 
 		void drawAt(Core::Graphics&, Vector&);
 	};
@@ -200,7 +194,6 @@ namespace Blocks
 		{
 			value = 7;
 		}
-		~Gold();
 
 		void drawAt(Core::Graphics&, Vector&);
 	};
@@ -212,7 +205,6 @@ namespace Blocks
 		{
 			value = 8;
 		}
-		~Diamond();
 
 		void drawAt(Core::Graphics&, Vector&);
 	};
