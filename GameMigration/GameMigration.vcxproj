@@ -107,11 +107,18 @@
     <ClInclude Include="Fill.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Physics.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="Store.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="DrawText.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DigDug++.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\digdugpp.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
