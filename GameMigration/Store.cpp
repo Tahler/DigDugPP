@@ -139,8 +139,8 @@ void Store::draw(Core::Graphics& g)
 	if (c->inventory.maxSize < 100) writeMoney(g, Point(bagPoint.x + boxUnit * 3, bagPoint.y + boxUnit * 21), bagCost);
 	writeMoney(g, Point(ladderPoint.x + boxUnit * 4, ladderPoint.y + boxUnit * 21), ladderCost);
 	drawAmount(g, Point(ladderPoint.x + boxUnit*2, bagBar.a.y), c->inventory.ladderCount, c->inventory.maxSize);
-	g.SetColor(RGB(255, 255, 50));
-	writeMoney(g, Point(25,25), c->inventory.money);
+	g.SetColor(RGB(250, 250, 0));
+	writeMoney(g, Point(p.x + 20, p.y + 20), c->inventory.money);
 	
 }
 
