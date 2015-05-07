@@ -8,7 +8,7 @@
 int invItems[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 Inventory Character::inventory = Inventory(10, invItems, 0, 0);
 World world;
-Character player(&world);
+Character player(world);
 Store store(player);
 
 ////////////////////////////////////////////////////////////

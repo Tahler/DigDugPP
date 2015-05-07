@@ -37,7 +37,7 @@ public:
 		storeOpen(false)	
 	{}
 
-	Character(World* world);
+	Character(World& world);
 
 	Physics::Rectangle getBoundingBox();
 	Point getHeadPoint();

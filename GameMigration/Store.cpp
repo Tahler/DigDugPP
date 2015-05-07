@@ -2,10 +2,10 @@
 #include "World.h"
 #include "Physics.h"
 #include "Fill.h"
-#include <string>
 #include "DrawText.h"
 #include "Inventory.h"
 #include "Sound.h"
+#include "Controls.h"
 
 using Physics::Point;
 
@@ -33,7 +33,6 @@ Point ladderPoint = Point(p.x + WidthSixth*9, p.y + HeightSixth);
 Physics::Rectangle pickBar = Physics::Rectangle(Point(pickPoint.x, pickPoint.y + boxHeight + padding * 2), Point(pickPoint.x + boxLength, pickPoint.y + boxHeight + padding * 2 + boxUnit*3));
 Physics::Rectangle bagBar = Physics::Rectangle(Point(bagPoint.x, bagPoint.y + boxHeight + padding * 2), Point(bagPoint.x + boxLength, bagPoint.y + boxHeight + padding * 2  + boxUnit*3));
 float barUnit = boxLength/11;
-
 
 void Store::draw(Core::Graphics& g)
 {
@@ -142,34 +141,30 @@ void Store::draw(Core::Graphics& g)
 
 void Store::update()
 {
-	if (Core::Input::IsPressed(Core::Input::KEY_A))
+	if (keyPressed(MOVE_LEFT))
 	{
-		if(!aDownLastFrame){
+		if(!aDownLastFrame)
+		{
 			selection--;
 			aDownLastFrame = true;
 		}
 	} 
-	else 
-	{
-		aDownLastFrame = false;
-	}
+	else aDownLastFrame = false;
 	
-	if (Core::Input::IsPressed(Core::Input::KEY_D))
+	if (keyPressed(MOVE_RIGHT))
 	{
-		if(!dDownLastFrame){
+		if(!dDownLastFrame)
+		{
 			selection++;
 			dDownLastFrame = true;
 		}
 	} 
-	else 
-	{
-		dDownLastFrame = false;
-	}
+	else dDownLastFrame = false;
 	
 	if (selection > 2) selection = 0;
 	if (selection < 0) selection = 2;
 
-	if (Core::Input::IsPressed(VK_RETURN)) 
+	if (keyPressed(BUY_ITEM)) 
 	{
 		if (!enterDownLastFrame)
 		{
@@ -190,15 +185,11 @@ void Store::update()
 			}
 		}
 	} 
-	else
-	{
-		enterDownLastFrame = false;
-	}
+	else enterDownLastFrame = false;
 
-	if (Core::Input::IsPressed(VK_ESCAPE)) selection = 0, enterDownLastFrame = true, c->storeOpen = false;
-	if (Core::Input::IsPressed(VK_BACK)) c->inventory.money = 10000;
+	if (keyPressed(EXIT_SHOP)) selection = 0, enterDownLastFrame = true, c->storeOpen = false;
+	if (keyPressed(DIE)) c->inventory.money += 10000; // "Cheat code"
 }
-
 
 void Store::addLadder()
 {

@@ -8,6 +8,7 @@
 #include <time.h>
 #include <string>
 #include "Sound.h"
+#include "Controls.h"
 
 using Physics::Gravity;
 using Physics::Point;
@@ -16,23 +17,6 @@ using Physics::Rectangle;
 using Physics::operator+;
 using Physics::operator-;
 
-// #define controls here?
-bool keyPressed(int key)
-{
-	return Core::Input::IsPressed(key);
-}
-
-const int MOVE_UP = 0x57;						// W
-const int MOVE_LEFT	= 0x41;						// A
-const int MOVE_DOWN = 0x53;						// s
-const int MOVE_RIGHT = 0x44;					// D
-const int MINE_MODE = VK_SHIFT;					// Shift
-const int PLACE_LADDER = 0x45;					// E
-const int DIE = VK_BACK;						// Backspace
-const int OPEN_SHOP = VK_RETURN;				// Enter
-const int BUY_ITEM = VK_RETURN;					// Enter
-const int EXIT_SHOP = VK_ESCAPE;				// Escape
-
 // Character //
 Point Character::spawnPoint = Point(3, 3);
 string Character::notification = "";
@@ -40,11 +24,9 @@ const float MAX_SPEED = BLOCK_SIZE / 10;
 
 time_t lastMineMillis = time(nullptr) * 1000;
 
-//extern bool storeClosed;
-
-Character::Character(World* world)
+Character::Character(World& world)
 {
-	Character::world = world;
+	Character::world = &world;
 	setLocation(spawnPoint);
 	velocity = Vector(0, 0);
 	isJumping = false;
@@ -250,9 +232,9 @@ void Character::checkKeyInput()
 		if (!isJumping)
 		{
 			if (keyPressed(MOVE_DOWN)) mine(0);
-			else if (keyPressed(MOVE_LEFT)) mine(3);
+			else if (keyPressed(MOVE_RIGHT)) mine(3);
+			else if (keyPressed(MOVE_LEFT)) mine(1);
 			else if (keyPressed(MOVE_UP)) mine(2);
-			else if (keyPressed(MOVE_RIGHT)) mine(1);
 		}
 	}
 	else
@@ -273,13 +255,10 @@ void Character::checkKeyInput()
 			else velocity.y = 0;
 		}
 		// Else, the s key does nothing and w jumps
-		else
-		{
-			if (keyPressed(MOVE_UP)) jump();
-		}
+		else if (keyPressed(MOVE_UP)) jump();
 	}
 	
-	if (keyPressed(VK_RETURN))
+	if (keyPressed(OPEN_SHOP))
 	{
 		Point& p = getCenterPoint();
 		Physics::Rectangle* box = &getBoundingBox();

@@ -94,6 +94,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="Controls.cpp" />
     <ClCompile Include="Store.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="World.cpp" />
@@ -102,6 +103,7 @@
   <ItemGroup>
     <ClInclude Include="Blocks.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="Controls.h" />
     <ClInclude Include="Fill.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Physics.h" />
