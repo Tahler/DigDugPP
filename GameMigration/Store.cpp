@@ -114,16 +114,16 @@ void Store::draw(Core::Graphics& g)
 
 	switch (c->inventory.maxSize)
 	{
-	case 14:
+	case 100:
 		g.SetColor(RGB(0xBF, 0x10, 0x00));
 		fillSquare(g, Point(bagBar.a.x + 9*barUnit, pickBar.a.y + boxUnit), barUnit);
-	case 13:
+	case 50:
 		g.SetColor(RGB(0x98, 0x3A, 0x06));
 		fillSquare(g, Point(bagBar.a.x + 7*barUnit, pickBar.a.y + boxUnit), barUnit);
-	case 12:
+	case 25:
 		g.SetColor(RGB(0x72, 0x65, 0x0D));
 		fillSquare(g, Point(bagBar.a.x + 5*barUnit, pickBar.a.y + boxUnit), barUnit);
-	case 11:
+	case 15:
 		g.SetColor(RGB(0x4c, 0x8f, 0x13));
 		fillSquare(g, Point(bagBar.a.x + 3*barUnit, pickBar.a.y + boxUnit), barUnit);
 	case 10:
@@ -204,7 +204,11 @@ void Store::update()
 
 void Store::addLadder()
 {
-	
+	if (c->inventory.ladderCount <= c->inventory.maxSize)
+	{
+		c->inventory.money -= ladderCost;
+		c->inventory.ladderCount++;
+	}
 };
 
 void Store::upgradeBag()
@@ -212,7 +216,10 @@ void Store::upgradeBag()
 	if (c->inventory.money >= bagCost && c->inventory.maxSize < 14)
 	{
 		c->inventory.money -= bagCost;
-		c->inventory.maxSize += 1; 
+		if (c->inventory.maxSize = 10) c->inventory.maxSize = 15; 
+		else  if(c->inventory.maxSize = 15) c->inventory.maxSize = 25;
+		else if (c->inventory.maxSize = 25) c->inventory.maxSize = 50;
+		else c->inventory.maxSize = 100;
 		bagCost += 300;
 	} 
 	else

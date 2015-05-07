@@ -27,6 +27,7 @@ public:
 
 	int maxSize;
 	int money;
+	int ladderCount;
 	int size();
 	bool isFull();
 	void empty();

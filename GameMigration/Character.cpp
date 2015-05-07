@@ -34,6 +34,7 @@ Character::Character(World* world)
 	pickStrength = 1;
 	inventory.empty();
 	notification = "";
+	inventory.money = 200;
 }
 Physics::Rectangle Character::getBoundingBox()
 {

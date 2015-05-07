@@ -11,7 +11,7 @@ enum Minerals
 Inventory::Inventory(int invSize, int copy[8], int money)
 {
 	maxSize = invSize;
-
+	ladderCount = 0;
 	int length = sizeof(items) / sizeof(*items);
 	for (int i = 0; i < length; ++i)
 	{
