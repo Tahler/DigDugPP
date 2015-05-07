@@ -35,11 +35,20 @@ Character::Character(World* world)
 	pickStrength = 1;
 	inventory.empty();
 	notification = "";
+	
+	// Test 
 	inventory.money = 200;
+	inventory.ladderCount = 5;
 }
 Physics::Rectangle Character::getBoundingBox()
 {
 	return Physics::Rectangle(Point(location.x + BLOCK_FIFTH, location.y + 2), Point(location.x + BLOCK_SIZE - BLOCK_FIFTH, location.y + BLOCK_SIZE - 2));
+}
+
+Point Character::getHeadPoint()
+{
+	Point p = getCenterPoint();
+	return Point(p.x, p.y - (getBoundingBox().b.y - getBoundingBox().a.y) / 2);
 }
 
 Point Character::getCenterPoint()
@@ -202,9 +211,13 @@ void Character::placeLadder()
 {
 	if (inventory.ladderCount > 0)
 	{
-		world->placeLadderAt(getCenterPoint());
-		inventory.ladderCount--;
+		if (!isJumping)
+		{
+			// This will lower the ladderCount
+			world->placeLadderAt(getHeadPoint());
+		}
 	}
+	else notification = "Out of ladders.";
 }
 
 /* 

@@ -40,6 +40,7 @@ public:
 	Character(World* world);
 
 	Physics::Rectangle getBoundingBox();
+	Point getHeadPoint();
 	Point getCenterPoint();
 	void setLocation(Point&);
 	

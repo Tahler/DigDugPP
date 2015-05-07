@@ -370,5 +370,6 @@ void World::placeLadderAt(Point p)
 	{
 		delete blocks[x][y];
 		blocks[x][y] = new Ladder(Point(x, y));
+		Character::inventory.ladderCount--;
 	}
 }
