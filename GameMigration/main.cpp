@@ -15,8 +15,13 @@ Store store(player);
 
 bool update(float dt)
 {
+	// Move the player
 	if (!player.storeOpen) player.update();
 	else store.update();
+
+	// Sidescroll the window
+	world.window.update();
+
 	return false;
 }
 

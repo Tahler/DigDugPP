@@ -266,8 +266,15 @@ void World::flash(Core::Graphics& g)
 		else
 		{
 			g.SetColor(RGB(255, 255, 255));
+
+			// Draw white on the window
 			fillRectangle(g, window.box.a, window.box.b.x - window.box.a.x, window.box.b.y - window.box.a.y);
+			
+			// Draw white on the whole world
+			//fillRectangle(g, Point(0, 0), WORLD_WIDTH * BLOCK_SIZE, WORLD_HEIGHT * BLOCK_SIZE);
+			
 			count--;
+			
 			// if we've just reached the end of the timer, don't flash anymore
 			if (count == 0) shouldFlash = false;
 		}
@@ -292,6 +299,7 @@ void World::draw(Core::Graphics& g)
 	}
 
 	flash(g);
+	//window.drawAt(g, window.box.a);
 }
 
 Block& World::getBlockAt(Point p)

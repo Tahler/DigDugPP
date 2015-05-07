@@ -78,7 +78,6 @@ void Store::draw(Core::Graphics& g)
 	g.SetColor(RGB(100, 25, 0));
 	fillRectangle(g, Point(bagPoint.x + 7*boxUnit, bagPoint.y + 10*boxUnit), boxUnit * 1, boxUnit*3);
 
-
 	//Ladder content
 	g.SetColor(RGB(204, 151, 6));
 	fillRectangle(g, Point(ladderPoint.x + 3*boxUnit, ladderPoint.y + boxUnit*3), boxUnit*3, boxUnit * 15);
@@ -90,8 +89,6 @@ void Store::draw(Core::Graphics& g)
 	g.SetColor(RGB(40,40,40));
 	pickBar.draw(g);
 	bagBar.draw(g);
-
-	
 
 	switch (c->pickStrength)
 	{
@@ -140,8 +137,7 @@ void Store::draw(Core::Graphics& g)
 	writeMoney(g, Point(ladderPoint.x + boxUnit * 4, ladderPoint.y + boxUnit * 21), ladderCost);
 	drawAmount(g, Point(ladderPoint.x + boxUnit*2, bagBar.a.y), c->inventory.ladderCount, c->inventory.maxSize);
 	g.SetColor(RGB(250, 250, 0));
-	writeMoney(g, Point(p.x + 20, p.y + 20), c->inventory.money);
-	
+	writeMoney(g, Point(p.x + 20, p.y + 20), c->inventory.money);	
 }
 
 void Store::update()
@@ -232,7 +228,6 @@ void Store::upgradeBag()
 	} 
 	else
 	{
-		//noise
 		Sound::playBuyFail();
 	}
 };
@@ -248,7 +243,6 @@ void Store::upgradePick()
 	} 
 	else
 	{
-		//noise
 		Sound::playBuyFail();
 	}
 };

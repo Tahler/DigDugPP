@@ -28,7 +28,7 @@ public:
 	void shift(Vector);
 
 	void update();
-	//void draw(Core::Graphics&);
+	void drawAt(Core::Graphics&, Vector);
 };
 
 #endif

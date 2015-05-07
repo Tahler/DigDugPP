@@ -20,7 +20,6 @@ void Window::shift(Vector shift)
 {
 	box += shift;
 	deadzone += shift;
-	update();
 }
 
 // Ensure the boxes are in the correct place
@@ -38,10 +37,10 @@ void Window::update()
 	if (box.a.y < 0) box += Vector(0, -box.a.y);
 	else if (box.b.y > WORLD_HEIGHT * BLOCK_SIZE) box += Vector(0, WORLD_HEIGHT * BLOCK_SIZE - box.b.y);
  }
-//// Only used for tracing
-//void Window::draw(Core::Graphics& g)
-//{
-//	g.SetColor(RGB(255, 0, 0)); 
-//	box.draw(g);
-//	deadzone.draw(g);
-//}
+// Only used for tracing
+void Window::drawAt(Core::Graphics& g, Vector offset)
+{
+	g.SetColor(RGB(255, 0, 0)); 
+	box.drawAt(g, offset);
+	deadzone.drawAt(g, offset);
+}
