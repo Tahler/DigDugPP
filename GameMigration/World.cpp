@@ -32,7 +32,7 @@ World::~World()
 }
 void World::init()
 {
-	//srand(time(NULL));
+	srand(time(nullptr));
 	addEarth();
 	addMinerals();
 	delete blocks[1][3];
@@ -135,7 +135,7 @@ void World::addMinerals()
 				}
 				//Ensure in bounds
 				if(currentX < 0) currentX = 0;
-				if (currentY < 0) currentY = 0;
+				if (currentY > blocks[0].size() -1) currentY = blocks[0].size() - 1;
 				if (currentX > blocks.size() - 1) currentX = blocks.size() -1;
 				replaceBlock(currentX, currentY, hh);
 			}
