@@ -61,6 +61,23 @@ void World::init()
 	blocks[5][8] = new Ladder(Point(5, 8));
 	delete blocks[5][9];
 	blocks[5][9] = new Ladder(Point(5, 9));
+	delete blocks[47][4];
+	blocks[47][4] = new Diamond(Point(47, 4));
+	delete blocks[46][4];
+	blocks[46][4] = new Gold(Point(46, 4));
+	delete blocks[45][4];
+	blocks[45][4] = new Emerald(Point(45, 4));
+	delete blocks[44][4];
+	blocks[44][4] = new Ruby(Point(44, 4));
+	delete blocks[43][4];
+	blocks[43][4] = new Sapphire(Point(43, 4));
+	delete blocks[42][4];
+	blocks[42][4] = new Silver(Point(42, 4));
+	delete blocks[41][4];
+	blocks[41][4] = new Iron(Point(41, 4));
+	delete blocks[40][4];
+	blocks[40][4] = new Copper(Point(40, 4));
+
 }
 void World::addEarth()
 {
