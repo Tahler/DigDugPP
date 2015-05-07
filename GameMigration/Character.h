@@ -25,6 +25,7 @@ public:
 	bool isJumping;
 	bool isOnLadder;
 	bool storeOpen;
+	int pickStrength;
 	static string notification;
 
 	Character() :

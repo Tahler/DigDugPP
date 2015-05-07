@@ -20,6 +20,10 @@ float boxUnit = boxLength / 15;
 float barLength = boxLength * .75;
 bool aDownLastFrame = false;
 bool dDownLastFrame = false;
+bool enterDownLastFrame = true;
+int ladderCost = 50;
+int pickCost = 100;
+int bagCost = 150;
 Point p = Point((WINDOW_WIDTH - storeWidth)/2, (WINDOW_HEIGHT - storeHeight)/2);
 Point pickPoint = Point(p.x + WidthSixth, p.y + HeightSixth);
 Point bagPoint = Point(p.x + WidthSixth*5, p.y + HeightSixth);
@@ -27,6 +31,8 @@ Point ladderPoint = Point(p.x + WidthSixth*9, p.y + HeightSixth);
 
 Physics::Rectangle pickBar = Physics::Rectangle(Point(pickPoint.x, pickPoint.y + boxHeight + padding * 2), Point(pickPoint.x + boxLength, pickPoint.y + boxHeight + padding * 2 + boxUnit*3));
 Physics::Rectangle bagBar = Physics::Rectangle(Point(bagPoint.x, bagPoint.y + boxHeight + padding * 2), Point(bagPoint.x + boxLength, bagPoint.y + boxHeight + padding * 2  + boxUnit*3));
+float barUnit = boxLength/11;
+
 
 void Store::draw(Core::Graphics& g)
 {
@@ -68,7 +74,6 @@ void Store::draw(Core::Graphics& g)
 	fillRectangle(g, Point(bagPoint.x + 5*boxUnit, bagPoint.y + 9*boxUnit), boxUnit * 5, boxUnit+1);
 	fillRectangle(g, Point(bagPoint.x + 6*boxUnit, bagPoint.y + 10*boxUnit), boxUnit * 3, boxUnit+1);
 	g.SetColor(RGB(100, 25, 255));
-	//fillHexagon(g, Point(bagPoint.x + 7 * boxUnit, bagPoint.y + 15*boxUnit), boxUnit*2);
 	g.SetColor(RGB(100, 25, 0));
 	fillRectangle(g, Point(bagPoint.x + 7*boxUnit, bagPoint.y + 10*boxUnit), boxUnit * 1, boxUnit*3);
 
@@ -85,16 +90,58 @@ void Store::draw(Core::Graphics& g)
 	pickBar.draw(g);
 	bagBar.draw(g);
 
+	
+
+	switch (c->pickStrength)
+	{
+	case 5:
+		g.SetColor(RGB(0xBF, 0x10, 0x00));
+		fillSquare(g, Point(pickBar.a.x + 9*barUnit, pickBar.a.y + boxUnit), barUnit);
+	case 4:
+		g.SetColor(RGB(0x98, 0x3A, 0x06));
+		fillSquare(g, Point(pickBar.a.x + 7*barUnit, pickBar.a.y + boxUnit), barUnit);
+	case 3:
+		g.SetColor(RGB(0x72, 0x65, 0x0D));
+		fillSquare(g, Point(pickBar.a.x + 5*barUnit, pickBar.a.y + boxUnit), barUnit);
+	case 2:
+		g.SetColor(RGB(0x4c, 0x8f, 0x13));
+		fillSquare(g, Point(pickBar.a.x + 3*barUnit, pickBar.a.y + boxUnit), barUnit);
+	case 1:
+		g.SetColor(RGB(0x00, 0xe5, 0x21));
+		fillSquare(g, Point(pickBar.a.x + barUnit, pickBar.a.y + boxUnit), barUnit);
+		break;
+	}
+
+	switch (c->inventory.maxSize)
+	{
+	case 14:
+		g.SetColor(RGB(0xBF, 0x10, 0x00));
+		fillSquare(g, Point(bagBar.a.x + 9*barUnit, pickBar.a.y + boxUnit), barUnit);
+	case 13:
+		g.SetColor(RGB(0x98, 0x3A, 0x06));
+		fillSquare(g, Point(bagBar.a.x + 7*barUnit, pickBar.a.y + boxUnit), barUnit);
+	case 12:
+		g.SetColor(RGB(0x72, 0x65, 0x0D));
+		fillSquare(g, Point(bagBar.a.x + 5*barUnit, pickBar.a.y + boxUnit), barUnit);
+	case 11:
+		g.SetColor(RGB(0x4c, 0x8f, 0x13));
+		fillSquare(g, Point(bagBar.a.x + 3*barUnit, pickBar.a.y + boxUnit), barUnit);
+	case 10:
+		g.SetColor(RGB(0x00, 0xe5, 0x21));
+		fillSquare(g, Point(bagBar.a.x + barUnit, pickBar.a.y + boxUnit), barUnit);
+		break;
+	}
+
+
+
 	//Text
 	g.SetColor(RGB(0,0,0));
-	writeMoney(g, Point(pickPoint.x + boxUnit * 3, pickPoint.y + boxUnit * 21), 150);
-	writeMoney(g, Point(bagPoint.x + boxUnit * 3, bagPoint.y + boxUnit * 21), 350);
-	writeMoney(g, Point(ladderPoint.x + boxUnit * 4, ladderPoint.y + boxUnit * 21), 30);
+	if (c-> pickStrength < 5) writeMoney(g, Point(pickPoint.x + boxUnit * 3, pickPoint.y + boxUnit * 21), pickCost);
+	if (c->inventory.maxSize < 14) writeMoney(g, Point(bagPoint.x + boxUnit * 3, bagPoint.y + boxUnit * 21), bagCost);
+	writeMoney(g, Point(ladderPoint.x + boxUnit * 4, ladderPoint.y + boxUnit * 21), ladderCost);
 	g.SetColor(RGB(255, 255, 50));
 	writeMoney(g, Point(25,25), c->inventory.money);
 }
-
-void Store::addLadder(){};
 
 void Store::update()
 {
@@ -125,31 +172,65 @@ void Store::update()
 	if (selection > 2) selection = 0;
 	if (selection < 0) selection = 2;
 
-	if (Core::Input::IsPressed(VK_ESCAPE)) c->storeOpen = false, selection += 1;
-
 	if (Core::Input::IsPressed(VK_RETURN)) 
 	{
-		switch (selection)
+		if (!enterDownLastFrame)
 		{
-		case 0:
-			upgradePick();
-			break;
-		case 1:
-			upgradeBag();
-			break;
-		case 2:
-			addLadder();
-			break;
-		default:
-			break;
+			enterDownLastFrame = true;
+			switch (selection)
+			{
+			case 0:
+				upgradePick();
+				break;
+			case 1:
+				upgradeBag();
+				break;
+			case 2:
+				addLadder();
+				break;
+			default:
+				break;
+			}
 		}
+	} 
+	else
+	{
+		enterDownLastFrame = false;
 	}
+
+	if (Core::Input::IsPressed(VK_ESCAPE)) selection = 0, enterDownLastFrame = true, c->storeOpen = false;
 }
+
+
+void Store::addLadder()
+{
+	
+};
+
 void Store::upgradeBag()
 {
+	if (c->inventory.money >= bagCost && c->inventory.maxSize < 14)
+	{
+		c->inventory.money -= bagCost;
+		c->inventory.maxSize += 1; 
+		bagCost += 300;
+	} 
+	else
+	{
+		//noise
+	}
 };
 
 void Store::upgradePick()
 {
-
+	if (c->inventory.money >= pickCost && c->pickStrength < 5)
+	{
+		c->inventory.money -= pickCost;
+		c->pickStrength += 1;
+		pickCost += 250;
+	} 
+	else
+	{
+		//noise
+	}
 };

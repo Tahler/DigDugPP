@@ -276,6 +276,13 @@ void BreakableBlock::drawCracks(Core::Graphics& g, Point &p, int durability)
 
 int BreakableBlock::takeDamage(int damage)
 {
-	durability -= damage;
+	if (damage >= hardness)
+	{
+		durability -= 3;
+	} 
+	else
+	{
+		return 101;
+	}
 	return durability;
 }
