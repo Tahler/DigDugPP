@@ -5,6 +5,7 @@
 #include <string>
 #include "DrawText.h"
 #include "Inventory.h"
+#include "Sound.h"
 
 using Physics::Point;
 
@@ -135,7 +136,7 @@ void Store::draw(Core::Graphics& g)
 	//Text
 	g.SetColor(RGB(0,0,0));
 	if (c-> pickStrength < 5) writeMoney(g, Point(pickPoint.x + boxUnit * 3, pickPoint.y + boxUnit * 21), pickCost);
-	if (c->inventory.maxSize < 14) writeMoney(g, Point(bagPoint.x + boxUnit * 3, bagPoint.y + boxUnit * 21), bagCost);
+	if (c->inventory.maxSize < 100) writeMoney(g, Point(bagPoint.x + boxUnit * 3, bagPoint.y + boxUnit * 21), bagCost);
 	writeMoney(g, Point(ladderPoint.x + boxUnit * 4, ladderPoint.y + boxUnit * 21), ladderCost);
 	drawAmount(g, Point(ladderPoint.x + boxUnit*2, bagBar.a.y), c->inventory.ladderCount, c->inventory.maxSize);
 	g.SetColor(RGB(255, 255, 50));
@@ -199,6 +200,7 @@ void Store::update()
 	}
 
 	if (Core::Input::IsPressed(VK_ESCAPE)) selection = 0, enterDownLastFrame = true, c->storeOpen = false;
+	if (Core::Input::IsPressed(VK_BACK)) c->inventory.money = 10000;
 }
 
 
@@ -208,23 +210,30 @@ void Store::addLadder()
 	{
 		c->inventory.money -= ladderCost;
 		c->inventory.ladderCount++;
+		Sound::playSell();
+	}
+	else 
+	{
+		Sound::playBuyFail();
 	}
 };
 
 void Store::upgradeBag()
 {
-	if (c->inventory.money >= bagCost && c->inventory.maxSize < 14)
+	if (c->inventory.money >= bagCost && c->inventory.maxSize < 100)
 	{
 		c->inventory.money -= bagCost;
-		if (c->inventory.maxSize = 10) c->inventory.maxSize = 15; 
-		else  if(c->inventory.maxSize = 15) c->inventory.maxSize = 25;
-		else if (c->inventory.maxSize = 25) c->inventory.maxSize = 50;
+		if (c->inventory.maxSize == 10) c->inventory.maxSize = 15; 
+		else  if(c->inventory.maxSize == 15) c->inventory.maxSize = 25;
+		else if (c->inventory.maxSize == 25) c->inventory.maxSize = 50;
 		else c->inventory.maxSize = 100;
 		bagCost += 300;
+		Sound::playSell();
 	} 
 	else
 	{
 		//noise
+		Sound::playBuyFail();
 	}
 };
 
@@ -235,9 +244,11 @@ void Store::upgradePick()
 		c->inventory.money -= pickCost;
 		c->pickStrength += 1;
 		pickCost += 250;
+		Sound::playSell();
 	} 
 	else
 	{
 		//noise
+		Sound::playBuyFail();
 	}
 };

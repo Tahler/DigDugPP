@@ -13,6 +13,7 @@ struct Sound
 	static void playDeath();
 
 	static void playSell();
+	static void playBuyFail();
 
 	static void playMusic();
 };

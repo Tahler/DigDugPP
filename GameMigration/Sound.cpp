@@ -39,6 +39,12 @@ void Sound::playSell()
 	mciSendString(TEXT("play resources/sell.wav"), nullptr, 0, nullptr);
 }
 
+void Sound::playBuyFail()
+{
+	stopSoundEffects();
+	mciSendString(TEXT("play resources/buyFail.wav"), nullptr, 0, nullptr);
+}
+
 void Sound::playMusic()
 {
 	mciSendString(TEXT("open resources/music.wav type mpegvideo alias song"), nullptr, 0, nullptr);

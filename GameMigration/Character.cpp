@@ -273,7 +273,7 @@ void Character::checkKeyInput()
 		Block* b;
 		b = &(world->getBlockAt(Point(box->a.x - MAX_SPEED+1, p.y)));
 		StoreRight* s = dynamic_cast<StoreRight*>(b);
-		if(s != nullptr) storeOpen = true, inventory.sellMinerals();
+		if(s != nullptr) storeOpen = true, inventory.sellMinerals(), Sound::playSell();
 	}
 }
 
