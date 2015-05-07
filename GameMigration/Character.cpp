@@ -16,6 +16,23 @@ using Physics::Rectangle;
 using Physics::operator+;
 using Physics::operator-;
 
+// #define controls here?
+bool keyPressed(int key)
+{
+	return Core::Input::IsPressed(key);
+}
+
+const int MOVE_UP = 0x57;						// W
+const int MOVE_LEFT	= 0x41;						// A
+const int MOVE_DOWN = 0x53;						// s
+const int MOVE_RIGHT = 0x44;					// D
+const int MINE_MODE = VK_SHIFT;					// Shift
+const int PLACE_LADDER = 0x45;					// E
+const int DIE = VK_BACK;						// Backspace
+const int OPEN_SHOP = VK_RETURN;				// Enter
+const int BUY_ITEM = VK_RETURN;					// Enter
+const int EXIT_SHOP = VK_ESCAPE;				// Escape
+
 // Character //
 Point Character::spawnPoint = Point(3, 3);
 string Character::notification = "";
@@ -220,31 +237,28 @@ void Character::placeLadder()
 	else notification = "Out of ladders.";
 }
 
-/* 
-	Moves based on WASD
-	W jumps if not on ladder
-	If on ladder, W moves up ladder
-*/
 void Character::checkKeyInput()
 {
-	if (Core::Input::IsPressed(VK_BACK)) reset();
-	if (Core::Input::IsPressed(69)) placeLadder();
-	if (Core::Input::IsPressed(Core::Input::KEY_SHIFT))
+	if (keyPressed(DIE)) reset();
+
+	if (keyPressed(PLACE_LADDER)) placeLadder();
+	
+	if (keyPressed(MINE_MODE))
 	{
 		velocity.x = 0;
 		if (isOnLadder) velocity.y = 0;
 		if (!isJumping)
 		{
-			if (Core::Input::IsPressed(Core::Input::KEY_S)) mine(0);
-			else if (Core::Input::IsPressed(Core::Input::KEY_D)) mine(3);
-			else if (Core::Input::IsPressed(Core::Input::KEY_W)) mine(2);
-			else if (Core::Input::IsPressed(Core::Input::KEY_A)) mine(1);
+			if (keyPressed(MOVE_DOWN)) mine(0);
+			else if (keyPressed(MOVE_LEFT)) mine(3);
+			else if (keyPressed(MOVE_UP)) mine(2);
+			else if (keyPressed(MOVE_RIGHT)) mine(1);
 		}
 	}
 	else
 	{
-		if (Core::Input::IsPressed(Core::Input::KEY_A)) velocity.x = -MAX_SPEED;
-		else if (Core::Input::IsPressed(Core::Input::KEY_D)) velocity.x = MAX_SPEED;
+		if (keyPressed(MOVE_LEFT)) velocity.x = -MAX_SPEED;
+		else if (keyPressed(MOVE_RIGHT)) velocity.x = MAX_SPEED;
 		else velocity.x = 0;
 
 		Block* b = &world->getBlockAt(getCenterPoint());
@@ -254,19 +268,18 @@ void Character::checkKeyInput()
 		if (isOnLadder)
 		{
 			isJumping = false;
-			if (Core::Input::IsPressed(Core::Input::KEY_W)) velocity.y = -MAX_SPEED;
-			else if (Core::Input::IsPressed(Core::Input::KEY_S)) velocity.y = MAX_SPEED;
+			if (keyPressed(MOVE_UP)) velocity.y = -MAX_SPEED;
+			else if (keyPressed(MOVE_DOWN)) velocity.y = MAX_SPEED;
 			else velocity.y = 0;
 		}
 		// Else, the s key does nothing and w jumps
 		else
 		{
-			if (Core::Input::IsPressed(Core::Input::KEY_W)) jump();
+			if (keyPressed(MOVE_UP)) jump();
 		}
 	}
-
 	
-	if (Core::Input::IsPressed(VK_RETURN))
+	if (keyPressed(VK_RETURN))
 	{
 		Point& p = getCenterPoint();
 		Physics::Rectangle* box = &getBoundingBox();
