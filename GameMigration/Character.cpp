@@ -23,6 +23,7 @@ const float MAX_SPEED = BLOCK_SIZE / 10;
 
 time_t lastMineMillis = time(nullptr) * 1000;
 int pickStrength = 3;
+//extern bool storeClosed;
 
 Character::Character(World* world)
 {
@@ -109,6 +110,8 @@ void Character::mine(int dir)
 			world->destroyBlockAt(b->a);
 		}
 	}
+
+	
 }
 
 // Used for collision detection
@@ -190,6 +193,15 @@ void Character::moveY()
 	}
 }
 
+void Character::placeLadder()
+{
+	if (inventory.ladders > 0)
+	{
+		world->placeLadderAt(getCenterPoint());
+		inventory.ladders--;
+	}
+}
+
 /* 
 	Moves based on WASD
 	W jumps if not on ladder
@@ -198,6 +210,7 @@ void Character::moveY()
 void Character::checkKeyInput()
 {
 	if (Core::Input::IsPressed(VK_BACK)) reset();
+	if (Core::Input::IsPressed(69)) placeLadder();
 	if (Core::Input::IsPressed(Core::Input::KEY_SHIFT))
 	{
 		velocity.x = 0;
@@ -232,6 +245,17 @@ void Character::checkKeyInput()
 		{
 			if (Core::Input::IsPressed(Core::Input::KEY_W)) jump();
 		}
+	}
+
+	
+	if (Core::Input::IsPressed(VK_RETURN))
+	{
+		Point& p = getCenterPoint();
+		Physics::Rectangle* box = &getBoundingBox();
+		Block* b;
+		b = &(world->getBlockAt(Point(box->a.x - MAX_SPEED+1, p.y)));
+		StoreRight* s = dynamic_cast<StoreRight*>(b);
+		if(s != nullptr) storeOpen = true, inventory.sellMinerals();
 	}
 }
 
@@ -305,7 +329,7 @@ void Character::drawAt(Core::Graphics& g, Vector& displacement)
 	}
 	g.SetColor(RGB(38, 88, 158));
 	fillRectangle(g, Point(p.x + BLOCK_FIFTH * 2, p.y + BLOCK_FIFTH * 3), BLOCK_FIFTH, BLOCK_FIFTH * 2);
-	g.SetColor(RGB(10, 10, 255));
+	//g.SetColor(RGB(10, 10, 255));
 
 	// Draw the notifications
 	static int count;

@@ -3,7 +3,8 @@
 #include "Physics.h"
 #include "Fill.h"
 #include <string>
-#include "Write.h"
+#include "DrawText.h"
+#include "Inventory.h"
 
 using Physics::Point;
 
@@ -43,8 +44,8 @@ void Store::draw(Core::Graphics& g)
 	g.SetColor(RGB(228,132,0));
 	fillRectangle(g, Point(pickPoint.x - padding + (WidthSixth * 4 * selection), pickPoint.y -padding), padding, boxHeight + padding*2); 
 	fillRectangle(g, Point(pickPoint.x + boxLength + (WidthSixth * 4 * selection), pickPoint.y -padding), padding, boxHeight + padding*2);
-	fillRectangle(g, Point(pickPoint.x + (WidthSixth * 4 * selection), pickPoint.y - padding), boxLength, padding);
-	fillRectangle(g, Point(pickPoint.x + (WidthSixth * 4 * selection), pickPoint.y + boxHeight-1), boxLength, padding);
+	fillRectangle(g, Point(pickPoint.x + (WidthSixth * 4 * selection), pickPoint.y - padding), boxLength + 1, padding);
+	fillRectangle(g, Point(pickPoint.x + (WidthSixth * 4 * selection), pickPoint.y + boxHeight-1), boxLength + 1, padding);
 
 	//Pick content
 	g.SetColor(RGB(204, 151, 6));
@@ -76,8 +77,8 @@ void Store::draw(Core::Graphics& g)
 	g.SetColor(RGB(204, 151, 6));
 	fillRectangle(g, Point(ladderPoint.x + 3*boxUnit, ladderPoint.y + boxUnit*3), boxUnit*3, boxUnit * 15);
 	fillRectangle(g, Point(ladderPoint.x + boxUnit * 9, ladderPoint.y + boxUnit * 3), boxUnit*3, boxUnit * 15);
-	fillSquare(g, Point(ladderPoint.x + boxUnit* 6, ladderPoint.y + boxUnit *6), boxUnit*3);
-	fillSquare(g, Point(ladderPoint.x + boxUnit* 6, ladderPoint.y + boxUnit *12), boxUnit*3);
+	fillSquare(g, Point(ladderPoint.x + boxUnit* 6, ladderPoint.y + boxUnit *6), boxUnit*3 + 1);
+	fillSquare(g, Point(ladderPoint.x + boxUnit* 6, ladderPoint.y + boxUnit *12), boxUnit*3 + 1);
 
 	//Upgrade bar
 	g.SetColor(RGB(40,40,40));
@@ -85,7 +86,12 @@ void Store::draw(Core::Graphics& g)
 	bagBar.draw(g);
 
 	//Text
-	writeMoney(g, Point(0,0), 15, 30, 30);
+	g.SetColor(RGB(0,0,0));
+	writeMoney(g, Point(pickPoint.x + boxUnit * 3, pickPoint.y + boxUnit * 21), 150);
+	writeMoney(g, Point(bagPoint.x + boxUnit * 3, bagPoint.y + boxUnit * 21), 350);
+	writeMoney(g, Point(ladderPoint.x + boxUnit * 4, ladderPoint.y + boxUnit * 21), 30);
+	g.SetColor(RGB(255, 255, 50));
+	writeMoney(g, Point(25,25), c->inventory.money);
 }
 
 void Store::addLadder(){};
@@ -118,6 +124,32 @@ void Store::update()
 	
 	if (selection > 2) selection = 0;
 	if (selection < 0) selection = 2;
+
+	if (Core::Input::IsPressed(VK_ESCAPE)) c->storeOpen = false, selection += 1;
+
+	if (Core::Input::IsPressed(VK_RETURN)) 
+	{
+		switch (selection)
+		{
+		case 0:
+			upgradePick();
+			break;
+		case 1:
+			upgradeBag();
+			break;
+		case 2:
+			addLadder();
+			break;
+		default:
+			break;
+		}
+	}
 }
-void Store::upgradeBag(){};
-void Store::upgradePick(){};
+void Store::upgradeBag()
+{
+};
+
+void Store::upgradePick()
+{
+
+};

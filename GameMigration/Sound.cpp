@@ -35,7 +35,8 @@ void Sound::playDeath()
 
 void Sound::playSell()
 {
-	
+	stopSoundEffects();
+	mciSendString(TEXT("play resources/sell.wav"), nullptr, 0, nullptr);
 }
 
 void Sound::playMusic()

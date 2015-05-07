@@ -48,26 +48,6 @@ void World::init()
 	blocks[2][4] = new UnbreakableGrass(Point(2,4));
 	blocks[3][4] = new UnbreakableGrass(Point(3,4));
 	blocks[0][4] = new UnbreakableGrass(Point(0,4));
-	//delete blocks[10][4];
-	//blocks[10][4] = new Grass(Point(10, 4));
-	//delete blocks[11][5];
-	//blocks[11][5] = new Cave(Point(11, 5));
-	//delete blocks[3][5];
-	//blocks[3][5] = new Copper(Point(3, 5));
-	//delete blocks[3][6];
-	//blocks[3][6] = new Iron(Point(3, 6));
-	//delete blocks[3][7];
-	//blocks[3][7] = new Silver(Point(3, 7));
-	//delete blocks[3][8];
-	//blocks[3][8] = new Sapphire(Point(3, 8));
-	//delete blocks[3][9];
-	//blocks[3][9] = new Ruby(Point(3, 9));
-	//delete blocks[3][10];
-	//blocks[3][10] = new Emerald(Point(3, 10));
-	//delete blocks[3][11];
-	//blocks[3][11] = new Gold(Point(3, 11));
-	//delete blocks[3][12];
-	//blocks[3][12] = new Diamond(Point(3, 12));
 	
 	delete blocks[5][4];
 	blocks[5][4] = new Ladder(Point(5, 4));
@@ -378,4 +358,17 @@ void World::destroyBlockAt(Point p)
 
 	delete blocks[x][y];
 	blocks[x][y] = new Cave(Point(x, y));
+}
+
+void World::placeLadderAt(Point p)
+{
+	int x = p.x / BLOCK_SIZE;
+	int y = p.y / BLOCK_SIZE;
+
+	Cave* b = dynamic_cast<Cave*>(blocks[x][y]);
+	if (b != nullptr)
+	{
+		delete blocks[x][y];
+		blocks[x][y] = new Ladder(Point(x, y));
+	}
 }

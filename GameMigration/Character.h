@@ -24,6 +24,7 @@ public:
 	Vector velocity;
 	bool isJumping;
 	bool isOnLadder;
+	bool storeOpen;
 	static string notification;
 
 	Character() :
@@ -31,8 +32,10 @@ public:
 		location(0, 0),
 		velocity(0, 0),
 		isJumping(false),
-		isOnLadder(false)
+		isOnLadder(false),
+		storeOpen(false)	
 	{}
+
 	Character(World* world);
 
 	Physics::Rectangle getBoundingBox();
@@ -44,6 +47,7 @@ public:
 	void jump();
 	void moveX();
 	void moveY();
+	void placeLadder();
 	void mine(int dir);
 
 	void update();

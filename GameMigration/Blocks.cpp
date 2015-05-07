@@ -174,20 +174,22 @@ void StoreLeft::drawAt(Core::Graphics& g, Vector& offset)
 	fillSquare(g, p, BLOCK_SIZE);
 	//Counter
 	g.SetColor(RGB(181, 101, 29));
-	fillRectangle(g, Point(p.x, p.y + BLOCK_FIFTH * 2), BLOCK_SIZE, BLOCK_FIFTH);
-	fillRectangle(g, Point(p.x + BLOCK_FIFTH, p.y + BLOCK_FIFTH * 3), BLOCK_FIFTH, BLOCK_FIFTH * 2);
+	fillRectangle(g, Point(p.x, p.y + BLOCK_FIFTH * 3), BLOCK_SIZE, BLOCK_FIFTH);
+	fillSquare(g, Point(p.x + BLOCK_FIFTH, p.y + BLOCK_FIFTH * 4), BLOCK_FIFTH);
 	//Gold bar
 	g.SetColor(RGB(212, 175, 55));
-	fillRectangle(g, Point(p.x + BLOCK_FIFTH, p.y + BLOCK_FIFTH), BLOCK_SIXTH * 2, BLOCK_FIFTH);
+	fillRectangle(g, Point(p.x + BLOCK_FIFTH, p.y + BLOCK_FIFTH*2), BLOCK_SIXTH * 2, BLOCK_FIFTH);
 	//shirt
-	g.SetColor(RGB(159, 0, 197));
+	g.SetColor(RGB(0x70, 0xf0, 0x00));
 	fillRectangle(g, Point(p.x + BLOCK_FIFTH * 3, p.y + BLOCK_FIFTH), BLOCK_FIFTH*2, BLOCK_FIFTH);
+	fillSquare(g, Point(p.x + BLOCK_FIFTH * 4, p.y + BLOCK_FIFTH*2), BLOCK_FIFTH);
 	//legs
-	g.SetColor(RGB(0xf0, 0xf0, 0xf0));
-	fillRectangle(g, Point(p.x + BLOCK_FIFTH*4, p.y + BLOCK_FIFTH*3), BLOCK_FIFTH, BLOCK_FIFTH*2);
+	g.SetColor(RGB(38, 88, 158));
+	fillSquare(g, Point(p.x + BLOCK_FIFTH*4, p.y + BLOCK_FIFTH*4), BLOCK_FIFTH);
 	//head
 	g.SetColor(RGB(0x53, 0x37, 0x19));
 	fillSquare(g, Point(p.x + BLOCK_FIFTH*4, p.y), BLOCK_FIFTH);
+	fillSquare(g, Point(p.x + BLOCK_FIFTH*3, p.y+BLOCK_FIFTH*2), BLOCK_FIFTH);
 }
 
 void StoreRight::drawAt(Core::Graphics& g, Vector& offset)
@@ -196,16 +198,19 @@ void StoreRight::drawAt(Core::Graphics& g, Vector& offset)
 	Point p = a - offset;
 	g.SetColor(RGB(120, 207, 227));
 	fillSquare(g, p, BLOCK_SIZE);
-	//Counnter
+	//Counter
 	g.SetColor(RGB(181, 101, 29));
-	fillRectangle(g, Point(p.x, p.y + BLOCK_FIFTH * 2), BLOCK_SIZE, BLOCK_FIFTH);
-	fillRectangle(g, Point(p.x + BLOCK_FIFTH * 3, p.y + BLOCK_FIFTH * 3), BLOCK_FIFTH, BLOCK_FIFTH *2);
+	fillRectangle(g, Point(p.x, p.y + BLOCK_FIFTH * 3), BLOCK_SIZE, BLOCK_FIFTH);
+	fillSquare(g, Point(p.x + BLOCK_FIFTH * 3, p.y + BLOCK_FIFTH * 4), BLOCK_FIFTH);
 	//Emerald
 	g.SetColor(RGB(155, 17, 30));
-	fillHexagon(g, Point(p.x + BLOCK_FIFTH *2, p.y + BLOCK_FIFTH), BLOCK_FIFTH);
+	fillHexagon(g, Point(p.x + BLOCK_FIFTH *2, p.y + BLOCK_FIFTH*2), BLOCK_FIFTH);
 	//shirt
-	g.SetColor(RGB(159, 0, 197));
+	g.SetColor(RGB(0x70, 0xf0, 0x00));
 	fillSquare(g, Point(p.x, p.y + BLOCK_FIFTH), BLOCK_FIFTH);
+	//hand
+	g.SetColor(RGB(0x53, 0x37, 0x19));
+	fillSquare(g, Point(p.x, p.y+BLOCK_FIFTH*2), BLOCK_FIFTH);
 }
 
 void BreakableBlock::drawCracks(Core::Graphics& g, Point &p, int durability)

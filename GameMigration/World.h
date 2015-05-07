@@ -33,6 +33,7 @@ public:
 
 	Block& getBlockAt(Point);
 	void destroyBlockAt(Point);
+	void placeLadderAt(Point);
 };
 
 #endif
