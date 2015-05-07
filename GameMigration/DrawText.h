@@ -15,5 +15,8 @@ void drawSix(Core::Graphics&, Point p, int, int);
 void drawSeven(Core::Graphics&, Point p, int, int);
 void drawEight(Core::Graphics&, Point p, int, int);
 void drawNine(Core::Graphics&, Point p, int, int);
+void drawSlash(Core::Graphics&, Point p, int, int);
 void drawDollar(Core::Graphics&, Point p, int, int);
+void drawAmount(Core::Graphics&, Point p, int, int);
+void drawNumber(Core::Graphics&, Point p, int, int, int, bool);
 #endif

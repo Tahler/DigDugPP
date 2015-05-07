@@ -132,15 +132,15 @@ void Store::draw(Core::Graphics& g)
 		break;
 	}
 
-
-
 	//Text
 	g.SetColor(RGB(0,0,0));
 	if (c-> pickStrength < 5) writeMoney(g, Point(pickPoint.x + boxUnit * 3, pickPoint.y + boxUnit * 21), pickCost);
 	if (c->inventory.maxSize < 14) writeMoney(g, Point(bagPoint.x + boxUnit * 3, bagPoint.y + boxUnit * 21), bagCost);
 	writeMoney(g, Point(ladderPoint.x + boxUnit * 4, ladderPoint.y + boxUnit * 21), ladderCost);
+	drawAmount(g, Point(ladderPoint.x + boxUnit*2, bagBar.a.y), c->inventory.ladderCount, c->inventory.maxSize);
 	g.SetColor(RGB(255, 255, 50));
 	writeMoney(g, Point(25,25), c->inventory.money);
+	
 }
 
 void Store::update()
@@ -204,7 +204,7 @@ void Store::update()
 
 void Store::addLadder()
 {
-	if (c->inventory.money >= ladderCost && c->inventory.ladderCount <= c->inventory.maxSize)
+	if (c->inventory.money >= ladderCost && c->inventory.ladderCount < c->inventory.maxSize)
 	{
 		c->inventory.money -= ladderCost;
 		c->inventory.ladderCount++;

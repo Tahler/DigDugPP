@@ -6,16 +6,25 @@ using std::string;
 void writeMoney(Core::Graphics& g, Point p,int amount)
 {
 	int height = 30;
-	string s1 = std::to_string(amount);
 	int charWidth = 20;
-	int pad = 5;
+	drawDollar(g, p, charWidth, height);
+	drawNumber(g, p, charWidth, height, amount, true);
+
+}
+
+void drawNumber(Core::Graphics&g, Point p, int charWidth, int height, int num, bool space)
+{
+	string s1 = std::to_string(num);
 	int numChars = s1.length();
 	char* s = new char [numChars+1];
 	strcpy(s, s1.c_str());
-	drawDollar(g, Point(p.x, p.y), 20, 30);
-	for (int ii = 1; ii <= strlen(s); ii++)
+	int ii;
+	int mod;
+	if (space) ii = 1, mod = 1; else ii = 0, mod = 0;
+
+	for (; ii <= strlen(s); ii++)
 	{
-		switch (s[ii-1])
+		switch (s[ii-mod])
 		{
 		case 48:
 			drawZero(g, Point(p.x + ii*30, p.y), charWidth, height);
@@ -52,6 +61,24 @@ void writeMoney(Core::Graphics& g, Point p,int amount)
 		}
 	}
 	delete[] s;
+}
+
+void drawAmount(Core::Graphics& g, Point p, int count, int total)
+{
+	int height = 30;
+	int charWidth = 20;
+	int numChars = std::to_string(count).length();
+	drawNumber(g, p, charWidth, height, count, false);
+	p.x += numChars * (charWidth + 10);
+	drawSlash(g, p, charWidth, height);
+	p.x += 10;
+	drawNumber(g, p, charWidth, height, total, true);
+}
+
+void drawSlash(Core::Graphics& g, Point p, int width, int height)
+{
+	//g.DrawLine(p.x + width, p.y + height, p.x, p.y);
+	g.DrawLine(p.x + width, p.y, p.x, p.y + height);
 }
 
 void drawZero(Core::Graphics& g, Point p, int width, int height)
