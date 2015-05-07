@@ -74,10 +74,12 @@ namespace Blocks
 	{
 		//Can break
 		int durability;
+		int hardness;
 		BreakableBlock(Point a) :
 			Block(a, false)
 		{
 			durability = 100;
+			hardness = 1;
 		}
 		int takeDamage(int damage);
 		void drawCracks(Core::Graphics&, Vector& p, int durability);
@@ -149,6 +151,7 @@ namespace Blocks
 			OreBlock(a)
 		{
 			value = 3;
+			hardness = 2;
 		};
 
 		void drawAt(Core::Graphics&, Vector&);
@@ -160,6 +163,7 @@ namespace Blocks
 			OreBlock(a)
 		{
 			value = 4;
+			hardness = 3;
 		}
 
 		void drawAt(Core::Graphics&, Vector&);
@@ -171,6 +175,7 @@ namespace Blocks
 			OreBlock(a)
 		{
 			value = 5;
+			hardness = 3;
 		}
 
 		void drawAt(Core::Graphics&, Vector&);
@@ -182,6 +187,7 @@ namespace Blocks
 			OreBlock(a)
 		{
 			value = 6;
+			hardness = 4;
 		}
 
 		void drawAt(Core::Graphics&, Vector&);
@@ -193,6 +199,7 @@ namespace Blocks
 			OreBlock(a)
 		{
 			value = 7;
+			hardness = 4;
 		}
 
 		void drawAt(Core::Graphics&, Vector&);
@@ -204,6 +211,7 @@ namespace Blocks
 			OreBlock(a)
 		{
 			value = 8;
+			hardness = 5;
 		}
 
 		void drawAt(Core::Graphics&, Vector&);

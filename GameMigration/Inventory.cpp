@@ -8,10 +8,10 @@ enum Minerals
 	COPPER, IRON, SILVER, SAPPHIRE, RUBY, EMERALD, GOLD, DIAMOND
 };
 
-Inventory::Inventory(int invSize, int copy[8], int money, int ladders)
+Inventory::Inventory(int invSize, int copy[8], int money, int ladderCount)
 {
 	maxSize = invSize;
-
+	ladderCount = 0;
 	int length = sizeof(items) / sizeof(*items);
 	for (int i = 0; i < length; ++i)
 	{
@@ -19,7 +19,7 @@ Inventory::Inventory(int invSize, int copy[8], int money, int ladders)
 	}
 
 	Inventory::money = money;
-	Inventory::ladders = ladders;
+	Inventory::ladderCount = ladderCount;
 }
 
 int Inventory::size()
@@ -54,7 +54,7 @@ void Inventory::empty()
 {
 	emptyMinerals();
 	money = 0;
-	ladders = 0;
+	ladderCount = 0;
 }
 
 void Inventory::addItem(int i)

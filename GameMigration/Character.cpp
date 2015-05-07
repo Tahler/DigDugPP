@@ -22,7 +22,7 @@ string Character::notification = "";
 const float MAX_SPEED = BLOCK_SIZE / 10;
 
 time_t lastMineMillis = time(nullptr) * 1000;
-int pickStrength = 3;
+
 //extern bool storeClosed;
 
 Character::Character(World* world)
@@ -32,9 +32,10 @@ Character::Character(World* world)
 	velocity = Vector(0, 0);
 	isJumping = false;
 	isOnLadder = false;
-
+	pickStrength = 1;
 	inventory.empty();
 	notification = "";
+	inventory.money = 200;
 }
 Physics::Rectangle Character::getBoundingBox()
 {
@@ -104,10 +105,14 @@ void Character::mine(int dir)
 	BreakableBlock* b2 = dynamic_cast<BreakableBlock*>(b);
 	if (b2 != nullptr)
 	{
-		b2->takeDamage(pickStrength);
-		if (b2->durability <= 0)
+		int dura = b2->takeDamage(pickStrength);
+		if (dura <= 0)
 		{
 			world->destroyBlockAt(b->a);
+		} 
+		else if (dura == 101)
+		{
+			notification = "My pick is too weak!";
 		}
 	}
 
@@ -195,10 +200,10 @@ void Character::moveY()
 
 void Character::placeLadder()
 {
-	if (inventory.ladders > 0)
+	if (inventory.ladderCount > 0)
 	{
 		world->placeLadderAt(getCenterPoint());
-		inventory.ladders--;
+		inventory.ladderCount--;
 	}
 }
 

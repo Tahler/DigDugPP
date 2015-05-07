@@ -15,17 +15,17 @@
 class Inventory
 {
 private:
-	int maxSize;
 	int items[8];
 
 public:
+	int maxSize;
 	int money;
-	int ladders;
+	int ladderCount;
 
 	Inventory() :
 		maxSize(10) // default size is 10
 	{};
-	Inventory(int invSize, int items[8], int money, int ladders);
+	Inventory(int invSize, int items[8], int money, int ladderCount);
 
 	int size();
 	bool isFull();
