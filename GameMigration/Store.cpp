@@ -227,7 +227,7 @@ void Store::upgradeBag()
 		else  if(c->inventory.maxSize == 15) c->inventory.maxSize = 25;
 		else if (c->inventory.maxSize == 25) c->inventory.maxSize = 50;
 		else c->inventory.maxSize = 100;
-		bagCost += 300;
+		bagCost += 500;
 		Sound::playSell();
 	} 
 	else
@@ -243,7 +243,7 @@ void Store::upgradePick()
 	{
 		c->inventory.money -= pickCost;
 		c->pickStrength += 1;
-		pickCost += 250;
+		pickCost += 450;
 		Sound::playSell();
 	} 
 	else

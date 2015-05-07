@@ -48,6 +48,7 @@ void Inventory::sellMinerals()
 	{
 		money += items[i] * VALUES[i];
 	}
+	emptyMinerals();
 }
 
 void Inventory::empty()
