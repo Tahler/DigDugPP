@@ -35,8 +35,7 @@ Character::Character(World& world)
 	inventory.empty();
 	notification = "";
 	
-	// Test 
-	inventory.money = 200;
+	// Five ladders to start
 	inventory.ladderCount = 5;
 }
 Physics::Rectangle Character::getBoundingBox()

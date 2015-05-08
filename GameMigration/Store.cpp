@@ -188,7 +188,6 @@ void Store::update()
 	else enterDownLastFrame = false;
 
 	if (keyPressed(EXIT_SHOP)) selection = 0, enterDownLastFrame = true, c->storeOpen = false;
-	if (keyPressed(DIE)) c->inventory.money += 10000; // "Cheat code"
 }
 
 void Store::addLadder()

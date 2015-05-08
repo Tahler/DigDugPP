@@ -48,36 +48,6 @@ void World::init()
 	blocks[2][4] = new UnbreakableGrass(Point(2,4));
 	blocks[3][4] = new UnbreakableGrass(Point(3,4));
 	blocks[0][4] = new UnbreakableGrass(Point(0,4));
-	
-	delete blocks[5][4];
-	blocks[5][4] = new Ladder(Point(5, 4));
-	delete blocks[5][5];
-	blocks[5][5] = new Ladder(Point(5, 5));
-	delete blocks[5][6];
-	blocks[5][6] = new Ladder(Point(5, 6));
-	delete blocks[5][7];
-	blocks[5][7] = new Ladder(Point(5, 7));
-	delete blocks[5][8];
-	blocks[5][8] = new Ladder(Point(5, 8));
-	delete blocks[5][9];
-	blocks[5][9] = new Ladder(Point(5, 9));
-	delete blocks[47][4];
-	blocks[47][4] = new Diamond(Point(47, 4));
-	delete blocks[46][4];
-	blocks[46][4] = new Gold(Point(46, 4));
-	delete blocks[45][4];
-	blocks[45][4] = new Emerald(Point(45, 4));
-	delete blocks[44][4];
-	blocks[44][4] = new Ruby(Point(44, 4));
-	delete blocks[43][4];
-	blocks[43][4] = new Sapphire(Point(43, 4));
-	delete blocks[42][4];
-	blocks[42][4] = new Silver(Point(42, 4));
-	delete blocks[41][4];
-	blocks[41][4] = new Iron(Point(41, 4));
-	delete blocks[40][4];
-	blocks[40][4] = new Copper(Point(40, 4));
-
 }
 void World::addEarth()
 {
